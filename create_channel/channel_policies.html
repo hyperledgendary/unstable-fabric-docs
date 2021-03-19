@@ -1,0 +1,390 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Channel policies &mdash; hyperledger-fabricdocs master documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="hyperledger-fabricdocs master documentation" href="../index.html"/>
+        <link rel="up" title="Creating a channel" href="create_channel_overview.html"/>
+        <link rel="next" title="Adding an Org to a Channel" href="../channel_update_tutorial.html"/>
+        <link rel="prev" title="Using configtx.yaml to build a channel configuration" href="create_channel_config.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+
+          
+            <a href="../index.html" class="icon icon-home"> hyperledger-fabricdocs
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                master
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+
+<br><img style="background-color: #fff; height: unset; width: unset;" alt="Hyperledger Fabric" src=../_images/hyperledger_fabric_logo_color.png />
+<br>
+<a href="https://github.com/hyperledger/fabric"><img style="padding: 0px; margin: auto auto auto auto;" alt="GitHub" src="../_static/images/github_button.png"/></a>
+&nbsp;<a href="https://stackoverflow.com/questions/tagged/hyperledger-fabric"><img style="padding: 0px; margin: auto auto auto auto;" alt="StackOverflow" src="../_static/images/stackoverflow_button.png"/></a>
+&nbsp;<a href="https://chat.hyperledger.org"><img style="padding: 0px; margin: auto auto auto auto;" alt="Rocket Chat" src="../_static/images/rocketchat_button.png"/></a>
+&nbsp;<a href="https://www.youtube.com/playlist?list=PL0MZ85B_96CH7wvtrRzV7SvtRY0sI0DEg"><img style="padding: 0px; margin: auto auto auto auto;" alt="Youtube Channel" src="../_static/images/youtube_button.png"/></a>
+
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../whatis.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html">What’s new in Hyperledger Fabric v2.x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html#release-notes">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../key_concepts.html">Key Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started - Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started_run_fabric.html">Getting Started - Run Fabric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developapps/developing_applications.html">Developing Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorials.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../test_network.html">Using the Fabric test network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deploy_chaincode.html">Deploying a smart contract to a channel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../write_first_app.html">Running a Fabric Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/commercial_paper.html">Commercial paper tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../private_data_tutorial.html">Using Private Data in Fabric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../secured_asset_transfer/secured_private_asset_transfer_tutorial.html">Secured asset transfer in Fabric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../couchdb_tutorial.html">Using CouchDB</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="create_channel_overview.html">Creating a channel</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="create_channel_participation.html">Create a channel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create_channel_test_net.html">Create a channel using the test network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create_channel_config.html">Using configtx.yaml to build a channel configuration</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Channel policies</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#signature-policies">Signature policies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implicitmeta-policies">ImplicitMeta Policies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#channel-modification-policies">Channel modification policies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#channel-policies-and-access-control-lists">Channel policies and Access Control Lists</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#orderer-policies">Orderer policies</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../channel_update_tutorial.html">Adding an Org to a Channel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config_update.html">Updating a channel configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chaincode4ade.html">Writing Your First Chaincode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../peer-chaincode-devmode.html">Running chaincode in development mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../videos.html">Videos</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment_guide_overview.html">Deploying a production network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ops_guide.html">Operations Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../upgrade.html">Upgrading to the latest release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command_ref.html">Commands Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Architecture Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Fabric-FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributions Welcome!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releases.html">Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../questions.html">Still Have Questions?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../status.html">Status</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">hyperledger-fabricdocs</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../tutorials.html">Tutorials</a> &raquo;</li>
+        
+          <li><a href="create_channel_overview.html">Creating a channel</a> &raquo;</li>
+        
+      <li>Channel policies</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/create_channel/channel_policies.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="channel-policies">
+<span id="channel-policies"></span><h1>Channel policies<a class="headerlink" href="#channel-policies" title="Permalink to this headline">¶</a></h1>
+<p>Channels are a private method of communication between organizations. As a result, most changes to the channel configuration need to be agreed to by other members of the channel. A channel would not be useful if an organization could join the channel and read the data on the ledger without getting the approval of other organizations. Any changes to the channel <strong>structure</strong> need to be approved by a set of organizations that can satisfy the channel policies.</p>
+<p>Policies also govern the <strong>processes</strong> of how users interact with the channel, such as the set of organizations that need to approve a chaincode before it can be deployed to a channel or which actions need to be completed by channel administrators.</p>
+<p>Channel policies are important enough that they need to be discussed in their own topic. Unlike other parts of the channel configuration, the policies that govern the channel are determined by how different sections of the <code class="docutils literal notranslate"><span class="pre">configtx.yaml</span></code> file work together. While channel policies can be configured for any use case with few constraints, this topic will focus on how to use the default policies provided by Hyperledger Fabric. If you use the default policies used by the Fabric test network or the <a class="reference external" href="https://github.com/hyperledger/fabric/blob/master/sampleconfig/configtx.yaml">Fabric sample configuration</a>, each channel you create will use a combination of signature policies, ImplicitMeta policies, and Access Control Lists to determine how organizations interact with the channel and agree to update the channel structure. You can learn more about the role of policies in Hyperledger Fabric by visiting the <a class="reference external" href="../policies.html">Policies concept topic</a>.</p>
+<div class="section" id="signature-policies">
+<span id="signature-policies"></span><h2>Signature policies<a class="headerlink" href="#signature-policies" title="Permalink to this headline">¶</a></h2>
+<p>By default, each channel member defines a set of signature policies that references their organization. When a proposal is submitted to a peer, or a transaction is submitted to the ordering nodes, the nodes read the signatures attached to the transaction and evaluate them against the signature policies defined in the channel configuration. Every signature policy has rule that specifies the set of organizations and identities whose signatures can satisfy the policy. You can see the signature policies defined by Org1 in the <strong>Organizations</strong> section of <code class="docutils literal notranslate"><span class="pre">configtx.yaml</span></code> below:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nl">&amp;Org1</span>
+
+  <span class="l l-Scalar l-Scalar-Plain">...</span>
+
+  <span class="l l-Scalar l-Scalar-Plain">Policies</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">Readers</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">Type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Signature</span>
+          <span class="l l-Scalar l-Scalar-Plain">Rule</span><span class="p p-Indicator">:</span> <span class="s">&quot;OR(&#39;Org1MSP.admin&#39;,</span><span class="nv"> </span><span class="s">&#39;Org1MSP.peer&#39;,</span><span class="nv"> </span><span class="s">&#39;Org1MSP.client&#39;)&quot;</span>
+      <span class="l l-Scalar l-Scalar-Plain">Writers</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">Type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Signature</span>
+          <span class="l l-Scalar l-Scalar-Plain">Rule</span><span class="p p-Indicator">:</span> <span class="s">&quot;OR(&#39;Org1MSP.admin&#39;,</span><span class="nv"> </span><span class="s">&#39;Org1MSP.client&#39;)&quot;</span>
+      <span class="l l-Scalar l-Scalar-Plain">Admins</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">Type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Signature</span>
+          <span class="l l-Scalar l-Scalar-Plain">Rule</span><span class="p p-Indicator">:</span> <span class="s">&quot;OR(&#39;Org1MSP.admin&#39;)&quot;</span>
+      <span class="l l-Scalar l-Scalar-Plain">Endorsement</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">Type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Signature</span>
+          <span class="l l-Scalar l-Scalar-Plain">Rule</span><span class="p p-Indicator">:</span> <span class="s">&quot;OR(&#39;Org1MSP.peer&#39;)&quot;</span>
+</pre></div>
+</div>
+<p>All the policies above can be satisfied by signatures from Org1. However, each policy lists a different set of roles from within the organization that are able to satisfy the policy. The <code class="docutils literal notranslate"><span class="pre">Admins</span></code> policy can only be satisfied by transactions submitted by an identity with an admin role, while only identities with a peer role can satisfy the <code class="docutils literal notranslate"><span class="pre">Endorsement</span></code> policy. A set of signatures attached to a single transaction can satisfy multiple signature policies. For example, if the endorsements attached to a transaction were provided by both Org1 and Org2, then this signature set would satisfy the <code class="docutils literal notranslate"><span class="pre">Endorsement</span></code> policy of Org1 and Org2.</p>
+</div>
+<div class="section" id="implicitmeta-policies">
+<span id="implicitmeta-policies"></span><h2>ImplicitMeta Policies<a class="headerlink" href="#implicitmeta-policies" title="Permalink to this headline">¶</a></h2>
+<p>If your channel uses the default policies, the signature policies for each organization are evaluated by ImplicitMeta policies at higher levels of the channel configuration. Instead of directly evaluating the signatures that are submitted to the channel, ImplicitMeta policies have rules specify a set of other policies in the channel configuration that can satisfy the policy. A transaction can satisfy an ImplicitMeta policy if it can satisfy the underlying set of signature policies that are referenced by the policy.</p>
+<p>You can see the ImplicitMeta policies defined in the <strong>Application</strong> section of <code class="docutils literal notranslate"><span class="pre">configtx.yaml</span></code> file below:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">Policies</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">Readers</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">Type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplicitMeta</span>
+        <span class="l l-Scalar l-Scalar-Plain">Rule</span><span class="p p-Indicator">:</span> <span class="s">&quot;ANY</span><span class="nv"> </span><span class="s">Readers&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">Writers</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">Type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplicitMeta</span>
+        <span class="l l-Scalar l-Scalar-Plain">Rule</span><span class="p p-Indicator">:</span> <span class="s">&quot;ANY</span><span class="nv"> </span><span class="s">Writers&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">Admins</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">Type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplicitMeta</span>
+        <span class="l l-Scalar l-Scalar-Plain">Rule</span><span class="p p-Indicator">:</span> <span class="s">&quot;MAJORITY</span><span class="nv"> </span><span class="s">Admins&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">LifecycleEndorsement</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">Type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplicitMeta</span>
+        <span class="l l-Scalar l-Scalar-Plain">Rule</span><span class="p p-Indicator">:</span> <span class="s">&quot;MAJORITY</span><span class="nv"> </span><span class="s">Endorsement&quot;</span>
+    <span class="l l-Scalar l-Scalar-Plain">Endorsement</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">Type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">ImplicitMeta</span>
+        <span class="l l-Scalar l-Scalar-Plain">Rule</span><span class="p p-Indicator">:</span> <span class="s">&quot;MAJORITY</span><span class="nv"> </span><span class="s">Endorsement&quot;</span>
+</pre></div>
+</div>
+<p>The ImplicitMeta policies in the <strong>Application</strong> section govern how peer organizations interact with the channel. Each policy references the signature policies associated with each channel member. You see the relationship between the policies in the <strong>Application</strong> section and the policies in the <strong>Organization</strong> section below:</p>
+<p><img alt="Application policies" src="../_images/application-policies.png" /></p>
+<p><em>Figure 1: The Admins ImplicitMeta policy can be satisfied by a majority of the Admins signature policies that are defined by each organization.</em></p>
+<p>Each policy is referred to its path in the channel configuration. Because the policies in the <strong>Application</strong> section are located in the application group, which is located inside the channel group, they are referred to as <code class="docutils literal notranslate"><span class="pre">Channel/Application</span></code> policies. Since most places in the Fabric documentation refer to policies by their path, we will refer to policies by their path for the rest of the tutorial.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Rule</span></code> in each ImplicitMeta references the name of the signature policies that can satisfy the policy. For example, the <code class="docutils literal notranslate"><span class="pre">Channel/Application/Admins</span></code> ImplicitMeta policy references the <code class="docutils literal notranslate"><span class="pre">Admins</span></code> signature policies for each organization. Each <code class="docutils literal notranslate"><span class="pre">Rule</span></code> also contains the number of signature policies that are required to satisfy the ImplicitMeta policy. For example, the <code class="docutils literal notranslate"><span class="pre">Channel/Application/Admins</span></code> policy requires that a majority of the <code class="docutils literal notranslate"><span class="pre">Admins</span></code> signature policies be satisfied.</p>
+<p><img alt="Application admins" src="../_images/application-admins.png" /></p>
+<p><em>Figure 2: A channel update request submitted to the channel contains signatures from Org1, Org2, and Org3, satisfying the signature policies for each organization. As a result, the request satisfies the Channel/Application/Admins policy. The Org3 check is in light green because the signature was not required to reach to a majority.</em></p>
+<p>To provide another example, the <code class="docutils literal notranslate"><span class="pre">Channel/Application/Endorsement</span></code> policy can be satisfied by a majority of organization <code class="docutils literal notranslate"><span class="pre">Endorsement</span></code> policies, which require signatures from the peers of each organization. This policy is used by the Fabric chaincode lifecycle as the default chaincode endorsement policy. Unless you commit a chaincode definition with a different endorsement policy, transactions that invoke a chaincode need to be endorsed by a majority of channel members.</p>
+<p><img alt="channel endorsement policies" src="../_images/application-endorsement.png" /></p>
+<p><em>Figure 3: A transaction from a client application invoked a chaincode on the peers of Org1 and Org2. The chaincode invoke was successful, and the application received an endorsement from the peers of both organizations. Because this transaction satisfies the Channel/Application/Endorsement policy, the transaction meets the default endorsement policy and can be added to the channel ledger.</em></p>
+<p>The advantage of using ImplicitMeta policies and signature policies together is that you can set the rules for governance at the channel level, while allowing each channel member to select the identities that are required to sign for their organization. For example, a channel can specify that a majority of organization admins are required to sign a channel configuration update. However, each organization can use their signature policies to select which identities from their organization are admins, or even require that multiple identities from their organization need to sign in order to approve a channel update.</p>
+<p>Another advantage of ImplicitMeta policies is that they do not need to be updated when an organization is added or removed from the channel. Using <em>Figure 3</em> as an example, if two new organizations are added to the channel, the <code class="docutils literal notranslate"><span class="pre">Channel/Application/Endorsement</span></code> would require an endorsement from three organizations in order to validate a transaction.</p>
+<p>A disadvantage of ImplicitMeta policies is that they do not explicitly read the signature policies used by the channel members (which is why they are called implicit policies). Instead, they assume that users have the required signature policies based on the configuration of the channel. The <code class="docutils literal notranslate"><span class="pre">rule</span></code> of the <code class="docutils literal notranslate"><span class="pre">Channel/Application/Endorsement</span></code> policy is based on the number of peer organizations in the channel. If two of the three organizations in <em>Figure 3</em> do not possess the <code class="docutils literal notranslate"><span class="pre">Endorsement</span></code> signature polices, no transaction would be able to get the majority required to meet the <code class="docutils literal notranslate"><span class="pre">Channel/Application/Endorsement</span></code> ImplicitMeta policy.</p>
+</div>
+<div class="section" id="channel-modification-policies">
+<span id="channel-modification-policies"></span><h2>Channel modification policies<a class="headerlink" href="#channel-modification-policies" title="Permalink to this headline">¶</a></h2>
+<p>The channel <strong>structure</strong> is governed by modification policies within the channel configuration. Each component of the channel configuration has a modification policy that needs to be satisfied in order to be updated by channel members. For example, the policies and channel MSP defined by each organization, the application group that contains the members of the channel, and the components of the configuration that define the channel consenter set each have a different modification policy.</p>
+<p>Each modification policy can reference an ImplicitMeta policy or a signature policy. For example, if you use the default policies, the values that define each organization reference the <code class="docutils literal notranslate"><span class="pre">Admins</span></code> signature policy associated with that organization. As a result, an organization can update their channel MSP or set an anchor peer without approval from other channel members. The modification policy of the application group that defines the set of channel members is the <code class="docutils literal notranslate"><span class="pre">Channel/Application/Admins</span></code> ImplicitMeta policy. As a result, the default policy is that a majority of organizations need to approve the addition or removal of a channel member.</p>
+</div>
+<div class="section" id="channel-policies-and-access-control-lists">
+<span id="channel-policies-and-access-control-lists"></span><h2>Channel policies and Access Control Lists<a class="headerlink" href="#channel-policies-and-access-control-lists" title="Permalink to this headline">¶</a></h2>
+<p>The policies within the channel configuration are also referenced by <a class="reference external" href="../access_control.html">Access Control Lists (ACLs)</a> that are used to restrict access to Fabric resources used by the channel. The ACLs extend the policies within the channel configuration to govern the <strong>processes</strong> of the channel. You can see the default ACLs in the <a class="reference external" href="http://github.com/hyperledger/fabric/blob/master/sampleconfig/configtx.yaml">sample configtx.yaml file</a>. Each ACL refers to a channel policy using the path. For example, the following ACL restricts who can invoke a chaincode based on the <code class="docutils literal notranslate"><span class="pre">/Channel/Application/Writers</span></code> policy:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># ACL policy for invoking chaincodes on peer</span>
+<span class="n">peer</span><span class="o">/</span><span class="n">Propose</span><span class="p">:</span> <span class="o">/</span><span class="n">Channel</span><span class="o">/</span><span class="n">Application</span><span class="o">/</span><span class="n">Writers</span>
+</pre></div>
+</div>
+<p>Most of the default ACLs point to the ImplicitMeta policies in the application section of the channel configuration. To extend the example above, an organization can invoke a chaincode if they can satisfy the <code class="docutils literal notranslate"><span class="pre">/Channel/Application/Writers</span></code> policy.</p>
+<p><img alt="channel writer policies" src="../_images/application-writers.png" /></p>
+<p><em>Figure 4: The peer/Propose ACL is satisfied by the /Channel/Application/Writers policy. This policy can be satisfied by a transaction submitted by a client application from any organization with the writers signature policy.</em></p>
+</div>
+<div class="section" id="orderer-policies">
+<span id="orderer-policies"></span><h2>Orderer policies<a class="headerlink" href="#orderer-policies" title="Permalink to this headline">¶</a></h2>
+<p>The ImplicitMeta policies in the <strong>Orderer</strong> section of <code class="docutils literal notranslate"><span class="pre">configtx.yaml</span></code> govern the ordering nodes of a channel in a similar way as the <strong>Application</strong> section governs the peer organizations. The ImplicitMeta policies point to the signature policies associated with the organizations that are ordering service administrators.</p>
+<p><img alt="Orderer policies" src="../_images/orderer-policies.png" /></p>
+<p><em>Figure 5: The Channel/Orderer/Admins policy points to the Admins signature policies associated with the administrators of the ordering service.</em></p>
+<p>If you use the default policies, a majority of orderer organizations are required to approve the addition or removal of an ordering node.</p>
+<p><img alt="Orderer policies" src="../_images/orderer-admins.png" /></p>
+<p><em>Figure 6: A request submitted to remove an ordering node from the channel contains signatures from the three ordering organizations in the network, satisfying the Channel/Orderer/Admins policy. The Org3 check is in light green because the signature was not required to reach to a majority.</em></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Channel/Orderer/BlockValidation</span></code> policy is used by peers to confirm that new blocks being added to the channel were generated by an ordering node that is part of the channel consenter set, and that the block was not tampered with or created by another peer organization. By default, any orderer organization with a <code class="docutils literal notranslate"><span class="pre">Writers</span></code> signature policy can create and validate blocks for the channel.</p>
+<!--- Licensed under Creative Commons Attribution 4.0 International License
+https://creativecommons.org/licenses/by/4.0/ --></div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../channel_update_tutorial.html" class="btn btn-neutral float-right" title="Adding an Org to a Channel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="create_channel_config.html" class="btn btn-neutral" title="Using configtx.yaml to build a channel configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright Hyperledger 2020.
+    <br>
+      <br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>
+      <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+        <img alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'master',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

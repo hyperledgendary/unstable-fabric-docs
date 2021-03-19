@@ -1,0 +1,398 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Deploy the peer &mdash; hyperledger-fabricdocs master documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="hyperledger-fabricdocs master documentation" href="../index.html"/>
+        <link rel="up" title="Deploying a production network" href="../deployment_guide_overview.html"/>
+        <link rel="next" title="Planning for an ordering service" href="../deployorderer/ordererplan.html"/>
+        <link rel="prev" title="Checklist for a production peer" href="peerchecklist.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+
+          
+            <a href="../index.html" class="icon icon-home"> hyperledger-fabricdocs
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                master
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+
+<br><img style="background-color: #fff; height: unset; width: unset;" alt="Hyperledger Fabric" src=../_images/hyperledger_fabric_logo_color.png />
+<br>
+<a href="https://github.com/hyperledger/fabric"><img style="padding: 0px; margin: auto auto auto auto;" alt="GitHub" src="../_static/images/github_button.png"/></a>
+&nbsp;<a href="https://stackoverflow.com/questions/tagged/hyperledger-fabric"><img style="padding: 0px; margin: auto auto auto auto;" alt="StackOverflow" src="../_static/images/stackoverflow_button.png"/></a>
+&nbsp;<a href="https://chat.hyperledger.org"><img style="padding: 0px; margin: auto auto auto auto;" alt="Rocket Chat" src="../_static/images/rocketchat_button.png"/></a>
+&nbsp;<a href="https://www.youtube.com/playlist?list=PL0MZ85B_96CH7wvtrRzV7SvtRY0sI0DEg"><img style="padding: 0px; margin: auto auto auto auto;" alt="Youtube Channel" src="../_static/images/youtube_button.png"/></a>
+
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../whatis.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html">What’s new in Hyperledger Fabric v2.x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html#release-notes">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../key_concepts.html">Key Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started - Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started_run_fabric.html">Getting Started - Run Fabric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developapps/developing_applications.html">Developing Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../deployment_guide_overview.html">Deploying a production network</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../deployment_guide_overview.html#step-one-decide-on-your-network-configuration">Step one: Decide on your network configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment_guide_overview.html#step-two-set-up-a-cluster-for-your-resources">Step two: Set up a cluster for your resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment_guide_overview.html#step-three-set-up-your-cas">Step three: Set up your CAs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment_guide_overview.html#step-four-use-the-ca-to-create-identities-and-msps">Step four: Use the CA to create identities and MSPs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../deployment_guide_overview.html#step-five-deploy-peers-and-ordering-nodes">Step five: Deploy peers and ordering nodes</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../deployment_guide_overview.html#creating-a-peer">Creating a peer</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="peerplan.html">Planning for a production peer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="peerchecklist.html">Checklist for a production peer</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Deploy the peer</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment_guide_overview.html#creating-an-ordering-node">Creating an ordering node</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment_guide_overview.html#next-steps">Next steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ops_guide.html">Operations Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../upgrade.html">Upgrading to the latest release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command_ref.html">Commands Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Architecture Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Fabric-FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributions Welcome!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releases.html">Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../questions.html">Still Have Questions?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../status.html">Status</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">hyperledger-fabricdocs</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../deployment_guide_overview.html">Deploying a production network</a> &raquo;</li>
+        
+      <li>Deploy the peer</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/deploypeer/peerdeploy.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="deploy-the-peer">
+<span id="deploy-the-peer"></span><h1>Deploy the peer<a class="headerlink" href="#deploy-the-peer" title="Permalink to this headline">¶</a></h1>
+<p>Before deploying a peer, make sure to digest the material in <a class="reference external" href="./peerplan.html">Planning for a peer</a> and <a class="reference external" href="./peerchecklist.html">Checklist for a production peer</a> which discusses all of the relevant decisions you need to make and parameters you need to configure before deploying a peer.</p>
+<p>Note: in order for a peer to be a joined to a channel, the organization the peer belongs to must be joined to the channel. This means that you must have <a class="reference external" href="https://hyperledger-fabric-ca.readthedocs.io/en/release-1.4/deployguide/use_CA.html#create-the-org-msp-needed-to-add-an-org-to-a-channel">created the MSP of your organization</a>. The MSP ID of this organization must be the same as the ID specified at <code class="docutils literal notranslate"><span class="pre">peer.localMspId</span></code> in <code class="docutils literal notranslate"><span class="pre">core.yaml</span></code>.</p>
+<div class="section" id="download-the-peer-binary-and-configuration-files">
+<span id="download-the-peer-binary-and-configuration-files"></span><h2>Download the peer binary and configuration files<a class="headerlink" href="#download-the-peer-binary-and-configuration-files" title="Permalink to this headline">¶</a></h2>
+<p>The Fabric peer binary and configuration files can be downloaded from <a class="reference external" href="https://github.com/hyperledger/fabric/releases">GitHub</a> to a folder on your local system for example <code class="docutils literal notranslate"><span class="pre">fabric/</span></code>. Scroll to the Fabric release you want to download, click the <strong>Assets</strong> twistie, and select the binary for your system type. Extract the ZIP file and you will find all of the Fabric binaries in the <code class="docutils literal notranslate"><span class="pre">/bin</span></code> folder and the associated configuration files in the <code class="docutils literal notranslate"><span class="pre">/config</span></code> folder.
+The resulting folder structure is similar to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>├── fabric
+  ├── bin
+  │   ├── configtxgen
+  │   ├── configtxlator
+  │   ├── cryptogen
+  │   ├── discover
+  │   ├── idemixgen
+  │   ├── orderer
+  │   └── peer
+  └── config
+    ├── configtx.yaml
+    ├── core.yaml
+    └── orderer.yaml
+</pre></div>
+</div>
+<p>Along with the relevant binaries, you will receive both the peer binary executable and the peer configuration file, <code class="docutils literal notranslate"><span class="pre">core.yaml</span></code>, that is required to launch a peer on the network. The other files are not required for the peer deployment but will be useful when you attempt to create or edit channels, among other tasks.</p>
+<p><strong>Tip:</strong> Add the location of the peer binary to your <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment variable so that it can be picked up without fully qualifying the path to the binary executable, for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>export PATH=&lt;path to download location&gt;/bin:$PATH
+</pre></div>
+</div>
+<p>After you have mastered deploying and running a peer by using the peer binary and core.yaml configuration file, it is likely that you will want to use a peer container in a Kubernetes or Docker deployment. The Hyperledger Fabric project publishes a <a class="reference external" href="https://hub.docker.com/r/hyperledger/fabric-peer">peer image</a> that can be used for development and test, and various vendors provide supported peer images. For now though, the purpose of this topic is to teach you how to properly use the peer binary so you can take that knowledge and apply it to the production environment of your choice.</p>
+</div>
+<div class="section" id="prerequisites">
+<span id="prerequisites"></span><h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>Before you can launch a peer node in a production network, you need to make sure you’ve created and organized the necessary certificates, decided on storage, and configured <code class="docutils literal notranslate"><span class="pre">core.yaml</span></code>.</p>
+<div class="section" id="certificates">
+<span id="certificates"></span><h3>Certificates<a class="headerlink" href="#certificates" title="Permalink to this headline">¶</a></h3>
+<p>Note: while <strong>cryptogen</strong> is a convenient utility that can be used to generate certificates for a test network, it should <strong>never</strong> be used on a production network. The core requirement for certificates for Fabric nodes is that they are Elliptic Curve (EC) certificates. You can use any tool you prefer to issue these certificates (for example, OpenSSL). However, the Fabric CA streamlines the process because it generates the Membership Service Providers (MSPs) for you.</p>
+<p>Before you can deploy the peer, create the recommended folder structure for the peer certificates that is described in the <a class="reference external" href="https://hyperledger-fabric-ca.readthedocs.io/en/release-1.4/deployguide/use_CA.html">Registering and enrolling identities with a CA</a> topic to store the generated certificates and MSPs.</p>
+<p>This folder structure isn’t mandatory, but these instructions presume you have created it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>├── organizations
+  └── peerOrganizations
+      └── org1.example.com
+          ├── msp
+          └── peers
+              └── peer0.org1.example.com
+                  ├── msp
+                  └── tls
+</pre></div>
+</div>
+<p>You should have already used your certificate authority of choice to generate the peer enrollment certificate, TLS certificate, private keys, and the MSPs that Fabric must consume. Refer to the <a class="reference external" href="https://hyperledger-fabric-ca.readthedocs.io/en/release-1.4/deployguide/cadeploy.html">CA deployment</a> and <a class="reference external" href="https://hyperledger-fabric-ca.readthedocs.io/en/release-1.4/deployguide/use_CA.html">Registering and enrolling identities with a CA</a> topics for instructions on how to create a Fabric CA and how to generate these certificates. You need to generate the following sets of certificates:</p>
+<ul class="simple">
+<li><strong>Peer TLS CA certificates</strong></li>
+<li><strong>Peer local MSP (enrollment certificate and private key of the peer)</strong></li>
+</ul>
+<p>You will either need to use the Fabric CA client to generate the certificates directly into the recommended folder structure or you will need to copy the generated certificates to their recommended folders after they are generated. Whichever method you choose, most users are ultimately likely to script this process so it can be repeatable as needed. A list of the certificates and their locations is provided here for your convenience.</p>
+<div class="section" id="tls-certificates">
+<span id="tls-certificates"></span><h4>TLS certificates<a class="headerlink" href="#tls-certificates" title="Permalink to this headline">¶</a></h4>
+<p>In order for the peer to launch successfully, make sure that the locations of the TLS certificates you specified in the <a class="reference external" href="./peerchecklist.html">Checklist for a production peer</a> point to the correct certificates. To do this:</p>
+<ul class="simple">
+<li>Copy the TLS certificate that contains the public key that is associated with the signing (private) key certificate, which by default is called <code class="docutils literal notranslate"><span class="pre">ca-cert.pem</span></code>, to <code class="docutils literal notranslate"><span class="pre">organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/tls-cert.pem</span></code>. The path and name of the certificate corresponds to the <code class="docutils literal notranslate"><span class="pre">peer.tls.rootcert.file</span></code> parameter in <code class="docutils literal notranslate"><span class="pre">core.yaml</span></code>.</li>
+<li>After you have generated the peer TLS certificate, the certificate will have been generated in the <code class="docutils literal notranslate"><span class="pre">signcerts</span></code> directory, and the private key will have been generated in the <code class="docutils literal notranslate"><span class="pre">keystore</span></code> directory. Rename the generated private key in the <code class="docutils literal notranslate"><span class="pre">keystore</span></code> folder to <code class="docutils literal notranslate"><span class="pre">peer0-key.pem</span></code> so that it can more easily be recognized later on as being a private key.</li>
+<li>Copy the peer TLS certificate and private key to <code class="docutils literal notranslate"><span class="pre">organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls</span></code>. The path and name of the certificate and private key files correspond to the <code class="docutils literal notranslate"><span class="pre">peer.tls.cert.file</span></code> and <code class="docutils literal notranslate"><span class="pre">peer.tls.key.file</span></code> parameters in the <code class="docutils literal notranslate"><span class="pre">core.yaml</span></code>.</li>
+<li>If using mutual authentication (<code class="docutils literal notranslate"><span class="pre">clientAuthRequired</span></code> set to true), you need to indicate to the peer which TLS CA root certificates to use to authorize clients. Copy the organization’s TLS CA root certificate <code class="docutils literal notranslate"><span class="pre">ca-cert.pem</span></code> to <code class="docutils literal notranslate"><span class="pre">organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca-cert.pem</span></code> so that the organization’s clients will be authorized. The path and name of the certificate corresponds to <code class="docutils literal notranslate"><span class="pre">peer.tls.clientRootCAs.files</span></code> parameter in <code class="docutils literal notranslate"><span class="pre">core.yaml</span></code>. Note that multiple files can be configured, one for each client organization that will communicate with the peer (for example if other organizations will use this peer for endorsements). If <code class="docutils literal notranslate"><span class="pre">clientAuthRequired</span></code> is set to false, you can skip this step.</li>
+</ul>
+</div>
+<div class="section" id="peer-local-msp-enrollment-certificate-and-private-key">
+<span id="peer-local-msp-enrollment-certificate-and-private-key"></span><h4>Peer local MSP (enrollment certificate and private key)<a class="headerlink" href="#peer-local-msp-enrollment-certificate-and-private-key" title="Permalink to this headline">¶</a></h4>
+<p>Similarly, you need to point to the <a class="reference external" href="https://hyperledger-fabric-ca.readthedocs.io/en/release-1.4/deployguide/use_CA.html#create-the-local-msp-of-a-node">local MSP of your node</a> by copying it to <code class="docutils literal notranslate"><span class="pre">organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp</span></code>. This path corresponds to the value of the <code class="docutils literal notranslate"><span class="pre">peer.mspConfigPath</span></code> parameter in the <code class="docutils literal notranslate"><span class="pre">core.yaml</span></code> file. Because of the Fabric concept of <a class="reference external" href="https://hyperledger-fabric-ca.readthedocs.io/en/release-1.4/deployguide/use_CA.html#nodeous">“Node Organization Unit (OU)”</a>, you do not need to specify an admin of the peer when bootstrapping. Rather, the role of “admin” is conferred onto an identity by setting an OU value of “admin” inside a certificate and enabled by the <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code> file. When Node OUs are enabled, any organization admin will be able to administer the peer.</p>
+<p>Note that the local MSP contains the signed certificate (public key) and the private key for the peer. The private key is used by the node to sign transactions, and is therefore not shared and must be secured. For maximum security, a Hardware Security Module (HSM) can be configured to generate and store this private key.</p>
+</div>
+</div>
+<div class="section" id="storage">
+<span id="storage"></span><h3>Storage<a class="headerlink" href="#storage" title="Permalink to this headline">¶</a></h3>
+<p>You must provision persistent storage for your ledger. If you are not using an external chaincode builder and launcher, you should factor in storage for that as well. The default location for the ledger is located at <code class="docutils literal notranslate"><span class="pre">/var/hyperledger/production</span></code>. Ensure that your peer has write access to the folder. If you choose to use a different location, provide that path in the <code class="docutils literal notranslate"><span class="pre">peer.fileSystemPath</span></code> parameter in the <code class="docutils literal notranslate"><span class="pre">core.yaml</span></code> file. If you decide to use Kubernetes or Docker, recall that in a containerized environment local storage disappears when the container goes away, so you will need to provision or mount persistent storage for the ledger before you deploy a peer.</p>
+</div>
+<div class="section" id="configuration-of-core-yaml">
+<span id="configuration-of-core-yaml"></span><h3>Configuration of <code class="docutils literal notranslate"><span class="pre">core.yaml</span></code><a class="headerlink" href="#configuration-of-core-yaml" title="Permalink to this headline">¶</a></h3>
+<p>Now you can use the <a class="reference external" href="./peerchecklist.html">Checklist for a production peer</a> to modify the default settings in the <code class="docutils literal notranslate"><span class="pre">core.yaml</span></code> file. In the future, if you decide to deploy the peer through Kubernetes or Docker, you can override the same default settings by using environment variables instead. Check out the <a class="reference external" href="../deployment_guide_overview.html#step-five-deploy-peers-and-ordering-nodes">note</a> in the deployment guide overview for instructions on how to construct the environment variable names for an override.</p>
+<p>Make sure to set the value of the <code class="docutils literal notranslate"><span class="pre">FABRIC_CFG_PATH</span></code> to be the location of the <code class="docutils literal notranslate"><span class="pre">core.yaml</span></code> file. When you run the peer binary from the <code class="docutils literal notranslate"><span class="pre">fabric/bin</span></code> folder, it would point to the  <code class="docutils literal notranslate"><span class="pre">/config</span></code> folder:
+<code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">FABRIC_CFG_PATH=../config</span></code></p>
+</div>
+</div>
+<div class="section" id="start-the-peer">
+<span id="start-the-peer"></span><h2>Start the peer<a class="headerlink" href="#start-the-peer" title="Permalink to this headline">¶</a></h2>
+<p>After <code class="docutils literal notranslate"><span class="pre">core.yaml</span></code> has been configured and your deployment backend is ready, you can simply start the peer node with the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="nb">bin</span>
+<span class="o">./</span><span class="n">peer</span> <span class="n">node</span> <span class="n">start</span>
+</pre></div>
+</div>
+<p>When the peer starts successfully, you should see a message similar to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">nodeCmd</span><span class="p">]</span> <span class="n">serve</span> <span class="o">-&gt;</span> <span class="n">INFO</span> <span class="mi">017</span> <span class="n">Started</span> <span class="n">peer</span> <span class="k">with</span> <span class="n">ID</span><span class="o">=</span><span class="p">[</span><span class="n">peer0</span><span class="o">.</span><span class="n">org1</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span><span class="p">],</span> <span class="n">network</span> <span class="n">ID</span><span class="o">=</span><span class="p">[</span><span class="n">prod</span><span class="p">],</span> <span class="n">address</span><span class="o">=</span><span class="p">[</span><span class="n">peer0</span><span class="o">.</span><span class="n">org1</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="mi">7060</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="next-steps">
+<span id="next-steps"></span><h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
+<p>In order to be able to transact on a network, the peer must be joined to a channel. The organization the peer belongs to must be a member of a channel before one of its peers can be joined to it. Note that if an organization wants to create a channel, it must be a member of the consortium hosted by the ordering service. If your organization has not specified at least one <a class="reference external" href="../glossary.html#anchor-peer">anchor peer</a> on the channel, you should do so, as it will enabled communication between organizations. See the <a class="reference external" href="../create_channel/create_channel_overview.html">Create a channel tutorial</a> to learn more. Once a peer is joined to a channel, the Fabric chaincode lifecycle process can be used to install chaincode packages on the peer. Only peer admin identities can be used to install a package on a peer.</p>
+<p>For high availability, you should consider deploying at least one other peer in the organization so that this peer can safely go offline for maintenance while transaction requests can continue to be addressed by the other peer. This redundant peer should be on a separate system or virtual machine in case the location where both peers are deployed goes down.</p>
+</div>
+<div class="section" id="troubleshooting-peer-deployment">
+<span id="troubleshooting-peer-deployment"></span><h2>Troubleshooting peer deployment<a class="headerlink" href="#troubleshooting-peer-deployment" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="peer-fails-to-start-with-erro-001-fatal-error-when-initializing-core-config">
+<span id="peer-fails-to-start-with-erro-001-fatal-error-when-initializing-core-config"></span><h3>Peer fails to start with ERRO 001 Fatal error when initializing core config<a class="headerlink" href="#peer-fails-to-start-with-erro-001-fatal-error-when-initializing-core-config" title="Permalink to this headline">¶</a></h3>
+<p><strong>Problem:</strong> When launching the peer, it fails with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">InitCmd</span> <span class="o">-&gt;</span> <span class="n">ERRO</span> <span class="mi">001</span> <span class="n">Fatal</span> <span class="n">error</span> <span class="n">when</span> <span class="n">initializing</span> <span class="n">core</span> <span class="n">config</span> <span class="p">:</span> <span class="n">Could</span> <span class="ow">not</span> <span class="n">find</span> <span class="n">config</span> <span class="n">file</span><span class="o">.</span> <span class="n">Please</span> <span class="n">make</span> <span class="n">sure</span> <span class="n">that</span> <span class="n">FABRIC_CFG_PATH</span> <span class="ow">is</span> <span class="nb">set</span> <span class="n">to</span> <span class="n">a</span> <span class="n">path</span> <span class="n">which</span> <span class="n">contains</span> <span class="n">core</span><span class="o">.</span><span class="n">yaml</span>
+</pre></div>
+</div>
+<p><strong>Solution:</strong></p>
+<p>This error occurs when the <code class="docutils literal notranslate"><span class="pre">FABRIC_CFG_PATH</span></code> is not set or is set incorrectly. Ensure that you have set the <code class="docutils literal notranslate"><span class="pre">FABRIC_CFG_PATH</span></code> environment variable to point to the location of the peer <code class="docutils literal notranslate"><span class="pre">core.yaml</span></code> file. Navigate to the folder where the <code class="docutils literal notranslate"><span class="pre">peer.exe</span></code> binary file resides and run the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">FABRIC_CFG_PATH</span><span class="o">=../</span><span class="n">config</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../deployorderer/ordererplan.html" class="btn btn-neutral float-right" title="Planning for an ordering service" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="peerchecklist.html" class="btn btn-neutral" title="Checklist for a production peer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright Hyperledger 2020.
+    <br>
+      <br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>
+      <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+        <img alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'master',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,517 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>osnadmin channel &mdash; hyperledger-fabricdocs master documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="hyperledger-fabricdocs master documentation" href="../index.html"/>
+        <link rel="up" title="Commands Reference" href="../command_ref.html"/>
+        <link rel="next" title="configtxgen" href="configtxgen.html"/>
+        <link rel="prev" title="peer node" href="peernode.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+
+          
+            <a href="../index.html" class="icon icon-home"> hyperledger-fabricdocs
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                master
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+
+<br><img style="background-color: #fff; height: unset; width: unset;" alt="Hyperledger Fabric" src=../_images/hyperledger_fabric_logo_color.png />
+<br>
+<a href="https://github.com/hyperledger/fabric"><img style="padding: 0px; margin: auto auto auto auto;" alt="GitHub" src="../_static/images/github_button.png"/></a>
+&nbsp;<a href="https://stackoverflow.com/questions/tagged/hyperledger-fabric"><img style="padding: 0px; margin: auto auto auto auto;" alt="StackOverflow" src="../_static/images/stackoverflow_button.png"/></a>
+&nbsp;<a href="https://chat.hyperledger.org"><img style="padding: 0px; margin: auto auto auto auto;" alt="Rocket Chat" src="../_static/images/rocketchat_button.png"/></a>
+&nbsp;<a href="https://www.youtube.com/playlist?list=PL0MZ85B_96CH7wvtrRzV7SvtRY0sI0DEg"><img style="padding: 0px; margin: auto auto auto auto;" alt="Youtube Channel" src="../_static/images/youtube_button.png"/></a>
+
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../whatis.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html">What’s new in Hyperledger Fabric v2.x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html#release-notes">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../key_concepts.html">Key Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started - Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started_run_fabric.html">Getting Started - Run Fabric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developapps/developing_applications.html">Developing Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment_guide_overview.html">Deploying a production network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ops_guide.html">Operations Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../upgrade.html">Upgrading to the latest release</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../command_ref.html">Commands Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="peercommand.html">peer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="peerchaincode.html">peer chaincode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="peerlifecycle.html">peer lifecycle chaincode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="peerchannel.html">peer channel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="peersnapshot.html">peer snapshot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="peerversion.html">peer version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="peernode.html">peer node</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">osnadmin channel</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#syntax">Syntax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#osnadmin-channel">osnadmin channel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#osnadmin-channel-join">osnadmin channel join</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#osnadmin-channel-list">osnadmin channel list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#osnadmin-channel-remove">osnadmin channel remove</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-usage">Example Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#osnadmin-channel-join-examples">osnadmin channel join examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#osnadmin-channel-list-example">osnadmin channel list example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#osnadmin-channel-remove-example">osnadmin channel remove example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="configtxgen.html">configtxgen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configtxlator.html">configtxlator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cryptogen.html">cryptogen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../discovery-cli.html">Service Discovery CLI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fabric-ca-commands.html">Fabric-CA Commands</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Architecture Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Fabric-FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributions Welcome!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releases.html">Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../questions.html">Still Have Questions?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../status.html">Status</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">hyperledger-fabricdocs</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../command_ref.html">Commands Reference</a> &raquo;</li>
+        
+      <li>osnadmin channel</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/commands/osnadminchannel.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <!---
+ File generated by help_docs.sh. DO NOT EDIT.
+ Please make changes to preamble and postscript wrappers as appropriate.
+ ---><div class="section" id="osnadmin-channel">
+<span id="osnadmin-channel"></span><h1>osnadmin channel<a class="headerlink" href="#osnadmin-channel" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">osnadmin</span> <span class="pre">channel</span></code> command allows administrators to perform channel-related
+operations on an orderer, such as joining a channel, listing the channels an
+orderer has joined, and removing a channel. The channel participation API must
+be enabled and the Admin endpoint must be configured in the <code class="docutils literal notranslate"><span class="pre">orderer.yaml</span></code> for
+each orderer.</p>
+<p>*Note: For a network using a system channel, <code class="docutils literal notranslate"><span class="pre">list</span></code> (for all channels) and
+<code class="docutils literal notranslate"><span class="pre">remove</span></code> (for the system channel) are the only supported operations. Any other
+attempted operation will return an error.</p>
+<div class="section" id="syntax">
+<span id="syntax"></span><h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">osnadmin</span> <span class="pre">channel</span></code> command has the following subcommands:</p>
+<ul class="simple">
+<li>join</li>
+<li>list</li>
+<li>remove</li>
+</ul>
+</div>
+<div class="section" id="osnadmin-channel">
+<span id="id1"></span><h2>osnadmin channel<a class="headerlink" href="#osnadmin-channel" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">osnadmin</span> <span class="n">channel</span> <span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">args</span><span class="o">&gt;</span> <span class="o">...</span><span class="p">]</span>
+
+<span class="n">Channel</span> <span class="n">actions</span>
+
+<span class="n">Flags</span><span class="p">:</span>
+      <span class="o">--</span><span class="n">help</span>                     <span class="n">Show</span> <span class="n">context</span><span class="o">-</span><span class="n">sensitive</span> <span class="n">help</span> <span class="p">(</span><span class="n">also</span> <span class="k">try</span>
+                                 <span class="o">--</span><span class="n">help</span><span class="o">-</span><span class="n">long</span> <span class="ow">and</span> <span class="o">--</span><span class="n">help</span><span class="o">-</span><span class="n">man</span><span class="p">)</span><span class="o">.</span>
+  <span class="o">-</span><span class="n">o</span><span class="p">,</span> <span class="o">--</span><span class="n">orderer</span><span class="o">-</span><span class="n">address</span><span class="o">=</span><span class="n">ORDERER</span><span class="o">-</span><span class="n">ADDRESS</span>
+                                 <span class="n">Admin</span> <span class="n">endpoint</span> <span class="n">of</span> <span class="n">the</span> <span class="n">OSN</span>
+      <span class="o">--</span><span class="n">ca</span><span class="o">-</span><span class="n">file</span><span class="o">=</span><span class="n">CA</span><span class="o">-</span><span class="n">FILE</span>          <span class="n">Path</span> <span class="n">to</span> <span class="n">file</span> <span class="n">containing</span> <span class="n">PEM</span><span class="o">-</span><span class="n">encoded</span> <span class="n">TLS</span> <span class="n">CA</span>
+                                 <span class="n">certificate</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">the</span> <span class="n">OSN</span>
+      <span class="o">--</span><span class="n">client</span><span class="o">-</span><span class="n">cert</span><span class="o">=</span><span class="n">CLIENT</span><span class="o">-</span><span class="n">CERT</span>  <span class="n">Path</span> <span class="n">to</span> <span class="n">file</span> <span class="n">containing</span> <span class="n">PEM</span><span class="o">-</span><span class="n">encoded</span> <span class="n">X509</span> <span class="n">public</span>
+                                 <span class="n">key</span> <span class="n">to</span> <span class="n">use</span> <span class="k">for</span> <span class="n">mutual</span> <span class="n">TLS</span> <span class="n">communication</span> <span class="k">with</span>
+                                 <span class="n">the</span> <span class="n">OSN</span>
+      <span class="o">--</span><span class="n">client</span><span class="o">-</span><span class="n">key</span><span class="o">=</span><span class="n">CLIENT</span><span class="o">-</span><span class="n">KEY</span>    <span class="n">Path</span> <span class="n">to</span> <span class="n">file</span> <span class="n">containing</span> <span class="n">PEM</span><span class="o">-</span><span class="n">encoded</span> <span class="n">private</span> <span class="n">key</span>
+                                 <span class="n">to</span> <span class="n">use</span> <span class="k">for</span> <span class="n">mutual</span> <span class="n">TLS</span> <span class="n">communication</span> <span class="k">with</span> <span class="n">the</span>
+                                 <span class="n">OSN</span>
+      <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">status</span>                <span class="n">Remove</span> <span class="n">the</span> <span class="n">HTTP</span> <span class="n">status</span> <span class="n">message</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">command</span>
+                                 <span class="n">output</span>
+
+<span class="n">Subcommands</span><span class="p">:</span>
+  <span class="n">channel</span> <span class="n">join</span> <span class="o">--</span><span class="n">channelID</span><span class="o">=</span><span class="n">CHANNELID</span> <span class="o">--</span><span class="n">config</span><span class="o">-</span><span class="n">block</span><span class="o">=</span><span class="n">CONFIG</span><span class="o">-</span><span class="n">BLOCK</span>
+    <span class="n">Join</span> <span class="n">an</span> <span class="n">Ordering</span> <span class="n">Service</span> <span class="n">Node</span> <span class="p">(</span><span class="n">OSN</span><span class="p">)</span> <span class="n">to</span> <span class="n">a</span> <span class="n">channel</span><span class="o">.</span> <span class="n">If</span> <span class="n">the</span> <span class="n">channel</span> <span class="n">does</span> <span class="ow">not</span>
+    <span class="n">yet</span> <span class="n">exist</span><span class="p">,</span> <span class="n">it</span> <span class="n">will</span> <span class="n">be</span> <span class="n">created</span><span class="o">.</span>
+
+  <span class="n">channel</span> <span class="nb">list</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">flags</span><span class="o">&gt;</span><span class="p">]</span>
+    <span class="n">List</span> <span class="n">channel</span> <span class="n">information</span> <span class="k">for</span> <span class="n">an</span> <span class="n">Ordering</span> <span class="n">Service</span> <span class="n">Node</span> <span class="p">(</span><span class="n">OSN</span><span class="p">)</span><span class="o">.</span> <span class="n">If</span> <span class="n">the</span>
+    <span class="n">channelID</span> <span class="n">flag</span> <span class="ow">is</span> <span class="nb">set</span><span class="p">,</span> <span class="n">more</span> <span class="n">detailed</span> <span class="n">information</span> <span class="n">will</span> <span class="n">be</span> <span class="n">provided</span> <span class="k">for</span> <span class="n">that</span>
+    <span class="n">channel</span><span class="o">.</span>
+
+  <span class="n">channel</span> <span class="n">remove</span> <span class="o">--</span><span class="n">channelID</span><span class="o">=</span><span class="n">CHANNELID</span>
+    <span class="n">Remove</span> <span class="n">an</span> <span class="n">Ordering</span> <span class="n">Service</span> <span class="n">Node</span> <span class="p">(</span><span class="n">OSN</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">a</span> <span class="n">channel</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="osnadmin-channel-join">
+<span id="osnadmin-channel-join"></span><h2>osnadmin channel join<a class="headerlink" href="#osnadmin-channel-join" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">osnadmin</span> <span class="n">channel</span> <span class="n">join</span> <span class="o">--</span><span class="n">channelID</span><span class="o">=</span><span class="n">CHANNELID</span> <span class="o">--</span><span class="n">config</span><span class="o">-</span><span class="n">block</span><span class="o">=</span><span class="n">CONFIG</span><span class="o">-</span><span class="n">BLOCK</span>
+
+<span class="n">Join</span> <span class="n">an</span> <span class="n">Ordering</span> <span class="n">Service</span> <span class="n">Node</span> <span class="p">(</span><span class="n">OSN</span><span class="p">)</span> <span class="n">to</span> <span class="n">a</span> <span class="n">channel</span><span class="o">.</span> <span class="n">If</span> <span class="n">the</span> <span class="n">channel</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">yet</span>
+<span class="n">exist</span><span class="p">,</span> <span class="n">it</span> <span class="n">will</span> <span class="n">be</span> <span class="n">created</span><span class="o">.</span>
+
+<span class="n">Flags</span><span class="p">:</span>
+      <span class="o">--</span><span class="n">help</span>                     <span class="n">Show</span> <span class="n">context</span><span class="o">-</span><span class="n">sensitive</span> <span class="n">help</span> <span class="p">(</span><span class="n">also</span> <span class="k">try</span>
+                                 <span class="o">--</span><span class="n">help</span><span class="o">-</span><span class="n">long</span> <span class="ow">and</span> <span class="o">--</span><span class="n">help</span><span class="o">-</span><span class="n">man</span><span class="p">)</span><span class="o">.</span>
+  <span class="o">-</span><span class="n">o</span><span class="p">,</span> <span class="o">--</span><span class="n">orderer</span><span class="o">-</span><span class="n">address</span><span class="o">=</span><span class="n">ORDERER</span><span class="o">-</span><span class="n">ADDRESS</span>
+                                 <span class="n">Admin</span> <span class="n">endpoint</span> <span class="n">of</span> <span class="n">the</span> <span class="n">OSN</span>
+      <span class="o">--</span><span class="n">ca</span><span class="o">-</span><span class="n">file</span><span class="o">=</span><span class="n">CA</span><span class="o">-</span><span class="n">FILE</span>          <span class="n">Path</span> <span class="n">to</span> <span class="n">file</span> <span class="n">containing</span> <span class="n">PEM</span><span class="o">-</span><span class="n">encoded</span> <span class="n">TLS</span> <span class="n">CA</span>
+                                 <span class="n">certificate</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">the</span> <span class="n">OSN</span>
+      <span class="o">--</span><span class="n">client</span><span class="o">-</span><span class="n">cert</span><span class="o">=</span><span class="n">CLIENT</span><span class="o">-</span><span class="n">CERT</span>  <span class="n">Path</span> <span class="n">to</span> <span class="n">file</span> <span class="n">containing</span> <span class="n">PEM</span><span class="o">-</span><span class="n">encoded</span> <span class="n">X509</span> <span class="n">public</span>
+                                 <span class="n">key</span> <span class="n">to</span> <span class="n">use</span> <span class="k">for</span> <span class="n">mutual</span> <span class="n">TLS</span> <span class="n">communication</span> <span class="k">with</span>
+                                 <span class="n">the</span> <span class="n">OSN</span>
+      <span class="o">--</span><span class="n">client</span><span class="o">-</span><span class="n">key</span><span class="o">=</span><span class="n">CLIENT</span><span class="o">-</span><span class="n">KEY</span>    <span class="n">Path</span> <span class="n">to</span> <span class="n">file</span> <span class="n">containing</span> <span class="n">PEM</span><span class="o">-</span><span class="n">encoded</span> <span class="n">private</span> <span class="n">key</span>
+                                 <span class="n">to</span> <span class="n">use</span> <span class="k">for</span> <span class="n">mutual</span> <span class="n">TLS</span> <span class="n">communication</span> <span class="k">with</span> <span class="n">the</span>
+                                 <span class="n">OSN</span>
+      <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">status</span>                <span class="n">Remove</span> <span class="n">the</span> <span class="n">HTTP</span> <span class="n">status</span> <span class="n">message</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">command</span>
+                                 <span class="n">output</span>
+  <span class="o">-</span><span class="n">c</span><span class="p">,</span> <span class="o">--</span><span class="n">channelID</span><span class="o">=</span><span class="n">CHANNELID</span>      <span class="n">Channel</span> <span class="n">ID</span>
+  <span class="o">-</span><span class="n">b</span><span class="p">,</span> <span class="o">--</span><span class="n">config</span><span class="o">-</span><span class="n">block</span><span class="o">=</span><span class="n">CONFIG</span><span class="o">-</span><span class="n">BLOCK</span>
+                                 <span class="n">Path</span> <span class="n">to</span> <span class="n">the</span> <span class="n">file</span> <span class="n">containing</span> <span class="n">an</span> <span class="n">up</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">date</span>
+                                 <span class="n">config</span> <span class="n">block</span> <span class="k">for</span> <span class="n">the</span> <span class="n">channel</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="osnadmin-channel-list">
+<span id="osnadmin-channel-list"></span><h2>osnadmin channel list<a class="headerlink" href="#osnadmin-channel-list" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">osnadmin</span> <span class="n">channel</span> <span class="nb">list</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">flags</span><span class="o">&gt;</span><span class="p">]</span>
+
+<span class="n">List</span> <span class="n">channel</span> <span class="n">information</span> <span class="k">for</span> <span class="n">an</span> <span class="n">Ordering</span> <span class="n">Service</span> <span class="n">Node</span> <span class="p">(</span><span class="n">OSN</span><span class="p">)</span><span class="o">.</span> <span class="n">If</span> <span class="n">the</span> <span class="n">channelID</span>
+<span class="n">flag</span> <span class="ow">is</span> <span class="nb">set</span><span class="p">,</span> <span class="n">more</span> <span class="n">detailed</span> <span class="n">information</span> <span class="n">will</span> <span class="n">be</span> <span class="n">provided</span> <span class="k">for</span> <span class="n">that</span> <span class="n">channel</span><span class="o">.</span>
+
+<span class="n">Flags</span><span class="p">:</span>
+      <span class="o">--</span><span class="n">help</span>                     <span class="n">Show</span> <span class="n">context</span><span class="o">-</span><span class="n">sensitive</span> <span class="n">help</span> <span class="p">(</span><span class="n">also</span> <span class="k">try</span>
+                                 <span class="o">--</span><span class="n">help</span><span class="o">-</span><span class="n">long</span> <span class="ow">and</span> <span class="o">--</span><span class="n">help</span><span class="o">-</span><span class="n">man</span><span class="p">)</span><span class="o">.</span>
+  <span class="o">-</span><span class="n">o</span><span class="p">,</span> <span class="o">--</span><span class="n">orderer</span><span class="o">-</span><span class="n">address</span><span class="o">=</span><span class="n">ORDERER</span><span class="o">-</span><span class="n">ADDRESS</span>
+                                 <span class="n">Admin</span> <span class="n">endpoint</span> <span class="n">of</span> <span class="n">the</span> <span class="n">OSN</span>
+      <span class="o">--</span><span class="n">ca</span><span class="o">-</span><span class="n">file</span><span class="o">=</span><span class="n">CA</span><span class="o">-</span><span class="n">FILE</span>          <span class="n">Path</span> <span class="n">to</span> <span class="n">file</span> <span class="n">containing</span> <span class="n">PEM</span><span class="o">-</span><span class="n">encoded</span> <span class="n">TLS</span> <span class="n">CA</span>
+                                 <span class="n">certificate</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">the</span> <span class="n">OSN</span>
+      <span class="o">--</span><span class="n">client</span><span class="o">-</span><span class="n">cert</span><span class="o">=</span><span class="n">CLIENT</span><span class="o">-</span><span class="n">CERT</span>  <span class="n">Path</span> <span class="n">to</span> <span class="n">file</span> <span class="n">containing</span> <span class="n">PEM</span><span class="o">-</span><span class="n">encoded</span> <span class="n">X509</span> <span class="n">public</span>
+                                 <span class="n">key</span> <span class="n">to</span> <span class="n">use</span> <span class="k">for</span> <span class="n">mutual</span> <span class="n">TLS</span> <span class="n">communication</span> <span class="k">with</span>
+                                 <span class="n">the</span> <span class="n">OSN</span>
+      <span class="o">--</span><span class="n">client</span><span class="o">-</span><span class="n">key</span><span class="o">=</span><span class="n">CLIENT</span><span class="o">-</span><span class="n">KEY</span>    <span class="n">Path</span> <span class="n">to</span> <span class="n">file</span> <span class="n">containing</span> <span class="n">PEM</span><span class="o">-</span><span class="n">encoded</span> <span class="n">private</span> <span class="n">key</span>
+                                 <span class="n">to</span> <span class="n">use</span> <span class="k">for</span> <span class="n">mutual</span> <span class="n">TLS</span> <span class="n">communication</span> <span class="k">with</span> <span class="n">the</span>
+                                 <span class="n">OSN</span>
+      <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">status</span>                <span class="n">Remove</span> <span class="n">the</span> <span class="n">HTTP</span> <span class="n">status</span> <span class="n">message</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">command</span>
+                                 <span class="n">output</span>
+  <span class="o">-</span><span class="n">c</span><span class="p">,</span> <span class="o">--</span><span class="n">channelID</span><span class="o">=</span><span class="n">CHANNELID</span>      <span class="n">Channel</span> <span class="n">ID</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="osnadmin-channel-remove">
+<span id="osnadmin-channel-remove"></span><h2>osnadmin channel remove<a class="headerlink" href="#osnadmin-channel-remove" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">osnadmin</span> <span class="n">channel</span> <span class="n">remove</span> <span class="o">--</span><span class="n">channelID</span><span class="o">=</span><span class="n">CHANNELID</span>
+
+<span class="n">Remove</span> <span class="n">an</span> <span class="n">Ordering</span> <span class="n">Service</span> <span class="n">Node</span> <span class="p">(</span><span class="n">OSN</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">a</span> <span class="n">channel</span><span class="o">.</span>
+
+<span class="n">Flags</span><span class="p">:</span>
+      <span class="o">--</span><span class="n">help</span>                     <span class="n">Show</span> <span class="n">context</span><span class="o">-</span><span class="n">sensitive</span> <span class="n">help</span> <span class="p">(</span><span class="n">also</span> <span class="k">try</span>
+                                 <span class="o">--</span><span class="n">help</span><span class="o">-</span><span class="n">long</span> <span class="ow">and</span> <span class="o">--</span><span class="n">help</span><span class="o">-</span><span class="n">man</span><span class="p">)</span><span class="o">.</span>
+  <span class="o">-</span><span class="n">o</span><span class="p">,</span> <span class="o">--</span><span class="n">orderer</span><span class="o">-</span><span class="n">address</span><span class="o">=</span><span class="n">ORDERER</span><span class="o">-</span><span class="n">ADDRESS</span>
+                                 <span class="n">Admin</span> <span class="n">endpoint</span> <span class="n">of</span> <span class="n">the</span> <span class="n">OSN</span>
+      <span class="o">--</span><span class="n">ca</span><span class="o">-</span><span class="n">file</span><span class="o">=</span><span class="n">CA</span><span class="o">-</span><span class="n">FILE</span>          <span class="n">Path</span> <span class="n">to</span> <span class="n">file</span> <span class="n">containing</span> <span class="n">PEM</span><span class="o">-</span><span class="n">encoded</span> <span class="n">TLS</span> <span class="n">CA</span>
+                                 <span class="n">certificate</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">the</span> <span class="n">OSN</span>
+      <span class="o">--</span><span class="n">client</span><span class="o">-</span><span class="n">cert</span><span class="o">=</span><span class="n">CLIENT</span><span class="o">-</span><span class="n">CERT</span>  <span class="n">Path</span> <span class="n">to</span> <span class="n">file</span> <span class="n">containing</span> <span class="n">PEM</span><span class="o">-</span><span class="n">encoded</span> <span class="n">X509</span> <span class="n">public</span>
+                                 <span class="n">key</span> <span class="n">to</span> <span class="n">use</span> <span class="k">for</span> <span class="n">mutual</span> <span class="n">TLS</span> <span class="n">communication</span> <span class="k">with</span>
+                                 <span class="n">the</span> <span class="n">OSN</span>
+      <span class="o">--</span><span class="n">client</span><span class="o">-</span><span class="n">key</span><span class="o">=</span><span class="n">CLIENT</span><span class="o">-</span><span class="n">KEY</span>    <span class="n">Path</span> <span class="n">to</span> <span class="n">file</span> <span class="n">containing</span> <span class="n">PEM</span><span class="o">-</span><span class="n">encoded</span> <span class="n">private</span> <span class="n">key</span>
+                                 <span class="n">to</span> <span class="n">use</span> <span class="k">for</span> <span class="n">mutual</span> <span class="n">TLS</span> <span class="n">communication</span> <span class="k">with</span> <span class="n">the</span>
+                                 <span class="n">OSN</span>
+      <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">status</span>                <span class="n">Remove</span> <span class="n">the</span> <span class="n">HTTP</span> <span class="n">status</span> <span class="n">message</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">command</span>
+                                 <span class="n">output</span>
+  <span class="o">-</span><span class="n">c</span><span class="p">,</span> <span class="o">--</span><span class="n">channelID</span><span class="o">=</span><span class="n">CHANNELID</span>      <span class="n">Channel</span> <span class="n">ID</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-usage">
+<span id="example-usage"></span><h2>Example Usage<a class="headerlink" href="#example-usage" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="osnadmin-channel-join-examples">
+<span id="osnadmin-channel-join-examples"></span><h3>osnadmin channel join examples<a class="headerlink" href="#osnadmin-channel-join-examples" title="Permalink to this headline">¶</a></h3>
+<p>Here’s an example of the <code class="docutils literal notranslate"><span class="pre">osnadmin</span> <span class="pre">channel</span> <span class="pre">join</span></code> command.</p>
+<ul>
+<li><p class="first">Create and join a sample channel <code class="docutils literal notranslate"><span class="pre">mychannel</span></code> defined by the application channel genesis
+block contained in file <code class="docutils literal notranslate"><span class="pre">mychannel-genesis-block.pb</span></code>. Use the orderer admin endpoint
+at <code class="docutils literal notranslate"><span class="pre">orderer.example.com:9443</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+osnadmin channel join -o orderer.example.com:9443 --ca-file $CA_FILE --client-cert $CLIENT_CERT --client-key $CLIENT_KEY --channelID mychannel --config-block mychannel-genesis-block.pb
+
+Status: 201
+{
+  &quot;name&quot;: &quot;mychannel&quot;,
+  &quot;url&quot;: &quot;/participation/v1/channels/mychannel&quot;,
+  &quot;consensusRelation&quot;: &quot;consenter&quot;,
+  &quot;status&quot;: &quot;active&quot;,
+  &quot;height&quot;: 1
+}
+</pre></div>
+</div>
+<p>Status 201 and the channel details are returned indicating that the channel has been
+successfully created and joined.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="osnadmin-channel-list-example">
+<span id="osnadmin-channel-list-example"></span><h3>osnadmin channel list example<a class="headerlink" href="#osnadmin-channel-list-example" title="Permalink to this headline">¶</a></h3>
+<p>Here are some examples of the <code class="docutils literal notranslate"><span class="pre">osnadmin</span> <span class="pre">channel</span> <span class="pre">list</span></code> command.</p>
+<ul>
+<li><p class="first">Listing all the channels that the orderer has joined. This includes the
+system channel (if one exists) and all of the application channels.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>osnadmin channel list -o orderer.example.com:9443 --ca-file $CA_FILE --client-cert $CLIENT_CERT --client-key $CLIENT_KEY
+
+Status: 200
+{
+  &quot;systemChannel&quot;: null,
+  &quot;channels&quot;: [
+      {
+          &quot;name&quot;: &quot;mychannel&quot;,
+          &quot;url&quot;: &quot;/participation/v1/channels/mychannel&quot;
+      }
+  ]
+}
+</pre></div>
+</div>
+<p>Status 200 and the list of channels are returned.</p>
+</li>
+<li><p class="first">Using the <code class="docutils literal notranslate"><span class="pre">--channelID</span></code> flag to list more details for <code class="docutils literal notranslate"><span class="pre">mychannel</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>osnadmin channel list -o orderer.example.com:9443 --ca-file $CA_FILE --client-cert $CLIENT_CERT --client-key $CLIENT_KEY --channelID mychannel
+
+Status: 200
+{
+  &quot;name&quot;: &quot;mychannel&quot;,
+  &quot;url&quot;: &quot;/participation/v1/channels/mychannel&quot;,
+  &quot;consensusRelation&quot;: &quot;consenter&quot;,
+  &quot;status&quot;: &quot;active&quot;,
+  &quot;height&quot;: 3
+}
+</pre></div>
+</div>
+<p>Status 200 and the details of the channels are returned.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="osnadmin-channel-remove-example">
+<span id="osnadmin-channel-remove-example"></span><h3>osnadmin channel remove example<a class="headerlink" href="#osnadmin-channel-remove-example" title="Permalink to this headline">¶</a></h3>
+<p>Here’s an example of the <code class="docutils literal notranslate"><span class="pre">osnadmin</span> <span class="pre">channel</span> <span class="pre">remove</span></code> command.</p>
+<ul>
+<li><p class="first">Removing channel <code class="docutils literal notranslate"><span class="pre">mychannel</span></code> from the orderer at <code class="docutils literal notranslate"><span class="pre">orderer.example.com:9443</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>osnadmin channel remove -o orderer.example.com:9443 --ca-file $CA_FILE --client-cert $CLIENT_CERT --client-key $CLIENT_KEY --channelID mychannel
+
+Status: 204
+</pre></div>
+</div>
+<p>Status 204 is returned upon successful removal of a channel.</p>
+</li>
+</ul>
+<p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="configtxgen.html" class="btn btn-neutral float-right" title="configtxgen" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="peernode.html" class="btn btn-neutral" title="peer node" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright Hyperledger 2020.
+    <br>
+      <br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>
+      <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+        <img alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'master',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,1182 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Running a Fabric Application &mdash; hyperledger-fabricdocs master documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="hyperledger-fabricdocs master documentation" href="index.html"/>
+        <link rel="up" title="Getting Started - Run Fabric" href="getting_started_run_fabric.html"/>
+        <link rel="next" title="Developing Applications" href="developapps/developing_applications.html"/>
+        <link rel="prev" title="Using the Fabric test network" href="test_network.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+
+          
+            <a href="index.html" class="icon icon-home"> hyperledger-fabricdocs
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                master
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+
+<br><img style="background-color: #fff; height: unset; width: unset;" alt="Hyperledger Fabric" src=_images/hyperledger_fabric_logo_color.png />
+<br>
+<a href="https://github.com/hyperledger/fabric"><img style="padding: 0px; margin: auto auto auto auto;" alt="GitHub" src="_static/images/github_button.png"/></a>
+&nbsp;<a href="https://stackoverflow.com/questions/tagged/hyperledger-fabric"><img style="padding: 0px; margin: auto auto auto auto;" alt="StackOverflow" src="_static/images/stackoverflow_button.png"/></a>
+&nbsp;<a href="https://chat.hyperledger.org"><img style="padding: 0px; margin: auto auto auto auto;" alt="Rocket Chat" src="_static/images/rocketchat_button.png"/></a>
+&nbsp;<a href="https://www.youtube.com/playlist?list=PL0MZ85B_96CH7wvtrRzV7SvtRY0sI0DEg"><img style="padding: 0px; margin: auto auto auto auto;" alt="Youtube Channel" src="_static/images/youtube_button.png"/></a>
+
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="whatis.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whatsnew.html">What’s new in Hyperledger Fabric v2.x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whatsnew.html#release-notes">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="key_concepts.html">Key Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started - Install</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="getting_started_run_fabric.html">Getting Started - Run Fabric</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="test_network.html">Running a Test Network</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Running a Fabric Application</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#before-you-begin">Before you begin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#set-up-the-blockchain-network">Set up the blockchain network</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#launch-the-network">Launch the network</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sample-application">Sample application</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#first-the-application-enrolls-the-admin-user">First, the application enrolls the admin user</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#second-the-application-registers-and-enrolls-an-application-user">Second, the application registers and enrolls an application user</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#third-the-sample-application-prepares-a-connection-to-the-channel-and-smart-contract">Third, the sample application prepares a connection to the channel and smart contract</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fourth-the-application-initializes-the-ledger-with-some-sample-data">Fourth, the application initializes the ledger with some sample data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fifth-the-application-invokes-each-of-the-chaincode-functions">Fifth, the application invokes each of the chaincode functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#a-closer-look">A closer look</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#updating-the-ledger">Updating the ledger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-asset-transfer-basic-smart-contract">The asset-transfer (‘basic’) smart contract</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clean-up">Clean up</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#additional-resources">Additional resources</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="developapps/developing_applications.html">Developing Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment_guide_overview.html">Deploying a production network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ops_guide.html">Operations Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upgrade.html">Upgrading to the latest release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_ref.html">Commands Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fabric-FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributions Welcome!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="releases.html">Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="questions.html">Still Have Questions?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="status.html">Status</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">hyperledger-fabricdocs</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="getting_started_run_fabric.html">Getting Started - Run Fabric</a> &raquo;</li>
+        
+      <li>Running a Fabric Application</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/write_first_app.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="running-a-fabric-application">
+<h1>Running a Fabric Application<a class="headerlink" href="#running-a-fabric-application" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If you’re not yet familiar with the fundamental architecture of a
+Fabric network, you may want to visit the <a class="reference internal" href="key_concepts.html"><span class="doc">Key Concepts</span></a> section
+prior to continuing.</p>
+<p class="last">It is also worth noting that this tutorial serves as an introduction
+to Fabric applications and uses simple smart contracts and
+applications. For a more in-depth look at Fabric applications and
+smart contracts, check out our
+<a class="reference internal" href="developapps/developing_applications.html"><span class="doc">Developing Applications</span></a> section or the
+<a class="reference internal" href="tutorial/commercial_paper.html"><span class="doc">Commercial paper tutorial</span></a>.</p>
+</div>
+<p>This tutorial provides an introduction to how Fabric applications interact
+with deployed blockchain networks. The tutorial uses sample programs built using the
+Fabric SDKs – described in detail in the <a class="reference internal" href="developapps/application.html"><span class="doc">Application</span></a> topic –
+to invoke a smart contract which queries and updates the ledger with the smart
+contract API – described in detail in <a class="reference internal" href="developapps/smartcontract.html"><span class="doc">Smart Contract Processing</span></a>.
+We will also use our sample programs and a deployed Certificate Authority to generate
+the X.509 certificates that an application needs to interact with a permissioned
+blockchain.</p>
+<p><strong>About Asset Transfer</strong></p>
+<p>This Asset Transfer (basic) sample demonstrates how to initialize a ledger with assets, query those assets, create
+a new asset, query a single asset based on an asset ID, update an existing asset, and transfer an asset to a new owner.
+It involves the following two components:</p>
+<blockquote>
+<div><p>1. Sample application: which makes calls to the blockchain network, invoking transactions
+implemented in the chaincode (smart contract). The application is located in the following <code class="docutils literal notranslate"><span class="pre">fabric-samples</span></code> directory:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">asset</span><span class="o">-</span><span class="n">transfer</span><span class="o">-</span><span class="n">basic</span><span class="o">/</span><span class="n">application</span><span class="o">-</span><span class="n">javascript</span>
+</pre></div>
+</div>
+<p>2. Smart contract itself, implementing the transactions that involve interactions with the
+ledger. The smart contract (chaincode) is located in the following <code class="docutils literal notranslate"><span class="pre">fabric-samples</span></code> directory:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">asset</span><span class="o">-</span><span class="n">transfer</span><span class="o">-</span><span class="n">basic</span><span class="o">/</span><span class="n">chaincode</span><span class="o">-</span><span class="p">(</span><span class="n">javascript</span><span class="p">,</span> <span class="n">java</span><span class="p">,</span> <span class="n">go</span><span class="p">,</span> <span class="n">typescript</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Please note that for the purposes of this tutorial, the terms chaincode and smart contract are used
+interchangeably. For this example, we will be using the javascript chaincode.</p>
+<p>We’ll go through three principle steps:</p>
+<blockquote>
+<div><p><strong>1. Setting up a development environment.</strong> Our application needs a network
+to interact with, so we’ll deploy a basic network for our smart contracts and
+application.</p>
+<img alt="_images/AppConceptsOverview.png" src="_images/AppConceptsOverview.png" />
+<p><strong>2. Explore a sample smart contract.</strong>
+We’ll inspect the sample assetTransfer (javascript) smart contract to learn about the transactions within it,
+and how they are used by an application to query and update the ledger.</p>
+<p><strong>3. Interact with the smart contract with a sample application.</strong> Our application will
+use the assetTransfer smart contract to create, query, and update assets on the ledger.
+We’ll get into the code of the app and the transactions they create, including initializing
+the ledger with assets, querying an asset, querying a range of assets, creating a new asset,
+and transferring an asset to a new owner.</p>
+</div></blockquote>
+<p>After completing this tutorial you should have a basic understanding of how Fabric
+applications and smart contracts work together to manage data on the distributed
+ledger of a blockchain network.</p>
+<div class="section" id="before-you-begin">
+<h2>Before you begin<a class="headerlink" href="#before-you-begin" title="Permalink to this headline">¶</a></h2>
+<p>In addition to the standard <a class="reference internal" href="prereqs.html"><span class="doc">Prerequisites</span></a> for Fabric, this tutorial leverages the Hyperledger Fabric SDK for Node.js. See the Node.js SDK <a class="reference external" href="https://github.com/hyperledger/fabric-sdk-node#build-and-test">README</a> for a up to date list of prerequisites.</p>
+<ul>
+<li><p class="first">If you are using macOS, complete the following steps:</p>
+<ol class="arabic simple">
+<li>Install <a class="reference external" href="https://brew.sh/">Homebrew</a>.</li>
+<li>Check the Node SDK <a class="reference external" href="https://github.com/hyperledger/fabric-sdk-node#build-and-test">prerequisites</a> to find out what level of Node to install.</li>
+<li>Run <code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">node</span></code> to download the latest version of node or choose a specific version, for example: <code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">node&#64;10</span></code> according to what is supported in the prerequisites.</li>
+<li>Run <code class="docutils literal notranslate"><span class="pre">npm</span> <span class="pre">install</span></code>.</li>
+</ol>
+</li>
+<li><p class="first">If you are on Windows,  you can install the <a class="reference external" href="https://github.com/felixrieseberg/windows-build-tools#readme">windows-build-tools</a> with npm which installs all required compilers and tooling by running the following command:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">npm</span> <span class="n">install</span> <span class="o">--</span><span class="k">global</span> <span class="n">windows</span><span class="o">-</span><span class="n">build</span><span class="o">-</span><span class="n">tools</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">If you are on Linux, you need to install <a class="reference external" href="https://www.python.org/download/releases/2.7/">Python v2.7</a>, <a class="reference external" href="https://www.gnu.org/software/make/">make</a>, and a C/C++ compiler toolchain such as <a class="reference external" href="https://gcc.gnu.org/">GCC</a>. You can run the following command to install the other tools:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">build</span><span class="o">-</span><span class="n">essential</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="set-up-the-blockchain-network">
+<h2>Set up the blockchain network<a class="headerlink" href="#set-up-the-blockchain-network" title="Permalink to this headline">¶</a></h2>
+<p>If you’ve already run through <a class="reference internal" href="test_network.html"><span class="doc">Using the Fabric test network</span></a> tutorial and have a network up
+and running, this tutorial will bring down your running network before
+bringing up a new one.</p>
+<div class="section" id="launch-the-network">
+<h3>Launch the network<a class="headerlink" href="#launch-the-network" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This tutorial demonstrates the JavaScript versions of the Asset Transfer
+smart contract and application, but the <code class="docutils literal notranslate"><span class="pre">fabric-samples</span></code> repository also
+contains Go, Java and TypeScript versions of this sample smart contract. To try the
+Go, Java or TypeScript versions, change the <code class="docutils literal notranslate"><span class="pre">javascript</span></code> argument
+for <code class="docutils literal notranslate"><span class="pre">./network.sh</span> <span class="pre">deployCC</span> <span class="pre">-ccl</span> <span class="pre">javascript</span></code> below to either <code class="docutils literal notranslate"><span class="pre">go</span></code>, <code class="docutils literal notranslate"><span class="pre">java</span></code> or <code class="docutils literal notranslate"><span class="pre">typescript</span></code>
+and follow the instructions written to the terminal. You may use any chaincode language sample with
+the javascript application sample (e.g javascript application calling go chaincode functions or
+javascript application calling typescript chaincode functions, etc.)</p>
+</div>
+<p>Navigate to the <code class="docutils literal notranslate"><span class="pre">test-network</span></code> subdirectory within your local clone of the
+<code class="docutils literal notranslate"><span class="pre">fabric-samples</span></code> repository.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">fabric</span><span class="o">-</span><span class="n">samples</span><span class="o">/</span><span class="n">test</span><span class="o">-</span><span class="n">network</span>
+</pre></div>
+</div>
+<p>If you already have a test network running, bring it down to ensure the environment is clean.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">network</span><span class="o">.</span><span class="n">sh</span> <span class="n">down</span>
+</pre></div>
+</div>
+<p>Launch the Fabric test network using the <code class="docutils literal notranslate"><span class="pre">network.sh</span></code> shell script.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">network</span><span class="o">.</span><span class="n">sh</span> <span class="n">up</span> <span class="n">createChannel</span> <span class="o">-</span><span class="n">c</span> <span class="n">mychannel</span> <span class="o">-</span><span class="n">ca</span>
+</pre></div>
+</div>
+<p>This command will deploy the Fabric test network with two peers, an ordering service, and three certificate authorities (Orderer, Org1, Org2).
+Instead of using the cryptogen tool, we bring up the test network using Certificate Authorities,
+hence the <code class="docutils literal notranslate"><span class="pre">-ca</span></code> flag. Additionally, the org admin user registration is bootstrapped when the Certificate Authority is started.
+In a later step, we will show how the sample application completes the admin enrollment.</p>
+<p>Next, let’s deploy the chaincode by calling the <code class="docutils literal notranslate"><span class="pre">./network.sh</span></code> script with the chaincode name and language options.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">network</span><span class="o">.</span><span class="n">sh</span> <span class="n">deployCC</span> <span class="o">-</span><span class="n">ccn</span> <span class="n">basic</span> <span class="o">-</span><span class="n">ccp</span> <span class="o">../</span><span class="n">asset</span><span class="o">-</span><span class="n">transfer</span><span class="o">-</span><span class="n">basic</span><span class="o">/</span><span class="n">chaincode</span><span class="o">-</span><span class="n">javascript</span><span class="o">/</span> <span class="o">-</span><span class="n">ccl</span> <span class="n">javascript</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Behind the scenes, this script uses the chaincode lifecycle to package, install,
+query installed chaincode, approve chaincode for both Org1 and Org2, and finally commit the chaincode.</p>
+</div>
+<p>If the chaincode is successfully deployed, the end of the output in your terminal should look similar to below:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Committed</span> <span class="n">chaincode</span> <span class="n">definition</span> <span class="k">for</span> <span class="n">chaincode</span> <span class="s1">&#39;basic&#39;</span> <span class="n">on</span> <span class="n">channel</span> <span class="s1">&#39;mychannel&#39;</span><span class="p">:</span>
+<span class="n">Version</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Endorsement</span> <span class="n">Plugin</span><span class="p">:</span> <span class="n">escc</span><span class="p">,</span> <span class="n">Validation</span> <span class="n">Plugin</span><span class="p">:</span> <span class="n">vscc</span><span class="p">,</span> <span class="n">Approvals</span><span class="p">:</span> <span class="p">[</span><span class="n">Org1MSP</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span> <span class="n">Org2MSP</span><span class="p">:</span> <span class="n">true</span><span class="p">]</span>
+<span class="o">=====================</span> <span class="n">Query</span> <span class="n">chaincode</span> <span class="n">definition</span> <span class="n">successful</span> <span class="n">on</span> <span class="n">peer0</span><span class="o">.</span><span class="n">org2</span> <span class="n">on</span> <span class="n">channel</span> <span class="s1">&#39;mychannel&#39;</span> <span class="o">=====================</span>
+
+<span class="o">=====================</span> <span class="n">Chaincode</span> <span class="n">initialization</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">required</span> <span class="o">=====================</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sample-application">
+<h3>Sample application<a class="headerlink" href="#sample-application" title="Permalink to this headline">¶</a></h3>
+<p>Next, let’s prepare the sample Asset Transfer Javascript application that will be used to interact with the deployed chaincode.</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/hyperledger/fabric-samples/blob/master/asset-transfer-basic/application-javascript">JavaScript application</a></li>
+</ul>
+<p>Note that the sample application is also available in Go and Java at the links below:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/hyperledger/fabric-samples/blob/master/asset-transfer-basic/application-go">Go application</a></li>
+<li><a class="reference external" href="https://github.com/hyperledger/fabric-samples/blob/master/asset-transfer-basic/application-java">Java application</a></li>
+</ul>
+<p>Open a new terminal, and navigate to the <code class="docutils literal notranslate"><span class="pre">application-javascript</span></code> folder.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">asset</span><span class="o">-</span><span class="n">transfer</span><span class="o">-</span><span class="n">basic</span><span class="o">/</span><span class="n">application</span><span class="o">-</span><span class="n">javascript</span>
+</pre></div>
+</div>
+<p>This directory contains sample programs that were developed using the Fabric
+SDK for Node.js. Run the following command to install the application dependencies.
+It may take up to a minute to complete:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">npm</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>This process is installing the key application dependencies defined in the application’s
+<code class="docutils literal notranslate"><span class="pre">package.json</span></code>. The most important of which is the <code class="docutils literal notranslate"><span class="pre">fabric-network</span></code> Node.js module;
+it enables an application to use identities, wallets, and gateways to connect to
+channels, submit transactions, and wait for notifications. This tutorial also
+uses the <code class="docutils literal notranslate"><span class="pre">fabric-ca-client</span></code> module to enroll users with their respective
+certificate authorities, generating a valid identity which is then used by
+the <code class="docutils literal notranslate"><span class="pre">fabric-network</span></code> module to interact with the blockchain network.</p>
+<p>Once <code class="docutils literal notranslate"><span class="pre">npm</span> <span class="pre">install</span></code> completes, everything is in place to run the application.
+Let’s take a look at the sample JavaScript application files we will be using
+in this tutorial. Run the following command to list the files in this directory:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span>
+</pre></div>
+</div>
+<p>You should see the following:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">app</span><span class="o">.</span><span class="n">js</span>                  <span class="n">node_modules</span>            <span class="n">package</span><span class="o">.</span><span class="n">json</span>       <span class="n">package</span><span class="o">-</span><span class="n">lock</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The first part of the following section involves communication with the Certificate
+Authority. You may find it useful to stream the CA logs when running
+the upcoming programs by opening a new terminal shell and running
+<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">logs</span> <span class="pre">-f</span> <span class="pre">ca_org1</span></code>.</p>
+</div>
+<p>When we started the Fabric test network back in the first step, an admin user — literally called <code class="docutils literal notranslate"><span class="pre">admin</span></code> —
+was created as the <strong>registrar</strong> for the Certificate Authority (CA). Our first
+step is to generate the private key, public key, and X.509 certificate for
+<code class="docutils literal notranslate"><span class="pre">admin</span></code> by having the application call the <code class="docutils literal notranslate"><span class="pre">enrollAdmin</span></code> . This process uses a <strong>Certificate
+Signing Request</strong> (CSR) — the private and public key are first generated
+locally and the public key is then sent to the CA which returns an encoded
+certificate for use by the application. These credentials are then stored
+in the wallet, allowing us to act as an administrator for the CA.</p>
+<p>Let’s run the application and then step through each of the interactions with the smart contract functions. From the
+<code class="docutils literal notranslate"><span class="pre">asset-transfer-basic/application-javascript</span></code> directory, run the following command:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">node</span> <span class="n">app</span><span class="o">.</span><span class="n">js</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="first-the-application-enrolls-the-admin-user">
+<h2>First, the application enrolls the admin user<a class="headerlink" href="#first-the-application-enrolls-the-admin-user" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It is important to note that enrolling the admin and registering the app user are interactions that
+take place between the application and the Certificate Authority, not between the application and the chaincode.
+If you examine the chaincode in <code class="docutils literal notranslate"><span class="pre">asset-transfer-basic/chaincode-javascript/lib</span></code> you will find that the chaincode
+does not contain any functionality that supports enrolling the admin or registering the user.</p>
+</div>
+<p>In the sample application code below, you will see that after getting reference to the
+common connection profile path, making sure the connection profile exists, and specifying where to create the wallet,
+<code class="docutils literal notranslate"><span class="pre">enrollAdmin()</span></code> is executed and the admin credentials are generated from the Certificate Authority.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="n">function</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="o">//</span> <span class="n">build</span> <span class="n">an</span> <span class="ow">in</span> <span class="n">memory</span> <span class="nb">object</span> <span class="k">with</span> <span class="n">the</span> <span class="n">network</span> <span class="n">configuration</span> <span class="p">(</span><span class="n">also</span> <span class="n">known</span> <span class="k">as</span> <span class="n">a</span> <span class="n">connection</span> <span class="n">profile</span><span class="p">)</span>
+    <span class="n">const</span> <span class="n">ccp</span> <span class="o">=</span> <span class="n">buildCCP</span><span class="p">();</span>
+
+    <span class="o">//</span> <span class="n">build</span> <span class="n">an</span> <span class="n">instance</span> <span class="n">of</span> <span class="n">the</span> <span class="n">fabric</span> <span class="n">ca</span> <span class="n">services</span> <span class="n">client</span> <span class="n">based</span> <span class="n">on</span>
+    <span class="o">//</span> <span class="n">the</span> <span class="n">information</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">network</span> <span class="n">configuration</span>
+    <span class="n">const</span> <span class="n">caClient</span> <span class="o">=</span> <span class="n">buildCAClient</span><span class="p">(</span><span class="n">FabricCAServices</span><span class="p">,</span> <span class="n">ccp</span><span class="p">);</span>
+
+    <span class="o">//</span> <span class="n">setup</span> <span class="n">the</span> <span class="n">wallet</span> <span class="n">to</span> <span class="n">hold</span> <span class="n">the</span> <span class="n">credentials</span> <span class="n">of</span> <span class="n">the</span> <span class="n">application</span> <span class="n">user</span>
+    <span class="n">const</span> <span class="n">wallet</span> <span class="o">=</span> <span class="k">await</span> <span class="n">buildWallet</span><span class="p">(</span><span class="n">Wallets</span><span class="p">,</span> <span class="n">walletPath</span><span class="p">);</span>
+
+    <span class="o">//</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">real</span> <span class="n">application</span> <span class="n">this</span> <span class="n">would</span> <span class="n">be</span> <span class="n">done</span> <span class="n">on</span> <span class="n">an</span> <span class="n">administrative</span> <span class="n">flow</span><span class="p">,</span> <span class="ow">and</span> <span class="n">only</span> <span class="n">once</span>
+    <span class="k">await</span> <span class="n">enrollAdmin</span><span class="p">(</span><span class="n">caClient</span><span class="p">,</span> <span class="n">wallet</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This command stores the CA administrator’s credentials in the <code class="docutils literal notranslate"><span class="pre">wallet</span></code> directory.
+You can find administrator’s certificate and private key in the <code class="docutils literal notranslate"><span class="pre">wallet/admin.id</span></code>
+file.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you decide to start over by taking down the network and bringing it back up again, you will
+have to delete the <code class="docutils literal notranslate"><span class="pre">wallet</span></code> folder and its identities prior to re-running the javascript application
+or you will get an error. This happens because the Certificate Authority and its database are taken down
+when the test-network is taken down but the original wallet still remains in the application-javascript directory
+so it must be deleted.  When you re-run the sample javascript application, a new wallet and credentials will
+be generated.</p>
+</div>
+<p>If you scroll back up to the beginning of the output in your terminal, it should be similar to below:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Wallet</span> <span class="n">path</span><span class="p">:</span> <span class="o">/</span><span class="n">Users</span><span class="o">/&lt;</span><span class="n">your_username</span><span class="o">&gt;/</span><span class="n">fabric</span><span class="o">-</span><span class="n">samples</span><span class="o">/</span><span class="n">asset</span><span class="o">-</span><span class="n">transfer</span><span class="o">-</span><span class="n">basic</span><span class="o">/</span><span class="n">application</span><span class="o">-</span><span class="n">javascript</span><span class="o">/</span><span class="n">wallet</span>
+<span class="n">Successfully</span> <span class="n">enrolled</span> <span class="n">admin</span> <span class="n">user</span> <span class="ow">and</span> <span class="n">imported</span> <span class="n">it</span> <span class="n">into</span> <span class="n">the</span> <span class="n">wallet</span>
+</pre></div>
+</div>
+<p>Because the admin registration step is bootstrapped when the Certificate Authority
+is started, we only need to enroll the admin.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Since the Fabric CA interactions are common across the samples, enrollAdmin() and the other CA
+related functions are included in the <code class="docutils literal notranslate"><span class="pre">fabric-samples/test-application/javascript/CAUtil.js</span></code>
+common utility.</p>
+</div>
+<p>As for the app user, we need the application to register and enroll the user in the next step.</p>
+</div>
+<div class="section" id="second-the-application-registers-and-enrolls-an-application-user">
+<h2>Second, the application registers and enrolls an application user<a class="headerlink" href="#second-the-application-registers-and-enrolls-an-application-user" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have the administrator’s credentials in a wallet, the application uses the <code class="docutils literal notranslate"><span class="pre">admin</span></code>
+user to register and enroll an app user which will be used
+to interact with the blockchain network. The section of the application code is shown below.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">real</span> <span class="n">application</span> <span class="n">this</span> <span class="n">would</span> <span class="n">be</span> <span class="n">done</span> <span class="n">only</span> <span class="n">when</span> <span class="n">a</span> <span class="n">new</span> <span class="n">user</span> <span class="n">was</span> <span class="n">required</span> <span class="n">to</span> <span class="n">be</span> <span class="n">added</span>
+<span class="o">//</span> <span class="ow">and</span> <span class="n">would</span> <span class="n">be</span> <span class="n">part</span> <span class="n">of</span> <span class="n">an</span> <span class="n">administrative</span> <span class="n">flow</span>
+<span class="k">await</span> <span class="n">registerUser</span><span class="p">(</span><span class="n">caClient</span><span class="p">,</span> <span class="n">wallet</span><span class="p">,</span> <span class="n">userId</span><span class="p">,</span> <span class="s1">&#39;org1.department1&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Similar to the admin enrollment, this function uses a CSR to register and enroll <code class="docutils literal notranslate"><span class="pre">appUser</span></code> and
+store its credentials alongside those of <code class="docutils literal notranslate"><span class="pre">admin</span></code> in the wallet. We now have
+identities for two separate users — <code class="docutils literal notranslate"><span class="pre">admin</span></code> and <code class="docutils literal notranslate"><span class="pre">appUser</span></code> — that can be
+used by our application.</p>
+<p>Scrolling further down in your terminal output, you should see confirmation of the app user registration
+similar to this:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Successfully</span> <span class="n">registered</span> <span class="ow">and</span> <span class="n">enrolled</span> <span class="n">user</span> <span class="n">appUser</span> <span class="ow">and</span> <span class="n">imported</span> <span class="n">it</span> <span class="n">into</span> <span class="n">the</span> <span class="n">wallet</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="third-the-sample-application-prepares-a-connection-to-the-channel-and-smart-contract">
+<h2>Third, the sample application prepares a connection to the channel and smart contract<a class="headerlink" href="#third-the-sample-application-prepares-a-connection-to-the-channel-and-smart-contract" title="Permalink to this headline">¶</a></h2>
+<p>In the prior steps, the application generated the admin and app user credentials and placed them in the wallet.
+If the credentials exist and have the correct permissions attributes associated with them, the sample application user
+will be able to call chaincode functions after getting reference to the channel name and contract name.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Our connection configuration specifies only the peer from your own Org.
+We tell node client sdk to use the service discovery (running on the peer),
+which fetches other peers that are currently online, metadata like relevant endorsement policies
+and any static information it would have otherwise needed to communicate with the rest of the nodes.
+The <code class="docutils literal notranslate"><span class="pre">asLocalhost</span></code> set to <code class="docutils literal notranslate"><span class="pre">true</span></code> tells it to connect as localhost, since our client is running on same network as the other fabric nodes.
+In deployments where you are not running the client on the same network as the other fabric nodes,
+the <code class="docutils literal notranslate"><span class="pre">asLocalhost</span></code> option would be set to <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+</div>
+<p>You will notice that in the following lines of application code, the application is getting reference
+to the Contract using the contract name and channel name via Gateway:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Create</span> <span class="n">a</span> <span class="n">new</span> <span class="n">gateway</span> <span class="n">instance</span> <span class="k">for</span> <span class="n">interacting</span> <span class="k">with</span> <span class="n">the</span> <span class="n">fabric</span> <span class="n">network</span><span class="o">.</span>
+<span class="o">//</span> <span class="n">In</span> <span class="n">a</span> <span class="n">real</span> <span class="n">application</span> <span class="n">this</span> <span class="n">would</span> <span class="n">be</span> <span class="n">done</span> <span class="k">as</span> <span class="n">the</span> <span class="n">backend</span> <span class="n">server</span> <span class="n">session</span> <span class="ow">is</span> <span class="n">setup</span> <span class="k">for</span>
+<span class="o">//</span> <span class="n">a</span> <span class="n">user</span> <span class="n">that</span> <span class="n">has</span> <span class="n">been</span> <span class="n">verified</span><span class="o">.</span>
+<span class="n">const</span> <span class="n">gateway</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Gateway</span><span class="p">();</span>
+
+<span class="k">try</span> <span class="p">{</span>
+  <span class="o">//</span> <span class="n">setup</span> <span class="n">the</span> <span class="n">gateway</span> <span class="n">instance</span>
+  <span class="o">//</span> <span class="n">The</span> <span class="n">user</span> <span class="n">will</span> <span class="n">now</span> <span class="n">be</span> <span class="n">able</span> <span class="n">to</span> <span class="n">create</span> <span class="n">connections</span> <span class="n">to</span> <span class="n">the</span> <span class="n">fabric</span> <span class="n">network</span> <span class="ow">and</span> <span class="n">be</span> <span class="n">able</span> <span class="n">to</span>
+  <span class="o">//</span> <span class="n">submit</span> <span class="n">transactions</span> <span class="ow">and</span> <span class="n">query</span><span class="o">.</span> <span class="n">All</span> <span class="n">transactions</span> <span class="n">submitted</span> <span class="n">by</span> <span class="n">this</span> <span class="n">gateway</span> <span class="n">will</span> <span class="n">be</span>
+  <span class="o">//</span> <span class="n">signed</span> <span class="n">by</span> <span class="n">this</span> <span class="n">user</span> <span class="n">using</span> <span class="n">the</span> <span class="n">credentials</span> <span class="n">stored</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">wallet</span><span class="o">.</span>
+  <span class="k">await</span> <span class="n">gateway</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">ccp</span><span class="p">,</span> <span class="p">{</span>
+    <span class="n">wallet</span><span class="p">,</span>
+    <span class="n">identity</span><span class="p">:</span> <span class="n">userId</span><span class="p">,</span>
+    <span class="n">discovery</span><span class="p">:</span> <span class="p">{</span><span class="n">enabled</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span> <span class="n">asLocalhost</span><span class="p">:</span> <span class="n">true</span><span class="p">}</span> <span class="o">//</span> <span class="n">using</span> <span class="n">asLocalhost</span> <span class="k">as</span> <span class="n">this</span> <span class="n">gateway</span> <span class="ow">is</span> <span class="n">using</span> <span class="n">a</span> <span class="n">fabric</span> <span class="n">network</span> <span class="n">deployed</span> <span class="n">locally</span>
+  <span class="p">});</span>
+
+  <span class="o">//</span> <span class="n">Build</span> <span class="n">a</span> <span class="n">network</span> <span class="n">instance</span> <span class="n">based</span> <span class="n">on</span> <span class="n">the</span> <span class="n">channel</span> <span class="n">where</span> <span class="n">the</span> <span class="n">smart</span> <span class="n">contract</span> <span class="ow">is</span> <span class="n">deployed</span>
+  <span class="n">const</span> <span class="n">network</span> <span class="o">=</span> <span class="k">await</span> <span class="n">gateway</span><span class="o">.</span><span class="n">getNetwork</span><span class="p">(</span><span class="n">channelName</span><span class="p">);</span>
+
+
+  <span class="o">//</span> <span class="n">Get</span> <span class="n">the</span> <span class="n">contract</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">network</span><span class="o">.</span>
+  <span class="n">const</span> <span class="n">contract</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">getContract</span><span class="p">(</span><span class="n">chaincodeName</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>When a chaincode package includes multiple smart contracts, on the <a class="reference external" href="https://hyperledger.github.io/fabric-sdk-node/release-2.2/module-fabric-network.Network.html#getContract">getContract() API</a> you can specify both the name of the chaincode package and a specific smart contract to target. For example:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">const</span> <span class="n">contract</span> <span class="o">=</span> <span class="k">await</span> <span class="n">network</span><span class="o">.</span><span class="n">getContract</span><span class="p">(</span><span class="s1">&#39;chaincodeName&#39;</span><span class="p">,</span> <span class="s1">&#39;smartContractName&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fourth-the-application-initializes-the-ledger-with-some-sample-data">
+<h2>Fourth, the application initializes the ledger with some sample data<a class="headerlink" href="#fourth-the-application-initializes-the-ledger-with-some-sample-data" title="Permalink to this headline">¶</a></h2>
+<p>Now that we are at the point where we are actually having the sample application submit transactions, let’s
+go through them in sequence. The application code snippets and invoked chaincode snippets
+are provided for each called function, as well as the terminal output.</p>
+<p>The submitTransaction() function is used to invoke the chaincode <code class="docutils literal notranslate"><span class="pre">InitLedger</span></code> function to populate the
+ledger with some sample data. Under the covers, the submitTransaction() function will use service discovery
+to find a set of required endorsing peers for the chaincode, invoke the chaincode
+on the required number of peers, gather the chaincode endorsed results from those peers,
+and finally submit the transaction to the ordering service.</p>
+<p>Sample application <code class="docutils literal notranslate"><span class="pre">'InitLedger'</span></code> call</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Initialize</span> <span class="n">a</span> <span class="nb">set</span> <span class="n">of</span> <span class="n">asset</span> <span class="n">data</span> <span class="n">on</span> <span class="n">the</span> <span class="n">channel</span> <span class="n">using</span> <span class="n">the</span> <span class="n">chaincode</span> <span class="s1">&#39;InitLedger&#39;</span> <span class="n">function</span><span class="o">.</span>
+<span class="o">//</span> <span class="n">This</span> <span class="nb">type</span> <span class="n">of</span> <span class="n">transaction</span> <span class="n">would</span> <span class="n">only</span> <span class="n">be</span> <span class="n">run</span> <span class="n">once</span> <span class="n">by</span> <span class="n">an</span> <span class="n">application</span> <span class="n">the</span> <span class="n">first</span> <span class="n">time</span> <span class="n">it</span> <span class="n">was</span> <span class="n">started</span> <span class="n">after</span> <span class="n">it</span>
+<span class="o">//</span> <span class="n">deployed</span> <span class="n">the</span> <span class="n">first</span> <span class="n">time</span><span class="o">.</span> <span class="n">Any</span> <span class="n">updates</span> <span class="n">to</span> <span class="n">the</span> <span class="n">chaincode</span> <span class="n">deployed</span> <span class="n">later</span> <span class="n">would</span> <span class="n">likely</span> <span class="ow">not</span> <span class="n">need</span> <span class="n">to</span> <span class="n">run</span>
+<span class="o">//</span> <span class="n">an</span> <span class="s2">&quot;init&quot;</span> <span class="nb">type</span> <span class="n">function</span><span class="o">.</span>
+<span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">--&gt; Submit Transaction: InitLedger, function creates the initial set of assets on the ledger&#39;</span><span class="p">);</span>
+<span class="k">await</span> <span class="n">contract</span><span class="o">.</span><span class="n">submitTransaction</span><span class="p">(</span><span class="s1">&#39;InitLedger&#39;</span><span class="p">);</span>
+<span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;*** Result: committed&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Chaincode <code class="docutils literal notranslate"><span class="pre">'InitLedger'</span></code> function</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>async InitLedger(ctx) {
+     const assets = [
+         {
+             ID: &#39;asset1&#39;,
+             Color: &#39;blue&#39;,
+             Size: 5,
+             Owner: &#39;Tomoko&#39;,
+             AppraisedValue: 300,
+         },
+         {
+             ID: &#39;asset2&#39;,
+             Color: &#39;red&#39;,
+             Size: 5,
+             Owner: &#39;Brad&#39;,
+             AppraisedValue: 400,
+         },
+         {
+             ID: &#39;asset3&#39;,
+             Color: &#39;green&#39;,
+             Size: 10,
+             Owner: &#39;Jin Soo&#39;,
+             AppraisedValue: 500,
+         },
+         {
+             ID: &#39;asset4&#39;,
+             Color: &#39;yellow&#39;,
+             Size: 10,
+             Owner: &#39;Max&#39;,
+             AppraisedValue: 600,
+         },
+         {
+             ID: &#39;asset5&#39;,
+             Color: &#39;black&#39;,
+             Size: 15,
+             Owner: &#39;Adriana&#39;,
+             AppraisedValue: 700,
+         },
+         {
+             ID: &#39;asset6&#39;,
+             Color: &#39;white&#39;,
+             Size: 15,
+             Owner: &#39;Michel&#39;,
+             AppraisedValue: 800,
+         },
+     ];
+
+     for (const asset of assets) {
+         asset.docType = &#39;asset&#39;;
+         await ctx.stub.putState(asset.ID, Buffer.from(JSON.stringify(asset)));
+         console.info(`Asset ${asset.ID} initialized`);
+     }
+ }
+</pre></div>
+</div>
+<p>The terminal output entry should look similar to below:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Submit</span> <span class="n">Transaction</span><span class="p">:</span> <span class="n">InitLedger</span><span class="p">,</span> <span class="n">function</span> <span class="n">creates</span> <span class="n">the</span> <span class="n">initial</span> <span class="nb">set</span> <span class="n">of</span> <span class="n">assets</span> <span class="n">on</span> <span class="n">the</span> <span class="n">ledger</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fifth-the-application-invokes-each-of-the-chaincode-functions">
+<h2>Fifth, the application invokes each of the chaincode functions<a class="headerlink" href="#fifth-the-application-invokes-each-of-the-chaincode-functions" title="Permalink to this headline">¶</a></h2>
+<p>First, a word about querying the ledger.</p>
+<p>Each peer in a blockchain network hosts a copy of the <a class="reference external" href="./ledger/ledger.html">ledger</a>. An application
+program can view the most recent data from the ledger using read-only invocations of
+a smart contract running on your peers called a query.</p>
+<p>Here is a simplified representation of how a query works:</p>
+<img alt="_images/write_first_app.diagram.1.png" src="_images/write_first_app.diagram.1.png" />
+<p>The most common queries involve the current values of data in the ledger – its
+<a class="reference external" href="./ledger/ledger.html#world-state">world state</a>. The world state is
+represented as a set of key-value pairs, and applications can query data for a
+single key or multiple keys. Moreover, you can use complex queries to read the
+data on the ledger when you use CouchDB as your state database and model your data in JSON.
+This can be very helpful when looking for all assets that match certain keywords
+with particular values; all assets with a particular owner, for example.</p>
+<p>Below, the sample application is just getting all the assets that we populated in the prior
+step when we initialized the ledger with data. The evaluateTransaction() function is
+used when you’d like to query a single peer, without submitting a transaction to
+the ordering service.</p>
+<p>Sample application <code class="docutils literal notranslate"><span class="pre">'GetAllAssets'</span></code> call</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>// Let&#39;s try a query type operation (function).
+// This will be sent to just one peer and the results will be shown.
+console.log(&#39;\n--&gt; Evaluate Transaction: GetAllAssets, function returns all the current assets on the ledger&#39;);
+let result = await contract.evaluateTransaction(&#39;GetAllAssets&#39;);
+console.log(`*** Result: ${prettyJSONString(result.toString())}`);
+</pre></div>
+</div>
+<p>Chaincode <code class="docutils literal notranslate"><span class="pre">'GetAllAssets'</span></code> function</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>// GetAllAssets returns all assets found in the world state.
+ async GetAllAssets(ctx) {
+     const allResults = [];
+     // range query with empty string for startKey and endKey does an open-ended query of all assets in the chaincode namespace.
+     const iterator = await ctx.stub.getStateByRange(&#39;&#39;, &#39;&#39;);
+     let result = await iterator.next();
+     while (!result.done) {
+         const strValue = Buffer.from(result.value.value.toString()).toString(&#39;utf8&#39;);
+         let record;
+         try {
+             record = JSON.parse(strValue);
+         } catch (err) {
+             console.log(err);
+             record = strValue;
+         }
+         allResults.push({ Key: result.value.key, Record: record });
+         result = await iterator.next();
+     }
+     return JSON.stringify(allResults);
+ }
+</pre></div>
+</div>
+<p>The terminal output should look like this:</p>
+<div class="code json highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">Evaluate</span> <span class="n">Transaction</span><span class="p">:</span> <span class="n">GetAllAssets</span><span class="p">,</span> <span class="n">function</span> <span class="n">returns</span> <span class="nb">all</span> <span class="n">the</span> <span class="n">current</span> <span class="n">assets</span> <span class="n">on</span> <span class="n">the</span> <span class="n">ledger</span>
+  <span class="n">Result</span><span class="p">:</span> <span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;Key&quot;</span><span class="p">:</span> <span class="s2">&quot;asset1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Record&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;ID&quot;</span><span class="p">:</span> <span class="s2">&quot;asset1&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;Color&quot;</span><span class="p">:</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;Size&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+      <span class="s2">&quot;Owner&quot;</span><span class="p">:</span> <span class="s2">&quot;Tomoko&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;AppraisedValue&quot;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
+      <span class="s2">&quot;docType&quot;</span><span class="p">:</span> <span class="s2">&quot;asset&quot;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;Key&quot;</span><span class="p">:</span> <span class="s2">&quot;asset2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Record&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;ID&quot;</span><span class="p">:</span> <span class="s2">&quot;asset2&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;Color&quot;</span><span class="p">:</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;Size&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+      <span class="s2">&quot;Owner&quot;</span><span class="p">:</span> <span class="s2">&quot;Brad&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;AppraisedValue&quot;</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span>
+      <span class="s2">&quot;docType&quot;</span><span class="p">:</span> <span class="s2">&quot;asset&quot;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;Key&quot;</span><span class="p">:</span> <span class="s2">&quot;asset3&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Record&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;ID&quot;</span><span class="p">:</span> <span class="s2">&quot;asset3&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;Color&quot;</span><span class="p">:</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;Size&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+      <span class="s2">&quot;Owner&quot;</span><span class="p">:</span> <span class="s2">&quot;Jin Soo&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;AppraisedValue&quot;</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
+      <span class="s2">&quot;docType&quot;</span><span class="p">:</span> <span class="s2">&quot;asset&quot;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;Key&quot;</span><span class="p">:</span> <span class="s2">&quot;asset4&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Record&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;ID&quot;</span><span class="p">:</span> <span class="s2">&quot;asset4&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;Color&quot;</span><span class="p">:</span> <span class="s2">&quot;yellow&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;Size&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+      <span class="s2">&quot;Owner&quot;</span><span class="p">:</span> <span class="s2">&quot;Max&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;AppraisedValue&quot;</span><span class="p">:</span> <span class="mi">600</span><span class="p">,</span>
+      <span class="s2">&quot;docType&quot;</span><span class="p">:</span> <span class="s2">&quot;asset&quot;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;Key&quot;</span><span class="p">:</span> <span class="s2">&quot;asset5&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Record&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;ID&quot;</span><span class="p">:</span> <span class="s2">&quot;asset5&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;Color&quot;</span><span class="p">:</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;Size&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+      <span class="s2">&quot;Owner&quot;</span><span class="p">:</span> <span class="s2">&quot;Adriana&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;AppraisedValue&quot;</span><span class="p">:</span> <span class="mi">700</span><span class="p">,</span>
+      <span class="s2">&quot;docType&quot;</span><span class="p">:</span> <span class="s2">&quot;asset&quot;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;Key&quot;</span><span class="p">:</span> <span class="s2">&quot;asset6&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Record&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;ID&quot;</span><span class="p">:</span> <span class="s2">&quot;asset6&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;Color&quot;</span><span class="p">:</span> <span class="s2">&quot;white&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;Size&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+      <span class="s2">&quot;Owner&quot;</span><span class="p">:</span> <span class="s2">&quot;Michel&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;AppraisedValue&quot;</span><span class="p">:</span> <span class="mi">800</span><span class="p">,</span>
+      <span class="s2">&quot;docType&quot;</span><span class="p">:</span> <span class="s2">&quot;asset&quot;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>Next, the sample application submits a transaction to create ‘asset13’.</p>
+<p>Sample application <code class="docutils literal notranslate"><span class="pre">'CreateAsset'</span></code> call</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Now</span> <span class="n">let</span><span class="s1">&#39;s try to submit a transaction.</span>
+<span class="o">//</span> <span class="n">This</span> <span class="n">will</span> <span class="n">be</span> <span class="n">sent</span> <span class="n">to</span> <span class="n">both</span> <span class="n">peers</span> <span class="ow">and</span> <span class="k">if</span> <span class="n">both</span> <span class="n">peers</span> <span class="n">endorse</span> <span class="n">the</span> <span class="n">transaction</span><span class="p">,</span> <span class="n">the</span> <span class="n">endorsed</span> <span class="n">proposal</span> <span class="n">will</span> <span class="n">be</span> <span class="n">sent</span>
+<span class="o">//</span> <span class="n">to</span> <span class="n">the</span> <span class="n">orderer</span> <span class="n">to</span> <span class="n">be</span> <span class="n">committed</span> <span class="n">by</span> <span class="n">each</span> <span class="n">of</span> <span class="n">the</span> <span class="n">peer</span><span class="s1">&#39;s to the channel ledger.</span>
+<span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">--&gt; Submit Transaction: CreateAsset, creates new asset with ID, color, owner, size, and appraisedValue arguments&#39;</span><span class="p">);</span>
+<span class="k">await</span> <span class="n">contract</span><span class="o">.</span><span class="n">submitTransaction</span><span class="p">(</span><span class="s1">&#39;CreateAsset&#39;</span><span class="p">,</span> <span class="s1">&#39;asset13&#39;</span><span class="p">,</span> <span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span> <span class="s1">&#39;Tom&#39;</span><span class="p">,</span> <span class="s1">&#39;1300&#39;</span><span class="p">);</span>
+<span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;*** Result: committed&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Chaincode <code class="docutils literal notranslate"><span class="pre">'CreateAsset'</span></code> function</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">CreateAsset</span> <span class="n">issues</span> <span class="n">a</span> <span class="n">new</span> <span class="n">asset</span> <span class="n">to</span> <span class="n">the</span> <span class="n">world</span> <span class="n">state</span> <span class="k">with</span> <span class="n">given</span> <span class="n">details</span><span class="o">.</span>
+<span class="k">async</span> <span class="n">CreateAsset</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">owner</span><span class="p">,</span> <span class="n">appraisedValue</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">const</span> <span class="n">asset</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="n">ID</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
+      <span class="n">Color</span><span class="p">:</span> <span class="n">color</span><span class="p">,</span>
+      <span class="n">Size</span><span class="p">:</span> <span class="n">size</span><span class="p">,</span>
+      <span class="n">Owner</span><span class="p">:</span> <span class="n">owner</span><span class="p">,</span>
+      <span class="n">AppraisedValue</span><span class="p">:</span> <span class="n">appraisedValue</span><span class="p">,</span>
+  <span class="p">};</span>
+  <span class="k">return</span> <span class="n">ctx</span><span class="o">.</span><span class="n">stub</span><span class="o">.</span><span class="n">putState</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">Buffer</span><span class="o">.</span><span class="n">from</span><span class="p">(</span><span class="n">JSON</span><span class="o">.</span><span class="n">stringify</span><span class="p">(</span><span class="n">asset</span><span class="p">)));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Terminal output:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Submit</span> <span class="n">Transaction</span><span class="p">:</span> <span class="n">CreateAsset</span><span class="p">,</span> <span class="n">creates</span> <span class="n">new</span> <span class="n">asset</span> <span class="k">with</span> <span class="n">ID</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">owner</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="ow">and</span> <span class="n">appraisedValue</span> <span class="n">arguments</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>In the application and chaincode snippets above, it is important
+to note that the sample application submits the <code class="docutils literal notranslate"><span class="pre">'CreateAsset'</span></code>
+transaction with the same type and number of arguments the chaincode
+is expecting, and in the correct sequence. In this case, the transaction
+name and correctly sequenced arguments are: <code class="docutils literal notranslate"><span class="pre">'CreateAsset'</span></code>, <code class="docutils literal notranslate"><span class="pre">'asset13'</span></code>,
+<code class="docutils literal notranslate"><span class="pre">'yellow'</span></code>, <code class="docutils literal notranslate"><span class="pre">'5'</span></code>, <code class="docutils literal notranslate"><span class="pre">'Tom'</span></code>, <code class="docutils literal notranslate"><span class="pre">'1300'</span></code> because the corresponding chaincode
+CreateAsset is expecting the correct sequence and type of arguments that define the asset object:
+sequence: ID, Color, Size, Owner, and AppraisedValue</p>
+<p class="last">type: ID (string), Color (string), Size (int), Owner (string), AppraisedValue (int).</p>
+</div>
+<p>The sample application then evaluates a query for ‘asset13’.</p>
+<p>Sample application <code class="docutils literal notranslate"><span class="pre">'ReadAsset'</span></code> call</p>
+<blockquote>
+<div><div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>console.log(&#39;\n--&gt; Evaluate Transaction: ReadAsset, function returns an asset with a given assetID&#39;);
+result = await contract.evaluateTransaction(&#39;ReadAsset&#39;, &#39;asset13&#39;);
+console.log(`*** Result: ${prettyJSONString(result.toString())}`);
+</pre></div>
+</div>
+</div></blockquote>
+<p>Chaincode <code class="docutils literal notranslate"><span class="pre">'ReadAsset'</span></code> function</p>
+<blockquote>
+<div><div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>// ReadAsset returns the asset stored in the world state with given id.
+async ReadAsset(ctx, id) {
+  const assetJSON = await ctx.stub.getState(id); // get the asset from chaincode state
+  if (!assetJSON || assetJSON.length === 0) {
+      throw new Error(`The asset ${id} does not exist`);
+  }
+  return assetJSON.toString();
+}
+</pre></div>
+</div>
+<p>Terminal output:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Evaluate</span> <span class="n">Transaction</span><span class="p">:</span> <span class="n">ReadAsset</span><span class="p">,</span> <span class="n">function</span> <span class="n">returns</span> <span class="n">an</span> <span class="n">asset</span> <span class="k">with</span> <span class="n">a</span> <span class="n">given</span> <span class="n">assetID</span>
+<span class="n">Result</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s2">&quot;ID&quot;</span><span class="p">:</span> <span class="s2">&quot;asset13&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;Color&quot;</span><span class="p">:</span> <span class="s2">&quot;yellow&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;Size&quot;</span><span class="p">:</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;Owner&quot;</span><span class="p">:</span> <span class="s2">&quot;Tom&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;AppraisedValue&quot;</span><span class="p">:</span> <span class="s2">&quot;1300&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>In the next part of the sequence, the sample application evaluates to see if
+<code class="docutils literal notranslate"><span class="pre">asset1</span></code> exists, which will return a boolean value of true, because we populated
+the ledger with <code class="docutils literal notranslate"><span class="pre">asset1</span></code> when we initialized the ledger with assets. You may recall
+that the original appraised value of <code class="docutils literal notranslate"><span class="pre">asset1</span></code> was <code class="docutils literal notranslate"><span class="pre">300</span></code>.
+The application then submits a transaction to update <code class="docutils literal notranslate"><span class="pre">asset1</span></code> with a new appraised value, and
+then immediately evaluates to read <code class="docutils literal notranslate"><span class="pre">asset1</span></code> from the ledger to show the new appraised value of <code class="docutils literal notranslate"><span class="pre">350</span></code>.</p>
+<p>Sample application <code class="docutils literal notranslate"><span class="pre">'AssetExists'</span></code>, <code class="docutils literal notranslate"><span class="pre">'UpdateAsset'</span></code>, and <code class="docutils literal notranslate"><span class="pre">'ReadAsset'</span></code> calls</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>console.log(&#39;\n--&gt; Evaluate Transaction: AssetExists, function returns &quot;true&quot; if an asset with given assetID exist&#39;);
+result = await contract.evaluateTransaction(&#39;AssetExists&#39;, &#39;asset1&#39;);
+console.log(`*** Result: ${prettyJSONString(result.toString())}`);
+
+console.log(&#39;\n--&gt; Submit Transaction: UpdateAsset asset1, change the appraisedValue to 350&#39;);
+await contract.submitTransaction(&#39;UpdateAsset&#39;, &#39;asset1&#39;, &#39;blue&#39;, &#39;5&#39;, &#39;Tomoko&#39;, &#39;350&#39;);
+console.log(&#39;*** Result: committed&#39;);
+
+console.log(&#39;\n--&gt; Evaluate Transaction: ReadAsset, function returns &quot;asset1&quot; attributes&#39;);
+result = await contract.evaluateTransaction(&#39;ReadAsset&#39;, &#39;asset1&#39;);
+console.log(`*** Result: ${prettyJSONString(result.toString())}`);
+</pre></div>
+</div>
+<p>Chaincode <code class="docutils literal notranslate"><span class="pre">'AssetExists'</span></code>, <code class="docutils literal notranslate"><span class="pre">'UpdateAsset'</span></code>, and <code class="docutils literal notranslate"><span class="pre">'ReadAsset'</span></code> functions</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>// AssetExists returns true when asset with given ID exists in world state.
+   async AssetExists(ctx, id) {
+       const assetJSON = await ctx.stub.getState(id);
+       return assetJSON &amp;&amp; assetJSON.length &gt; 0;
+   }
+// UpdateAsset updates an existing asset in the world state with provided parameters.
+   async UpdateAsset(ctx, id, color, size, owner, appraisedValue) {
+       const exists = await this.AssetExists(ctx, id);
+       if (!exists) {
+           throw new Error(`The asset ${id} does not exist`);
+       }
+
+       // overwriting original asset with new asset
+       const updatedAsset = {
+           ID: id,
+           Color: color,
+           Size: size,
+           Owner: owner,
+           AppraisedValue: appraisedValue,
+       };
+       return ctx.stub.putState(id, Buffer.from(JSON.stringify(updatedAsset)));
+   }
+ // ReadAsset returns the asset stored in the world state with given id.
+ async ReadAsset(ctx, id) {
+     const assetJSON = await ctx.stub.getState(id); // get the asset from chaincode state
+     if (!assetJSON || assetJSON.length === 0) {
+         throw new Error(`The asset ${id} does not exist`);
+     }
+     return assetJSON.toString();
+ }
+</pre></div>
+</div>
+<p>Terminal Output:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Evaluate</span> <span class="n">Transaction</span><span class="p">:</span> <span class="n">AssetExists</span><span class="p">,</span> <span class="n">function</span> <span class="n">returns</span> <span class="s2">&quot;true&quot;</span> <span class="k">if</span> <span class="n">an</span> <span class="n">asset</span> <span class="k">with</span> <span class="n">given</span> <span class="n">assetID</span> <span class="n">exist</span>
+<span class="n">Result</span><span class="p">:</span> <span class="n">true</span>
+
+<span class="n">Submit</span> <span class="n">Transaction</span><span class="p">:</span> <span class="n">UpdateAsset</span> <span class="n">asset1</span><span class="p">,</span> <span class="n">change</span> <span class="n">the</span> <span class="n">appraisedValue</span> <span class="n">to</span> <span class="mi">350</span>
+
+<span class="n">Evaluate</span> <span class="n">Transaction</span><span class="p">:</span> <span class="n">ReadAsset</span><span class="p">,</span> <span class="n">function</span> <span class="n">returns</span> <span class="s2">&quot;asset1&quot;</span> <span class="n">attributes</span>
+<span class="n">Result</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s2">&quot;ID&quot;</span><span class="p">:</span> <span class="s2">&quot;asset1&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;Color&quot;</span><span class="p">:</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;Size&quot;</span><span class="p">:</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;Owner&quot;</span><span class="p">:</span> <span class="s2">&quot;Tomoko&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;AppraisedValue&quot;</span><span class="p">:</span> <span class="s2">&quot;350&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In this part of the sequence, the sample application attempts to submit
+an <code class="docutils literal notranslate"><span class="pre">'UpdateAsset'</span></code> transaction for an asset that we know does not exist (<code class="docutils literal notranslate"><span class="pre">asset70</span></code>).
+We expect that we will get an error because you cannot update an asset that does not exist,
+which is why it is a good idea to check if an asset exists prior to attempting an
+asset update or deletion.</p>
+<p>Sample application <code class="docutils literal notranslate"><span class="pre">'UpdateAsset'</span></code> call</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>try {
+  // How about we try a transactions where the executing chaincode throws an error
+  // Notice how the submitTransaction will throw an error containing the error thrown by the chaincode
+  console.log(&#39;\n--&gt; Submit Transaction: UpdateAsset asset70, asset70 does not exist and should return an error&#39;);
+  await contract.submitTransaction(&#39;UpdateAsset&#39;, &#39;asset70&#39;, &#39;blue&#39;, &#39;5&#39;, &#39;Tomoko&#39;, &#39;300&#39;);
+  console.log(&#39;******** FAILED to return an error&#39;);
+} catch (error) {
+  console.log(`*** Successfully caught the error: \n    ${error}`);
+}
+</pre></div>
+</div>
+<p>Chaincode <code class="docutils literal notranslate"><span class="pre">'UpdateAsset'</span></code> function</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>// UpdateAsset updates an existing asset in the world state with provided parameters.
+async UpdateAsset(ctx, id, color, size, owner, appraisedValue) {
+    const exists = await this.AssetExists(ctx, id);
+    if (!exists) {
+        throw new Error(`The asset ${id} does not exist`);
+    }
+
+      // overwriting original asset with new asset
+      const updatedAsset = {
+          ID: id,
+          Color: color,
+          Size: size,
+          Owner: owner,
+          AppraisedValue: appraisedValue,
+      };
+      return ctx.stub.putState(id, Buffer.from(JSON.stringify(updatedAsset)));
+  }
+</pre></div>
+</div>
+<p>Terminal output:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Submit</span> <span class="n">Transaction</span><span class="p">:</span> <span class="n">UpdateAsset</span> <span class="n">asset70</span>
+<span class="mi">2020</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">02</span><span class="n">T11</span><span class="p">:</span><span class="mi">12</span><span class="p">:</span><span class="mf">12.322</span><span class="n">Z</span> <span class="o">-</span> <span class="n">error</span><span class="p">:</span> <span class="p">[</span><span class="n">Transaction</span><span class="p">]:</span> <span class="n">Error</span><span class="p">:</span> <span class="n">No</span> <span class="n">valid</span> <span class="n">responses</span> <span class="kn">from</span> <span class="nn">any</span> <span class="n">peers</span><span class="o">.</span> <span class="n">Errors</span><span class="p">:</span>
+  <span class="n">peer</span><span class="o">=</span><span class="n">peer0</span><span class="o">.</span><span class="n">org1</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="mi">7051</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">error</span> <span class="ow">in</span> <span class="n">simulation</span><span class="p">:</span> <span class="n">transaction</span> <span class="n">returned</span> <span class="k">with</span> <span class="n">failure</span><span class="p">:</span> <span class="n">Error</span><span class="p">:</span> <span class="n">The</span> <span class="n">asset</span> <span class="n">asset70</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">exist</span>
+  <span class="n">peer</span><span class="o">=</span><span class="n">peer0</span><span class="o">.</span><span class="n">org2</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="mi">9051</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">error</span> <span class="ow">in</span> <span class="n">simulation</span><span class="p">:</span> <span class="n">transaction</span> <span class="n">returned</span> <span class="k">with</span> <span class="n">failure</span><span class="p">:</span> <span class="n">Error</span><span class="p">:</span> <span class="n">The</span> <span class="n">asset</span> <span class="n">asset70</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">exist</span>
+<span class="n">Expected</span> <span class="n">an</span> <span class="n">error</span> <span class="n">on</span> <span class="n">UpdateAsset</span> <span class="n">of</span> <span class="n">non</span><span class="o">-</span><span class="n">existing</span> <span class="n">Asset</span><span class="p">:</span> <span class="n">Error</span><span class="p">:</span> <span class="n">No</span> <span class="n">valid</span> <span class="n">responses</span> <span class="kn">from</span> <span class="nn">any</span> <span class="n">peers</span><span class="o">.</span> <span class="n">Errors</span><span class="p">:</span>
+  <span class="n">peer</span><span class="o">=</span><span class="n">peer0</span><span class="o">.</span><span class="n">org1</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="mi">7051</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">error</span> <span class="ow">in</span> <span class="n">simulation</span><span class="p">:</span> <span class="n">transaction</span> <span class="n">returned</span> <span class="k">with</span> <span class="n">failure</span><span class="p">:</span> <span class="n">Error</span><span class="p">:</span> <span class="n">The</span> <span class="n">asset</span> <span class="n">asset70</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">exist</span>
+  <span class="n">peer</span><span class="o">=</span><span class="n">peer0</span><span class="o">.</span><span class="n">org2</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="mi">9051</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">error</span> <span class="ow">in</span> <span class="n">simulation</span><span class="p">:</span> <span class="n">transaction</span> <span class="n">returned</span> <span class="k">with</span> <span class="n">failure</span><span class="p">:</span> <span class="n">Error</span><span class="p">:</span> <span class="n">The</span> <span class="n">asset</span> <span class="n">asset70</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">exist</span>
+</pre></div>
+</div>
+<p>In this final part of the sample application transaction sequence, the application
+submits a transaction to transfer an existing asset to a new owner and then reads the
+asset back from the ledger to display the new owner <code class="docutils literal notranslate"><span class="pre">Tom</span></code>.</p>
+<p>Sample application <code class="docutils literal notranslate"><span class="pre">'TransferAsset'</span></code>, and <code class="docutils literal notranslate"><span class="pre">'ReadAsset'</span></code> calls</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>console.log(&#39;\n--&gt; Submit Transaction: TransferAsset asset1, transfer to new owner of Tom&#39;);
+await contract.submitTransaction(&#39;TransferAsset&#39;, &#39;asset1&#39;, &#39;Tom&#39;);
+console.log(&#39;*** Result: committed&#39;);
+
+console.log(&#39;\n--&gt; Evaluate Transaction: ReadAsset, function returns &quot;asset1&quot; attributes&#39;);
+result = await contract.evaluateTransaction(&#39;ReadAsset&#39;, &#39;asset1&#39;);
+console.log(`*** Result: ${prettyJSONString(result.toString())}`);
+</pre></div>
+</div>
+<p>Chaincode <code class="docutils literal notranslate"><span class="pre">'TransferAsset'</span></code>, and <code class="docutils literal notranslate"><span class="pre">'ReadAsset'</span></code> functions</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>// TransferAsset updates the owner field of asset with given id in the world state.
+async TransferAsset(ctx, id, newOwner) {
+    const assetString = await this.ReadAsset(ctx, id);
+    const asset = JSON.parse(assetString);
+    asset.Owner = newOwner;
+    return ctx.stub.putState(id, Buffer.from(JSON.stringify(asset)));
+}
+ // ReadAsset returns the asset stored in the world state with given id.
+async ReadAsset(ctx, id) {
+    const assetJSON = await ctx.stub.getState(id); // get the asset from chaincode state
+    if (!assetJSON || assetJSON.length === 0) {
+        throw new Error(`The asset ${id} does not exist`);
+    }
+    return assetJSON.toString();
+}
+</pre></div>
+</div>
+<p>Terminal output:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Submit</span> <span class="n">Transaction</span><span class="p">:</span> <span class="n">TransferAsset</span> <span class="n">asset1</span><span class="p">,</span> <span class="n">transfer</span> <span class="n">to</span> <span class="n">new</span> <span class="n">owner</span> <span class="n">of</span> <span class="n">Tom</span>
+<span class="n">Evaluate</span> <span class="n">Transaction</span><span class="p">:</span> <span class="n">ReadAsset</span><span class="p">,</span> <span class="n">function</span> <span class="n">returns</span> <span class="s2">&quot;asset1&quot;</span> <span class="n">attributes</span>
+<span class="n">Result</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s2">&quot;ID&quot;</span><span class="p">:</span> <span class="s2">&quot;asset1&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;Color&quot;</span><span class="p">:</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;Size&quot;</span><span class="p">:</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;Owner&quot;</span><span class="p">:</span> <span class="s2">&quot;Tom&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;AppraisedValue&quot;</span><span class="p">:</span> <span class="s2">&quot;350&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="a-closer-look">
+<h2>A closer look<a class="headerlink" href="#a-closer-look" title="Permalink to this headline">¶</a></h2>
+<p>Let’s take a closer look at how the sample javascript application uses the APIs provided by the
+<a class="reference external" href="https://hyperledger.github.io/fabric-sdk-node/">Fabric Node SDK</a> to
+interact with our Fabric network. Use an editor (e.g. atom or visual studio) to
+open <code class="docutils literal notranslate"><span class="pre">app.js</span></code> located in the <code class="docutils literal notranslate"><span class="pre">asset-transfer-basic/application-javascript</span></code> directory.</p>
+<p>The application starts by bringing in scope two key classes from the
+<code class="docutils literal notranslate"><span class="pre">fabric-network</span></code> module; <code class="docutils literal notranslate"><span class="pre">Wallets</span></code> and <code class="docutils literal notranslate"><span class="pre">Gateway</span></code>. These classes
+will be used to locate the <code class="docutils literal notranslate"><span class="pre">appUser</span></code> identity in the wallet, and use it to
+connect to the network:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">const</span> <span class="p">{</span> <span class="n">Gateway</span><span class="p">,</span> <span class="n">Wallets</span> <span class="p">}</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">&#39;fabric-network&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>First, the program sets up the gateway connection with the userId stored in the wallet and
+specifies discovery options.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">setup</span> <span class="n">the</span> <span class="n">gateway</span> <span class="n">instance</span>
+<span class="o">//</span> <span class="n">The</span> <span class="n">user</span> <span class="n">will</span> <span class="n">now</span> <span class="n">be</span> <span class="n">able</span> <span class="n">to</span> <span class="n">create</span> <span class="n">connections</span> <span class="n">to</span> <span class="n">the</span> <span class="n">fabric</span> <span class="n">network</span> <span class="ow">and</span> <span class="n">be</span> <span class="n">able</span> <span class="n">to</span>
+<span class="o">//</span> <span class="n">submit</span> <span class="n">transactions</span> <span class="ow">and</span> <span class="n">query</span><span class="o">.</span> <span class="n">All</span> <span class="n">transactions</span> <span class="n">submitted</span> <span class="n">by</span> <span class="n">this</span> <span class="n">gateway</span> <span class="n">will</span> <span class="n">be</span>
+<span class="o">//</span> <span class="n">signed</span> <span class="n">by</span> <span class="n">this</span> <span class="n">user</span> <span class="n">using</span> <span class="n">the</span> <span class="n">credentials</span> <span class="n">stored</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">wallet</span><span class="o">.</span>
+<span class="k">await</span> <span class="n">gateway</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">ccp</span><span class="p">,</span> <span class="p">{</span>
+  <span class="n">wallet</span><span class="p">,</span>
+  <span class="n">identity</span><span class="p">:</span> <span class="n">userId</span><span class="p">,</span>
+  <span class="n">discovery</span><span class="p">:</span> <span class="p">{</span><span class="n">enabled</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span> <span class="n">asLocalhost</span><span class="p">:</span> <span class="n">true</span><span class="p">}</span> <span class="o">//</span> <span class="n">using</span> <span class="n">asLocalhost</span> <span class="k">as</span> <span class="n">this</span> <span class="n">gateway</span> <span class="ow">is</span> <span class="n">using</span> <span class="n">a</span> <span class="n">fabric</span> <span class="n">network</span> <span class="n">deployed</span> <span class="n">locally</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Note at the top of the sample application code we require external utility files to build the CAClient,
+registerUser, enrollAdmin, buildCCP (common connection profile), and buildWallet.
+These utility programs are located in <code class="docutils literal notranslate"><span class="pre">AppUtil.js</span></code> in the <code class="docutils literal notranslate"><span class="pre">test-application/javascript</span></code> directory.</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">AppUtil.js</span></code>, <code class="docutils literal notranslate"><span class="pre">ccpPath</span></code> describes the path to the connection profile that our application will use
+to connect to our network. The connection profile was loaded from inside the
+<code class="docutils literal notranslate"><span class="pre">fabric-samples/test-network</span></code> directory and parsed as a JSON file:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">const</span> <span class="n">ccpPath</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span><span class="n">__dirname</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;test-network&#39;</span><span class="p">,</span><span class="s1">&#39;organizations&#39;</span><span class="p">,</span><span class="s1">&#39;peerOrganizations&#39;</span><span class="p">,</span><span class="s1">&#39;org1.example.com&#39;</span><span class="p">,</span> <span class="s1">&#39;connection-org1.json&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>If you’d like to understand more about the structure of a connection profile,
+and how it defines the network, check out
+<a class="reference external" href="./developapps/connectionprofile.html">the connection profile topic</a>.</p>
+<p>A network can be divided into multiple channels, and the next important line of
+code connects the application to a particular channel within the network,
+<code class="docutils literal notranslate"><span class="pre">mychannel</span></code>, where our smart contract was deployed. Note that we assigned constants
+near the top of the sample application to account for the channel name and the contract name:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">const</span> <span class="n">channelName</span> <span class="o">=</span> <span class="s1">&#39;mychannel&#39;</span><span class="p">;</span>
+<span class="n">const</span> <span class="n">chaincodeName</span> <span class="o">=</span> <span class="s1">&#39;basic&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">const</span> <span class="n">network</span> <span class="o">=</span> <span class="k">await</span> <span class="n">gateway</span><span class="o">.</span><span class="n">getNetwork</span><span class="p">(</span><span class="n">channelName</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Within this channel, we can access the asset-transfer (‘basic’) smart contract to interact
+with the ledger:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">const</span> <span class="n">contract</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">getContract</span><span class="p">(</span><span class="n">chaincodeName</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Within asset-transfer (‘basic’) there are many different <strong>transactions</strong>, and our application
+initially uses the <code class="docutils literal notranslate"><span class="pre">InitLedger</span></code> transaction to populate the ledger world state with
+data:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">await</span> <span class="n">contract</span><span class="o">.</span><span class="n">submitTransaction</span><span class="p">(</span><span class="s1">&#39;InitLedger&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">evaluateTransaction</span></code> method represents one of the simplest interactions
+with a smart contract in blockchain network. It simply picks a peer defined in
+the connection profile and sends the request to it, where it is evaluated. The
+smart contract queries the assets on the peer’s copy of the ledger and returns
+the result to the application. This interaction does not result in an update of
+the ledger.</p>
+<p><code class="docutils literal notranslate"><span class="pre">submitTransaction</span></code> is much more sophisticated than <code class="docutils literal notranslate"><span class="pre">evaluateTransaction</span></code>.
+Rather than interacting with a single peer, the SDK will send the
+<code class="docutils literal notranslate"><span class="pre">submitTransaction</span></code> proposal to every required organization’s peer in the
+blockchain network based on the chaincode’s endorsement policy.
+Each of these peers will execute the requested smart
+contract using this proposal, to generate a transaction response which it endorses (signs)
+and returns to the SDK. The SDK collects all the endorsed transaction responses
+into a single transaction, which it then submits to the orderer. The orderer
+collects and sequences transactions from various application clients into a block of
+transactions. These blocks are distributed to every peer in the network,
+where every transaction is validated and committed. Finally, the SDK is
+notified via an event, allowing it to return control to the application.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">submitTransaction</span></code> includes an event listener that checks to make
+sure the transaction has been validated and committed to the ledger.
+Applications should either utilize a commit listener, or
+leverage an API like <code class="docutils literal notranslate"><span class="pre">submitTransaction</span></code> that does this for you.
+Without doing this, your transaction may not have been successfully
+ordered, validated, and committed to the ledger.</p>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">submitTransaction</span></code> does all this for the application! The process by which
+the application, smart contract, peers and ordering service work together to
+keep the ledger consistent across the network is called consensus, and it is
+explained in detail in this <a class="reference external" href="./peers/peers.html">section</a>.</p>
+</div>
+<div class="section" id="updating-the-ledger">
+<h2>Updating the ledger<a class="headerlink" href="#updating-the-ledger" title="Permalink to this headline">¶</a></h2>
+<p>From an application perspective, updating the ledger is simple. An application
+submits a transaction to the blockchain network, and when it has been validated
+and committed, the application receives a notification that the transaction has been successful.
+Behind the scenes, this involves the process of consensus whereby the different components
+of the blockchain network work together to ensure that every proposed update to the ledger
+is valid and performed in an agreed and consistent order.</p>
+<img alt="_images/write_first_app.diagram.2.png" src="_images/write_first_app.diagram.2.png" />
+</div>
+<div class="section" id="the-asset-transfer-basic-smart-contract">
+<h2>The asset-transfer (‘basic’) smart contract<a class="headerlink" href="#the-asset-transfer-basic-smart-contract" title="Permalink to this headline">¶</a></h2>
+<p>The smart contract sample is available in the following languages:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/hyperledger/fabric-samples/blob/master/asset-transfer-basic/chaincode-go">Golang</a></li>
+<li><a class="reference external" href="https://github.com/hyperledger/fabric-samples/blob/master/asset-transfer-basic/chaincode-java">Java</a></li>
+<li><a class="reference external" href="https://github.com/hyperledger/fabric-samples/blob/master/asset-transfer-basic/chaincode-javascript">JavaScript</a></li>
+<li><a class="reference external" href="https://github.com/hyperledger/fabric-samples/blob/master/asset-transfer-basic/chaincode-typescript">Typescript</a></li>
+</ul>
+</div>
+<div class="section" id="clean-up">
+<h2>Clean up<a class="headerlink" href="#clean-up" title="Permalink to this headline">¶</a></h2>
+<p>When you are finished using the asset-transfer sample, you can bring down the test
+network using <code class="docutils literal notranslate"><span class="pre">network.sh</span></code> script.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">network</span><span class="o">.</span><span class="n">sh</span> <span class="n">down</span>
+</pre></div>
+</div>
+<p>This command will bring down the CAs, peers, and ordering node of the network
+that we created. Note that all of the data on the ledger will be lost.
+If you want to go through the tutorial again, you will start from a clean initial state.</p>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>Now that we’ve seen how the sample application and chaincode are written and how they interact with each other, you should have a pretty
+good sense of how applications interact with a blockchain network using a smart
+contract to query or update the ledger. You’ve seen the basics of the roles
+smart contracts, APIs, and the SDK play in queries and updates and you should
+have a feel for how different kinds of applications could be used to perform
+other business tasks and operations.</p>
+</div>
+<div class="section" id="additional-resources">
+<h2>Additional resources<a class="headerlink" href="#additional-resources" title="Permalink to this headline">¶</a></h2>
+<p>As we said in the introduction, we have a whole section on
+<a class="reference internal" href="developapps/developing_applications.html"><span class="doc">Developing Applications</span></a> that includes in-depth information on
+smart contracts, process and data design, a tutorial using a more in-depth
+Commercial Paper <a class="reference external" href="./tutorial/commercial_paper.html">tutorial</a> and a large
+amount of other material relating to the development of applications.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="developapps/developing_applications.html" class="btn btn-neutral float-right" title="Developing Applications" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="test_network.html" class="btn btn-neutral" title="Using the Fabric test network" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright Hyperledger 2020.
+    <br>
+      <br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>
+      <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+        <img alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'master',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

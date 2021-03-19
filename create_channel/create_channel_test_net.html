@@ -1,0 +1,707 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Create a channel using the test network &mdash; hyperledger-fabricdocs master documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="hyperledger-fabricdocs master documentation" href="../index.html"/>
+        <link rel="up" title="Creating a channel" href="create_channel_overview.html"/>
+        <link rel="next" title="Using configtx.yaml to build a channel configuration" href="create_channel_config.html"/>
+        <link rel="prev" title="Create a channel" href="create_channel_participation.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+
+          
+            <a href="../index.html" class="icon icon-home"> hyperledger-fabricdocs
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                master
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+
+<br><img style="background-color: #fff; height: unset; width: unset;" alt="Hyperledger Fabric" src=../_images/hyperledger_fabric_logo_color.png />
+<br>
+<a href="https://github.com/hyperledger/fabric"><img style="padding: 0px; margin: auto auto auto auto;" alt="GitHub" src="../_static/images/github_button.png"/></a>
+&nbsp;<a href="https://stackoverflow.com/questions/tagged/hyperledger-fabric"><img style="padding: 0px; margin: auto auto auto auto;" alt="StackOverflow" src="../_static/images/stackoverflow_button.png"/></a>
+&nbsp;<a href="https://chat.hyperledger.org"><img style="padding: 0px; margin: auto auto auto auto;" alt="Rocket Chat" src="../_static/images/rocketchat_button.png"/></a>
+&nbsp;<a href="https://www.youtube.com/playlist?list=PL0MZ85B_96CH7wvtrRzV7SvtRY0sI0DEg"><img style="padding: 0px; margin: auto auto auto auto;" alt="Youtube Channel" src="../_static/images/youtube_button.png"/></a>
+
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../whatis.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html">What’s new in Hyperledger Fabric v2.x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html#release-notes">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../key_concepts.html">Key Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started - Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started_run_fabric.html">Getting Started - Run Fabric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developapps/developing_applications.html">Developing Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorials.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../test_network.html">Using the Fabric test network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deploy_chaincode.html">Deploying a smart contract to a channel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../write_first_app.html">Running a Fabric Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/commercial_paper.html">Commercial paper tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../private_data_tutorial.html">Using Private Data in Fabric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../secured_asset_transfer/secured_private_asset_transfer_tutorial.html">Secured asset transfer in Fabric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../couchdb_tutorial.html">Using CouchDB</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="create_channel_overview.html">Creating a channel</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="create_channel_participation.html">Create a channel</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Create a channel using the test network</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#before-you-begin">Before you begin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-one-generate-the-genesis-block-of-the-channel">Step one: Generate the genesis block of the channel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-two-create-the-application-channel">Step two: Create the application channel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#next-steps">Next steps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#set-anchor-peer">Set anchor peer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#deploy-a-chaincode-to-the-new-channel">Deploy a chaincode to the new channel</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="create_channel_config.html">Using configtx.yaml to build a channel configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="channel_policies.html">Channel policies</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../channel_update_tutorial.html">Adding an Org to a Channel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../config_update.html">Updating a channel configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chaincode4ade.html">Writing Your First Chaincode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../peer-chaincode-devmode.html">Running chaincode in development mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../videos.html">Videos</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment_guide_overview.html">Deploying a production network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ops_guide.html">Operations Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../upgrade.html">Upgrading to the latest release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command_ref.html">Commands Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Architecture Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Fabric-FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributions Welcome!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releases.html">Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../questions.html">Still Have Questions?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../status.html">Status</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">hyperledger-fabricdocs</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../tutorials.html">Tutorials</a> &raquo;</li>
+        
+          <li><a href="create_channel_overview.html">Creating a channel</a> &raquo;</li>
+        
+      <li>Create a channel using the test network</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/create_channel/create_channel_test_net.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="create-a-channel-using-the-test-network">
+<span id="create-a-channel-using-the-test-network"></span><h1>Create a channel using the test network<a class="headerlink" href="#create-a-channel-using-the-test-network" title="Permalink to this headline">¶</a></h1>
+<p>Use this tutorial along with the test network to learn how to create a channel genesis block and then create a new application channel that the test network peers can join. Rather than requiring you to set up an orderer, or remove the system channel from an existing orderer, this tutorial leverages the nodes from the Fabric sample test network. Because the test network deploys an ordering service and peers for you, this tutorial focuses solely on the process to create a channel. It is worth noting that the test network includes a <code class="docutils literal notranslate"><span class="pre">createChannel</span></code> subcommand that can be used to create a channel, but this tutorial explains how do it manually, the process that is required when you do not use the test network.</p>
+<p>Fabric v2.3 introduces the capability to create a channel without requiring a system channel, removing an extra layer of administration from the process. In this tutorial, we use the <a class="reference external" href="../commands/configtxgen.html">configtxgen</a> tool to create a channel genesis block and then use the <a class="reference external" href="../commands/osnadminchannel.html">osnadmin channel</a> command to create the channel.</p>
+<p><strong>Note:</strong></p>
+<ul class="simple">
+<li>If you are <em>not</em> using the test network, you should follow the instructions for <a class="reference external" href="create_channel_participation.html#deploy-a-new-set-of-orderers">how to deploy an ordering service without a system channel</a>. In the Fabric v2.3 test network sample, the single-node ordering service is deployed without a system channel.</li>
+<li>If you prefer to learn how to create a channel on an ordering service that includes the system channel, you should refer to the <a class="reference external" href="https://hyperledger-fabric.readthedocs.io/en/release-2.2/create_channel/create_channel.html">Create a channel tutorial</a> from Fabric v2.2. In the Fabric v2.2 test network sample, the single-node ordering service is deployed with a system channel.</li>
+</ul>
+<p>To create a channel using the test network, this tutorial takes you through the following steps and concepts:</p>
+<ul class="simple">
+<li><a class="reference external" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference external" href="#step-one-generate-the-genesis-block-of-the-channel">Step one: Generate the genesis block of the channel</a></li>
+<li><a class="reference external" href="#step-two-create-the-application-channel">Step two: Create the application channel</a></li>
+<li><a class="reference external" href="#next-steps">Next steps</a></li>
+</ul>
+<div class="section" id="before-you-begin">
+<span id="before-you-begin"></span><h2>Before you begin<a class="headerlink" href="#before-you-begin" title="Permalink to this headline">¶</a></h2>
+<p>To run the test network, you need to clone the <code class="docutils literal notranslate"><span class="pre">fabric-samples</span></code>
+repository and download the latest production Fabric images. Make sure that you have installed
+the <a class="reference external" href="../prereqs.html">Prerequisites</a> and <a class="reference external" href="../install.html">Installed the Samples, Binaries, and Docker Images</a>.</p>
+<p><strong>Note:</strong> After you create a channel and join peers to it, you will need to you add anchor peers to the channel, in order for service discovery and private data to work. Instructions on how to set an anchor peer on your channel are included in this tutorial, but require that the <a class="reference external" href="https://stedolan.github.io/jq/">jq tool</a> is installed on your local machine.</p>
+</div>
+<div class="section" id="prerequisites">
+<span id="prerequisites"></span><h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="start-the-test-network">
+<span id="start-the-test-network"></span><h3>Start the test network<a class="headerlink" href="#start-the-test-network" title="Permalink to this headline">¶</a></h3>
+<p>We will use a running instance of the Fabric test network to create the new channel. Because it’s important to operate from a known initial state, the following command destroys any active containers and removes any previously generated artifacts. For the purposes of this tutorial, we operate from the <code class="docutils literal notranslate"><span class="pre">test-network</span></code> directory inside <code class="docutils literal notranslate"><span class="pre">fabric-samples</span></code>. If you are not already there, navigate to that directory using the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">fabric</span><span class="o">-</span><span class="n">samples</span><span class="o">/</span><span class="n">test</span><span class="o">-</span><span class="n">network</span>
+</pre></div>
+</div>
+<p>Run the following command to bring down the network:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">network</span><span class="o">.</span><span class="n">sh</span> <span class="n">down</span>
+</pre></div>
+</div>
+<p>You can then use the following command to start the test network:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">network</span><span class="o">.</span><span class="n">sh</span> <span class="n">up</span>
+</pre></div>
+</div>
+<p>This command creates a Fabric network with the two peer organizations and the single ordering node ordering organization. The peer organizations will operate one peer each, while the ordering service administrator will operate a single ordering node. When you run the command, the script prints out the nodes being created:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Creating</span> <span class="n">network</span> <span class="s2">&quot;fabric_test&quot;</span> <span class="k">with</span> <span class="n">the</span> <span class="n">default</span> <span class="n">driver</span>
+<span class="n">Creating</span> <span class="n">volume</span> <span class="s2">&quot;net_orderer.example.com&quot;</span> <span class="k">with</span> <span class="n">default</span> <span class="n">driver</span>
+<span class="n">Creating</span> <span class="n">volume</span> <span class="s2">&quot;net_peer0.org1.example.com&quot;</span> <span class="k">with</span> <span class="n">default</span> <span class="n">driver</span>
+<span class="n">Creating</span> <span class="n">volume</span> <span class="s2">&quot;net_peer0.org2.example.com&quot;</span> <span class="k">with</span> <span class="n">default</span> <span class="n">driver</span>
+<span class="n">Creating</span> <span class="n">peer0</span><span class="o">.</span><span class="n">org2</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span> <span class="o">...</span> <span class="n">done</span>
+<span class="n">Creating</span> <span class="n">orderer</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span>    <span class="o">...</span> <span class="n">done</span>
+<span class="n">Creating</span> <span class="n">peer0</span><span class="o">.</span><span class="n">org1</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span> <span class="o">...</span> <span class="n">done</span>
+<span class="n">Creating</span> <span class="n">cli</span>                    <span class="o">...</span> <span class="n">done</span>
+<span class="n">CONTAINER</span> <span class="n">ID</span>   <span class="n">IMAGE</span>                               <span class="n">COMMAND</span>             <span class="n">CREATED</span>         <span class="n">STATUS</span>                  <span class="n">PORTS</span>                                            <span class="n">NAMES</span>
+<span class="mi">1667543</span><span class="n">b5634</span>   <span class="n">hyperledger</span><span class="o">/</span><span class="n">fabric</span><span class="o">-</span><span class="n">tools</span><span class="p">:</span><span class="n">latest</span>     <span class="s2">&quot;/bin/bash&quot;</span>         <span class="mi">1</span> <span class="n">second</span> <span class="n">ago</span>    <span class="n">Up</span> <span class="n">Less</span> <span class="n">than</span> <span class="n">a</span> <span class="n">second</span>                                                    <span class="n">cli</span>
+<span class="n">b6b117c81c7f</span>   <span class="n">hyperledger</span><span class="o">/</span><span class="n">fabric</span><span class="o">-</span><span class="n">peer</span><span class="p">:</span><span class="n">latest</span>      <span class="s2">&quot;peer node start&quot;</span>   <span class="mi">2</span> <span class="n">seconds</span> <span class="n">ago</span>   <span class="n">Up</span> <span class="mi">1</span> <span class="n">second</span>             <span class="mf">0.0</span><span class="o">.</span><span class="mf">0.0</span><span class="p">:</span><span class="mi">7051</span><span class="o">-&gt;</span><span class="mi">7051</span><span class="o">/</span><span class="n">tcp</span>                           <span class="n">peer0</span><span class="o">.</span><span class="n">org1</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span>
+<span class="mi">703</span><span class="n">ead770e05</span>   <span class="n">hyperledger</span><span class="o">/</span><span class="n">fabric</span><span class="o">-</span><span class="n">orderer</span><span class="p">:</span><span class="n">latest</span>   <span class="s2">&quot;orderer&quot;</span>           <span class="mi">2</span> <span class="n">seconds</span> <span class="n">ago</span>   <span class="n">Up</span> <span class="n">Less</span> <span class="n">than</span> <span class="n">a</span> <span class="n">second</span>   <span class="mf">0.0</span><span class="o">.</span><span class="mf">0.0</span><span class="p">:</span><span class="mi">7050</span><span class="o">-&gt;</span><span class="mi">7050</span><span class="o">/</span><span class="n">tcp</span><span class="p">,</span> <span class="mf">0.0</span><span class="o">.</span><span class="mf">0.0</span><span class="p">:</span><span class="mi">7053</span><span class="o">-&gt;</span><span class="mi">7053</span><span class="o">/</span><span class="n">tcp</span>   <span class="n">orderer</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span>
+<span class="mi">718</span><span class="n">d43f5f312</span>   <span class="n">hyperledger</span><span class="o">/</span><span class="n">fabric</span><span class="o">-</span><span class="n">peer</span><span class="p">:</span><span class="n">latest</span>      <span class="s2">&quot;peer node start&quot;</span>   <span class="mi">2</span> <span class="n">seconds</span> <span class="n">ago</span>   <span class="n">Up</span> <span class="mi">1</span> <span class="n">second</span>             <span class="mi">7051</span><span class="o">/</span><span class="n">tcp</span><span class="p">,</span> <span class="mf">0.0</span><span class="o">.</span><span class="mf">0.0</span><span class="p">:</span><span class="mi">9051</span><span class="o">-&gt;</span><span class="mi">9051</span><span class="o">/</span><span class="n">tcp</span>                 <span class="n">peer0</span><span class="o">.</span><span class="n">org2</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span>
+</pre></div>
+</div>
+<p>Notice that the peers are running on ports <code class="docutils literal notranslate"><span class="pre">7051</span></code> and <code class="docutils literal notranslate"><span class="pre">9051</span></code>, while the orderer is running on port <code class="docutils literal notranslate"><span class="pre">7050</span></code>. We will use these ports in subsequent commands.</p>
+<p>By default, when you start the test network, it does not contain any channels. The following instructions demonstrate how to add a channel that is named <code class="docutils literal notranslate"><span class="pre">channel1</span></code> to this network.</p>
+</div>
+<div class="section" id="set-up-the-configtxgen-tool">
+<span id="set-up-the-configtxgen-tool"></span><h3>Set up the configtxgen tool<a class="headerlink" href="#set-up-the-configtxgen-tool" title="Permalink to this headline">¶</a></h3>
+<p>Channels are created by generating a channel creation transaction in a genesis block, and then passing that genesis block to an ordering service node in a join request. The channel creation transaction specifies the initial configuration of the channel and can be created by the <a class="reference external" href="../commands/configtxgen.html">configtxgen</a> tool. The tool reads the <code class="docutils literal notranslate"><span class="pre">configtx.yaml</span></code> file that defines the configuration of our channel, and then writes the relevant information into the channel creation transaction and outputs a genesis block including the channel creation transaction. When you <a class="reference external" href="install.html">installed Fabric</a>, the <code class="docutils literal notranslate"><span class="pre">configtxgen</span></code> tool was installed in the <code class="docutils literal notranslate"><span class="pre">fabric-samples\bin</span></code> directory for you.</p>
+<p>Ensure that you are still operating from the <code class="docutils literal notranslate"><span class="pre">test-network</span></code> directory of your local clone of <code class="docutils literal notranslate"><span class="pre">fabric-samples</span></code> and run this command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>export PATH=${PWD}/../bin:$PATH
+</pre></div>
+</div>
+<p>Next, before you can use <code class="docutils literal notranslate"><span class="pre">configtxgen</span></code>, you need to the set the <code class="docutils literal notranslate"><span class="pre">FABRIC_CFG_PATH</span></code> environment variable to the location of the test network folder that contains the <code class="docutils literal notranslate"><span class="pre">configtx.yaml</span></code> file. Because we are using the test network, we reference the <code class="docutils literal notranslate"><span class="pre">configtx</span></code> folder:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>export FABRIC_CFG_PATH=${PWD}/configtx
+</pre></div>
+</div>
+<p>Now verify that you can use the tool by printing the <code class="docutils literal notranslate"><span class="pre">configtxgen</span></code> help text:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">configtxgen</span> <span class="o">--</span><span class="n">help</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-configtx-yaml-file">
+<span id="the-configtx-yaml-file"></span><h3>The configtx.yaml file<a class="headerlink" href="#the-configtx-yaml-file" title="Permalink to this headline">¶</a></h3>
+<p>For the test network, the <code class="docutils literal notranslate"><span class="pre">configtxgen</span></code> tool uses the channel profiles that are defined in the <code class="docutils literal notranslate"><span class="pre">configtxt\configtx.yaml</span></code> file to create the channel configuration and write it to the <a class="reference external" href="https://developers.google.com/protocol-buffers">protobuf format</a> that can be read by Fabric.</p>
+<p>This <code class="docutils literal notranslate"><span class="pre">configtx.yaml</span></code> file contains the following information that we will use to create our new channel:</p>
+<ul>
+<li><p class="first"><strong>Organizations:</strong> The peer and ordering organizations that can become members of your channel. Each organization has a reference to the cryptographic material that is used to build the <a class="reference external" href="../membership/membership.html">channel MSP</a>.</p>
+</li>
+<li><p class="first"><strong>Ordering service:</strong> Which ordering nodes will form the ordering service of the network, and consensus method they will use to agree to a common order of transactions. This section also defines the ordering nodes that are part of the ordering service consenter set. In the test network sample, there is only a single ordering node, but in a production network we recommend <strong>five</strong> ordering nodes to allow for two ordering nodes to go down and still maintain consensus.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">EtcdRaft</span><span class="p">:</span>
+    <span class="n">Consenters</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">Host</span><span class="p">:</span> <span class="n">orderer</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span>
+      <span class="n">Port</span><span class="p">:</span> <span class="mi">7050</span>
+      <span class="n">ClientTLSCert</span><span class="p">:</span> <span class="o">../</span><span class="n">organizations</span><span class="o">/</span><span class="n">ordererOrganizations</span><span class="o">/</span><span class="n">example</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">orderers</span><span class="o">/</span><span class="n">orderer</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">tls</span><span class="o">/</span><span class="n">server</span><span class="o">.</span><span class="n">crt</span>
+      <span class="n">ServerTLSCert</span><span class="p">:</span> <span class="o">../</span><span class="n">organizations</span><span class="o">/</span><span class="n">ordererOrganizations</span><span class="o">/</span><span class="n">example</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">orderers</span><span class="o">/</span><span class="n">orderer</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">tls</span><span class="o">/</span><span class="n">server</span><span class="o">.</span><span class="n">crt</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>Channel policies</strong> Different sections of the file work together to define the policies that will govern how organizations interact with the channel and which organizations need to approve channel updates. For the purposes of this tutorial, we will use the default policies used by Fabric.</p>
+</li>
+<li><p class="first"><strong>Channel profiles</strong> Each channel profile references information from other sections of the <code class="docutils literal notranslate"><span class="pre">configtx.yaml</span></code> file to build a channel configuration. The profiles are used to create the genesis block of application channel. Notice that the <code class="docutils literal notranslate"><span class="pre">configtx.yaml</span></code> file in the test network includes a single profile named <code class="docutils literal notranslate"><span class="pre">TwoOrgsApplicationGenesis</span></code> that we will use to generate the create channel transaction.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">TwoOrgsApplicationGenesis</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">&lt;&lt;</span><span class="p p-Indicator">:</span> <span class="nv">*ChannelDefaults</span>
+    <span class="l l-Scalar l-Scalar-Plain">Orderer</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">&lt;&lt;</span><span class="p p-Indicator">:</span> <span class="nv">*OrdererDefaults</span>
+        <span class="l l-Scalar l-Scalar-Plain">Organizations</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="nv">*OrdererOrg</span>
+        <span class="l l-Scalar l-Scalar-Plain">Capabilities</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">&lt;&lt;</span><span class="p p-Indicator">:</span> <span class="nv">*OrdererCapabilities</span>
+    <span class="l l-Scalar l-Scalar-Plain">Application</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">&lt;&lt;</span><span class="p p-Indicator">:</span> <span class="nv">*ApplicationDefaults</span>
+        <span class="l l-Scalar l-Scalar-Plain">Organizations</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="nv">*Org1</span>
+            <span class="p p-Indicator">-</span> <span class="nv">*Org2</span>
+        <span class="l l-Scalar l-Scalar-Plain">Capabilities</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">&lt;&lt;</span><span class="p p-Indicator">:</span> <span class="nv">*ApplicationCapabilities</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>The profile includes both peer organizations, <code class="docutils literal notranslate"><span class="pre">Org1</span></code> and <code class="docutils literal notranslate"><span class="pre">Org2</span></code> as well as the ordering organization <code class="docutils literal notranslate"><span class="pre">OrdererOrg</span></code>. Additional ordering nodes and ordering organizations can be added or removed from the consenter set at a later time using a channel update transaction.</p>
+<p>Want to learn more about this file and how to build your own channel application profiles? Visit <a class="reference external" href="create_channel_config.html">Using configtx.yaml to create a channel genesis block</a> tutorial for more details. For now, we will return to the operational aspects of creating the channel, though we will reference parts of this file in future steps.</p>
+</div>
+</div>
+<div class="section" id="step-one-generate-the-genesis-block-of-the-channel">
+<span id="step-one-generate-the-genesis-block-of-the-channel"></span><h2>Step one: Generate the genesis block of the channel<a class="headerlink" href="#step-one-generate-the-genesis-block-of-the-channel" title="Permalink to this headline">¶</a></h2>
+<p>Because we have started the Fabric test network, we are ready to create a new channel. We have already set the environment variables that are required to use the <code class="docutils literal notranslate"><span class="pre">configtxgen</span></code> tool.</p>
+<p>Run the following command to create the channel genesis block for <code class="docutils literal notranslate"><span class="pre">channel1</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">configtxgen</span> <span class="o">-</span><span class="n">profile</span> <span class="n">TwoOrgsApplicationGenesis</span> <span class="o">-</span><span class="n">outputBlock</span> <span class="o">./</span><span class="n">channel</span><span class="o">-</span><span class="n">artifacts</span><span class="o">/</span><span class="n">channel1</span><span class="o">.</span><span class="n">block</span> <span class="o">-</span><span class="n">channelID</span> <span class="n">channel1</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">-profile</span></code></strong>: The command uses the <code class="docutils literal notranslate"><span class="pre">-profile</span></code> flag to reference the <code class="docutils literal notranslate"><span class="pre">TwoOrgsApplicationGenesis:</span></code> profile from <code class="docutils literal notranslate"><span class="pre">configtx.yaml</span></code> that is used by the test network to create application channels.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">-outputBlock</span></code></strong>: The output of this command is the channel genesis block that is written to <code class="docutils literal notranslate"><span class="pre">-outputBlock</span> <span class="pre">./channel-artifacts/channel1.block</span></code>.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">-channelID</span></code></strong>: The <code class="docutils literal notranslate"><span class="pre">-channelID</span></code> parameter will be the name of the future channel. You can specify any name you want for your channel but for illustration purposes in this tutorial we use <code class="docutils literal notranslate"><span class="pre">channel1</span></code>. Channel names must be all lowercase, fewer than 250 characters long and match the regular expression <code class="docutils literal notranslate"><span class="pre">[a-z][a-z0-9.-]*</span></code>.</li>
+</ul>
+<p>When the command is successful, you can see the logs of <code class="docutils literal notranslate"><span class="pre">configtxgen</span></code> loading the <code class="docutils literal notranslate"><span class="pre">configtx.yaml</span></code> file and printing a channel creation transaction:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">common</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">configtxgen</span><span class="p">]</span> <span class="n">main</span> <span class="o">-&gt;</span> <span class="n">INFO</span> <span class="mi">001</span> <span class="n">Loading</span> <span class="n">configuration</span>
+<span class="p">[</span><span class="n">common</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">configtxgen</span><span class="o">.</span><span class="n">localconfig</span><span class="p">]</span> <span class="n">completeInitialization</span> <span class="o">-&gt;</span> <span class="n">INFO</span> <span class="mi">002</span> <span class="n">orderer</span> <span class="nb">type</span><span class="p">:</span> <span class="n">etcdraft</span>
+<span class="p">[</span><span class="n">common</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">configtxgen</span><span class="o">.</span><span class="n">localconfig</span><span class="p">]</span> <span class="n">completeInitialization</span> <span class="o">-&gt;</span> <span class="n">INFO</span> <span class="mi">003</span> <span class="n">Orderer</span><span class="o">.</span><span class="n">EtcdRaft</span><span class="o">.</span><span class="n">Options</span> <span class="n">unset</span><span class="p">,</span> <span class="n">setting</span> <span class="n">to</span> <span class="n">tick_interval</span><span class="p">:</span><span class="s2">&quot;500ms&quot;</span> <span class="n">election_tick</span><span class="p">:</span><span class="mi">10</span> <span class="n">heartbeat_tick</span><span class="p">:</span><span class="mi">1</span> <span class="n">max_inflight_blocks</span><span class="p">:</span><span class="mi">5</span> <span class="n">snapshot_interval_size</span><span class="p">:</span><span class="mi">16777216</span>
+<span class="p">[</span><span class="n">common</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">configtxgen</span><span class="o">.</span><span class="n">localconfig</span><span class="p">]</span> <span class="n">Load</span> <span class="o">-&gt;</span> <span class="n">INFO</span> <span class="mi">004</span> <span class="n">Loaded</span> <span class="n">configuration</span><span class="p">:</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">fabric</span><span class="o">-</span><span class="n">samples</span><span class="o">/</span><span class="n">test</span><span class="o">-</span><span class="n">network</span><span class="o">/</span><span class="n">configtx</span><span class="o">/</span><span class="n">configtx</span><span class="o">.</span><span class="n">yaml</span>
+<span class="p">[</span><span class="n">common</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">configtxgen</span><span class="p">]</span> <span class="n">doOutputBlock</span> <span class="o">-&gt;</span> <span class="n">INFO</span> <span class="mi">005</span> <span class="n">Generating</span> <span class="n">genesis</span> <span class="n">block</span>
+<span class="p">[</span><span class="n">common</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">configtxgen</span><span class="p">]</span> <span class="n">doOutputBlock</span> <span class="o">-&gt;</span> <span class="n">INFO</span> <span class="mi">006</span> <span class="n">Creating</span> <span class="n">application</span> <span class="n">channel</span> <span class="n">genesis</span> <span class="n">block</span>
+<span class="p">[</span><span class="n">common</span><span class="o">.</span><span class="n">tools</span><span class="o">.</span><span class="n">configtxgen</span><span class="p">]</span> <span class="n">doOutputBlock</span> <span class="o">-&gt;</span> <span class="n">INFO</span> <span class="mi">007</span> <span class="n">Writing</span> <span class="n">genesis</span> <span class="n">block</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="step-two-create-the-application-channel">
+<span id="step-two-create-the-application-channel"></span><h2>Step two: Create the application channel<a class="headerlink" href="#step-two-create-the-application-channel" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have the channel genesis block, it is easy to use the <code class="docutils literal notranslate"><span class="pre">osnadmin</span> <span class="pre">channel</span> <span class="pre">join</span></code> command to create the channel. To simplify subsequent commands, we also need to set some environment variables to establish the locations of the certificates for the nodes in the test network:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>export ORDERER_CA=${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
+export ORDERER_ADMIN_TLS_SIGN_CERT=${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/tls/server.crt
+export ORDERER_ADMIN_TLS_PRIVATE_KEY=${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/tls/server.key
+</pre></div>
+</div>
+<p>Run the following command to create the channel named <code class="docutils literal notranslate"><span class="pre">channel1</span></code> on the ordering service.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">osnadmin</span> <span class="n">channel</span> <span class="n">join</span> <span class="o">--</span><span class="n">channelID</span> <span class="n">channel1</span> <span class="o">--</span><span class="n">config</span><span class="o">-</span><span class="n">block</span> <span class="o">./</span><span class="n">channel</span><span class="o">-</span><span class="n">artifacts</span><span class="o">/</span><span class="n">channel1</span><span class="o">.</span><span class="n">block</span> <span class="o">-</span><span class="n">o</span> <span class="n">localhost</span><span class="p">:</span><span class="mi">7053</span> <span class="o">--</span><span class="n">ca</span><span class="o">-</span><span class="n">file</span> <span class="s2">&quot;$ORDERER_CA&quot;</span> <span class="o">--</span><span class="n">client</span><span class="o">-</span><span class="n">cert</span> <span class="s2">&quot;$ORDERER_ADMIN_TLS_SIGN_CERT&quot;</span> <span class="o">--</span><span class="n">client</span><span class="o">-</span><span class="n">key</span> <span class="s2">&quot;$ORDERER_ADMIN_TLS_PRIVATE_KEY&quot;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">--channelID</span></code></strong>: Specify the name of the application channel that you provided when you created the channel genesis block.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">--config-block</span></code></strong>: Specify the location of the channel genesis block that you created with the <code class="docutils literal notranslate"><span class="pre">configtxgen</span></code> command, or the latest config block.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">-o</span></code></strong>: Specify the hostname and port of the orderer admin endpoint. For the test network ordering node this is set to <code class="docutils literal notranslate"><span class="pre">localhost:7053</span></code>.</li>
+</ul>
+<p>In addition, because the <code class="docutils literal notranslate"><span class="pre">osnadmin</span> <span class="pre">channel</span></code> commands communicate with the ordering node using mutual TLS, you need to provide the following certificates:</p>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">--ca-file</span></code></strong>: Specify the location and file name of the orderer organization TLS CA root certificate.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">--client-cert</span></code></strong>: Specify the location and file name of admin client signed certificate from the TLS CA.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">--client-key</span></code></strong>: Specify the location and file name of admin client private key from the TLS CA.</li>
+</ul>
+<p>When successful, the output of the command contains the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Status</span><span class="p">:</span> <span class="mi">201</span>
+<span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;channel1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/participation/v1/channels/channel1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;consensusRelation&quot;</span><span class="p">:</span> <span class="s2">&quot;consenter&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;active&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The channel is active and ready for peers to join.</p>
+<div class="section" id="consenter-vs-follower">
+<span id="consenter-vs-follower"></span><h3>Consenter vs. Follower<a class="headerlink" href="#consenter-vs-follower" title="Permalink to this headline">¶</a></h3>
+<p>Notice the ordering node was joined to the channel with a <code class="docutils literal notranslate"><span class="pre">consensusRelation:</span> <span class="pre">&quot;consenter&quot;</span></code>. If you ran the command against an ordering node that is not included in the list of <code class="docutils literal notranslate"><span class="pre">Consenters:</span></code> in the <code class="docutils literal notranslate"><span class="pre">configtx.yaml</span></code> file (or the channel configuration consenter set), it is added to the channel as a <code class="docutils literal notranslate"><span class="pre">follower</span></code>. To learn more about considerations when joining additional ordering nodes see the topic on <a class="reference external" href="create_channel_participation.html#step-three-join-additional-ordering-nodes">Joining additional ordering nodes</a>.</p>
+</div>
+<div class="section" id="active-vs-onboarding">
+<span id="active-vs-onboarding"></span><h3>Active vs. onboarding<a class="headerlink" href="#active-vs-onboarding" title="Permalink to this headline">¶</a></h3>
+<p>An orderer can join the channel by providing the channel <strong>genesis block</strong>, or the <strong>latest config block</strong>. If joining from the latest config block, the orderer status is set to <code class="docutils literal notranslate"><span class="pre">onboarding</span></code> until the channel ledger has caught up to the specified config block, when it becomes <code class="docutils literal notranslate"><span class="pre">active</span></code>. At this point, you could then add the orderer to the channel consenter set by submitting a channel update transaction, which will cause the  <code class="docutils literal notranslate"><span class="pre">consensusRelation</span></code> to change from <code class="docutils literal notranslate"><span class="pre">follower</span></code> to <code class="docutils literal notranslate"><span class="pre">consenter</span></code>.</p>
+</div>
+</div>
+<div class="section" id="next-steps">
+<span id="next-steps"></span><h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
+<p>After you have created the channel, the next steps are to join peers to the channel and deploy smart contracts. This section walks you through those processes using the test network.</p>
+<div class="section" id="list-channels-on-an-orderer">
+<span id="list-channels-on-an-orderer"></span><h3>List channels on an orderer<a class="headerlink" href="#list-channels-on-an-orderer" title="Permalink to this headline">¶</a></h3>
+<p>Before you join peers to the channel, you might want to try to create additional channels. As you create more channels, the <code class="docutils literal notranslate"><span class="pre">osnadmin</span> <span class="pre">channel</span> <span class="pre">list</span></code> command is useful to view the channels that this orderer is a member of. The same parameters are used here as in the <code class="docutils literal notranslate"><span class="pre">osnadmin</span> <span class="pre">channel</span> <span class="pre">join</span></code> command from the previous step:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">osnadmin</span> <span class="n">channel</span> <span class="nb">list</span> <span class="o">-</span><span class="n">o</span> <span class="n">localhost</span><span class="p">:</span><span class="mi">7053</span> <span class="o">--</span><span class="n">ca</span><span class="o">-</span><span class="n">file</span> <span class="s2">&quot;$ORDERER_CA&quot;</span> <span class="o">--</span><span class="n">client</span><span class="o">-</span><span class="n">cert</span> <span class="s2">&quot;$ORDERER_ADMIN_TLS_SIGN_CERT&quot;</span> <span class="o">--</span><span class="n">client</span><span class="o">-</span><span class="n">key</span> <span class="s2">&quot;$ORDERER_ADMIN_TLS_PRIVATE_KEY&quot;</span>
+</pre></div>
+</div>
+<p>The output of this command looks similar to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Status</span><span class="p">:</span> <span class="mi">200</span>
+<span class="p">{</span>
+    <span class="s2">&quot;systemChannel&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">&quot;channels&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;channel1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/participation/v1/channels/channel1&quot;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="join-peers-to-the-channel">
+<span id="join-peers-to-the-channel"></span><h3>Join peers to the channel<a class="headerlink" href="#join-peers-to-the-channel" title="Permalink to this headline">¶</a></h3>
+<p>The test network includes two peer organizations each with one peer. But before we can use the peer CLI, we need to set some environment variables to specify which user (client MSP) we are acting as and which peer we are targeting. Set the following environment variables to indicate that we are acting as the Org1 admin and targeting the Org1 peer.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>export CORE_PEER_TLS_ENABLED=true
+export CORE_PEER_LOCALMSPID=&quot;Org1MSP&quot;
+export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
+export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
+export CORE_PEER_ADDRESS=localhost:7051
+</pre></div>
+</div>
+<p>In order to use the peer CLI, we also need to modify the <code class="docutils literal notranslate"><span class="pre">FABRIC_CONFIG_PATH</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>FABRIC_CFG_PATH=$PWD/../config/
+</pre></div>
+</div>
+<p>To join the test network peer from <code class="docutils literal notranslate"><span class="pre">Org1</span></code> to the channel <code class="docutils literal notranslate"><span class="pre">channel1</span></code> simply pass the genesis block in a join request:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">peer</span> <span class="n">channel</span> <span class="n">join</span> <span class="o">-</span><span class="n">b</span> <span class="o">./</span><span class="n">channel</span><span class="o">-</span><span class="n">artifacts</span><span class="o">/</span><span class="n">channel1</span><span class="o">.</span><span class="n">block</span>
+</pre></div>
+</div>
+<p>When successful, the output of this command contains the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">channelCmd</span><span class="p">]</span> <span class="n">InitCmdFactory</span> <span class="o">-&gt;</span> <span class="n">INFO</span> <span class="mi">001</span> <span class="n">Endorser</span> <span class="ow">and</span> <span class="n">orderer</span> <span class="n">connections</span> <span class="n">initialized</span>
+<span class="p">[</span><span class="n">channelCmd</span><span class="p">]</span> <span class="n">executeJoin</span> <span class="o">-&gt;</span> <span class="n">INFO</span> <span class="mi">002</span> <span class="n">Successfully</span> <span class="n">submitted</span> <span class="n">proposal</span> <span class="n">to</span> <span class="n">join</span> <span class="n">channel</span>
+</pre></div>
+</div>
+<p>We repeat these steps for the <code class="docutils literal notranslate"><span class="pre">Org2</span></code> peer. Set the following environment variables to operate the <code class="docutils literal notranslate"><span class="pre">peer</span></code> CLI as the <code class="docutils literal notranslate"><span class="pre">Org2</span></code> admin. The environment variables will also set the <code class="docutils literal notranslate"><span class="pre">Org2</span></code> peer, <code class="docutils literal notranslate"><span class="pre">peer0.org2.example.com</span></code>, as the target peer.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>export CORE_PEER_LOCALMSPID=&quot;Org2MSP&quot;
+export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
+export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
+export CORE_PEER_ADDRESS=localhost:9051
+</pre></div>
+</div>
+<p>Now repeat the command to join the peer from <code class="docutils literal notranslate"><span class="pre">Org2</span></code> to <code class="docutils literal notranslate"><span class="pre">channel1</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">peer</span> <span class="n">channel</span> <span class="n">join</span> <span class="o">-</span><span class="n">b</span> <span class="o">./</span><span class="n">channel</span><span class="o">-</span><span class="n">artifacts</span><span class="o">/</span><span class="n">channel1</span><span class="o">.</span><span class="n">block</span>
+</pre></div>
+</div>
+<p>When successful, the output of this command contains the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">channelCmd</span><span class="p">]</span> <span class="n">InitCmdFactory</span> <span class="o">-&gt;</span> <span class="n">INFO</span> <span class="mi">001</span> <span class="n">Endorser</span> <span class="ow">and</span> <span class="n">orderer</span> <span class="n">connections</span> <span class="n">initialized</span>
+<span class="p">[</span><span class="n">channelCmd</span><span class="p">]</span> <span class="n">executeJoin</span> <span class="o">-&gt;</span> <span class="n">INFO</span> <span class="mi">002</span> <span class="n">Successfully</span> <span class="n">submitted</span> <span class="n">proposal</span> <span class="n">to</span> <span class="n">join</span> <span class="n">channel</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="set-anchor-peer">
+<span id="set-anchor-peer"></span><h2>Set anchor peer<a class="headerlink" href="#set-anchor-peer" title="Permalink to this headline">¶</a></h2>
+<p>Finally, after an organization has joined their peers to the channel, they should select <strong>at least one</strong> of their peers to become an anchor peer. <a class="reference external" href="../gossip.html#anchor-peers">Anchor peers</a> are required in order to take advantage of features such as private data and service discovery. Each organization should set multiple anchor peers on a channel for redundancy. For more information about gossip and anchor peers, see the <a class="reference external" href="../gossip.html">Gossip data dissemination protocol</a>.</p>
+<p>The endpoint information of the anchor peers of each organization is included in the channel configuration. Each channel member can specify their anchor peers by updating the channel. We will use the <a class="reference external" href="../commands/configtxlator.html">configtxlator</a> tool to update the channel configuration and select an anchor peer for <code class="docutils literal notranslate"><span class="pre">Org1</span></code> and <code class="docutils literal notranslate"><span class="pre">Org2</span></code>.</p>
+<p><strong>Note:</strong> If <a class="reference external" href="https://stedolan.github.io/jq/">jq</a> is not already installed on your local machine, you need to install it now to complete these steps.</p>
+<p>We will start by selecting the peer from <code class="docutils literal notranslate"><span class="pre">Org1</span></code> to be an anchor peer. The first step is to pull the most recent channel configuration block using the <code class="docutils literal notranslate"><span class="pre">peer</span> <span class="pre">channel</span> <span class="pre">fetch</span></code> command. Set the following environment variables to operate the <code class="docutils literal notranslate"><span class="pre">peer</span></code> CLI as the <code class="docutils literal notranslate"><span class="pre">Org1</span></code> admin:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>export CORE_PEER_LOCALMSPID=&quot;Org1MSP&quot;
+export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
+export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
+export CORE_PEER_ADDRESS=localhost:7051
+</pre></div>
+</div>
+<p>You can use the following command to fetch the channel configuration:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">peer</span> <span class="n">channel</span> <span class="n">fetch</span> <span class="n">config</span> <span class="n">channel</span><span class="o">-</span><span class="n">artifacts</span><span class="o">/</span><span class="n">config_block</span><span class="o">.</span><span class="n">pb</span> <span class="o">-</span><span class="n">o</span> <span class="n">localhost</span><span class="p">:</span><span class="mi">7050</span> <span class="o">--</span><span class="n">ordererTLSHostnameOverride</span> <span class="n">orderer</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span> <span class="o">-</span><span class="n">c</span> <span class="n">channel1</span> <span class="o">--</span><span class="n">tls</span> <span class="o">--</span><span class="n">cafile</span> <span class="s2">&quot;$ORDERER_CA&quot;</span>
+</pre></div>
+</div>
+<p>Because the most recent channel configuration block is the channel genesis block, the command returns block <code class="docutils literal notranslate"><span class="pre">0</span></code> from the channel.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">channelCmd</span><span class="p">]</span> <span class="n">InitCmdFactory</span> <span class="o">-&gt;</span> <span class="n">INFO</span> <span class="mi">001</span> <span class="n">Endorser</span> <span class="ow">and</span> <span class="n">orderer</span> <span class="n">connections</span> <span class="n">initialized</span>
+<span class="p">[</span><span class="n">cli</span><span class="o">.</span><span class="n">common</span><span class="p">]</span> <span class="n">readBlock</span> <span class="o">-&gt;</span> <span class="n">INFO</span> <span class="mi">002</span> <span class="n">Received</span> <span class="n">block</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">[</span><span class="n">channelCmd</span><span class="p">]</span> <span class="n">fetch</span> <span class="o">-&gt;</span> <span class="n">INFO</span> <span class="mi">003</span> <span class="n">Retrieving</span> <span class="n">last</span> <span class="n">config</span> <span class="n">block</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">[</span><span class="n">cli</span><span class="o">.</span><span class="n">common</span><span class="p">]</span> <span class="n">readBlock</span> <span class="o">-&gt;</span> <span class="n">INFO</span> <span class="mi">004</span> <span class="n">Received</span> <span class="n">block</span><span class="p">:</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>The channel configuration block <code class="docutils literal notranslate"><span class="pre">config_block.pb</span></code> is stored in the <code class="docutils literal notranslate"><span class="pre">channel-artifacts</span></code> folder to keep the update process separate from other artifacts. Change into the <code class="docutils literal notranslate"><span class="pre">channel-artifacts</span></code> folder to complete the next steps:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">channel</span><span class="o">-</span><span class="n">artifacts</span>
+</pre></div>
+</div>
+<p>We can now start using the <code class="docutils literal notranslate"><span class="pre">configtxlator</span></code> tool to start working with the channel configuration. The first step is to decode the block from protobuf into a JSON object that can be read and edited. We also strip away the unnecessary block data, leaving only the channel configuration.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">configtxlator</span> <span class="n">proto_decode</span> <span class="o">--</span><span class="nb">input</span> <span class="n">config_block</span><span class="o">.</span><span class="n">pb</span> <span class="o">--</span><span class="nb">type</span> <span class="n">common</span><span class="o">.</span><span class="n">Block</span> <span class="o">--</span><span class="n">output</span> <span class="n">config_block</span><span class="o">.</span><span class="n">json</span>
+<span class="n">jq</span> <span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">payload</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">config</span> <span class="n">config_block</span><span class="o">.</span><span class="n">json</span> <span class="o">&gt;</span> <span class="n">config</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+<p>These commands convert the channel configuration block into a streamlined JSON, <code class="docutils literal notranslate"><span class="pre">config.json</span></code>, that will serve as the baseline for our update. Because we don’t want to edit this file directly, we will make a copy that we can edit. We will use the original channel config in a future step.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cp</span> <span class="n">config</span><span class="o">.</span><span class="n">json</span> <span class="n">config_copy</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">jq</span></code> tool to add the <code class="docutils literal notranslate"><span class="pre">Org1</span></code> anchor peer to the channel configuration.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jq</span> <span class="s1">&#39;.channel_group.groups.Application.groups.Org1MSP.values += {&quot;AnchorPeers&quot;:{&quot;mod_policy&quot;: &quot;Admins&quot;,&quot;value&quot;:{&quot;anchor_peers&quot;: [{&quot;host&quot;: &quot;peer0.org1.example.com&quot;,&quot;port&quot;: 7051}]},&quot;version&quot;: &quot;0&quot;}}&#39;</span> <span class="n">config_copy</span><span class="o">.</span><span class="n">json</span> <span class="o">&gt;</span> <span class="n">modified_config</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+<p>After this step, we have an updated version of channel configuration in JSON format in the <code class="docutils literal notranslate"><span class="pre">modified_config.json</span></code> file. We can now convert both the original and modified channel configurations back into protobuf format and calculate the difference between them.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">configtxlator</span> <span class="n">proto_encode</span> <span class="o">--</span><span class="nb">input</span> <span class="n">config</span><span class="o">.</span><span class="n">json</span> <span class="o">--</span><span class="nb">type</span> <span class="n">common</span><span class="o">.</span><span class="n">Config</span> <span class="o">--</span><span class="n">output</span> <span class="n">config</span><span class="o">.</span><span class="n">pb</span>
+<span class="n">configtxlator</span> <span class="n">proto_encode</span> <span class="o">--</span><span class="nb">input</span> <span class="n">modified_config</span><span class="o">.</span><span class="n">json</span> <span class="o">--</span><span class="nb">type</span> <span class="n">common</span><span class="o">.</span><span class="n">Config</span> <span class="o">--</span><span class="n">output</span> <span class="n">modified_config</span><span class="o">.</span><span class="n">pb</span>
+<span class="n">configtxlator</span> <span class="n">compute_update</span> <span class="o">--</span><span class="n">channel_id</span> <span class="n">channel1</span> <span class="o">--</span><span class="n">original</span> <span class="n">config</span><span class="o">.</span><span class="n">pb</span> <span class="o">--</span><span class="n">updated</span> <span class="n">modified_config</span><span class="o">.</span><span class="n">pb</span> <span class="o">--</span><span class="n">output</span> <span class="n">config_update</span><span class="o">.</span><span class="n">pb</span>
+</pre></div>
+</div>
+<p>The new protobuf named <code class="docutils literal notranslate"><span class="pre">config_update.pb</span></code> contains the anchor peer update that we need to apply to the channel configuration. We can wrap the configuration update in a transaction envelope to create the channel configuration update transaction.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>configtxlator proto_decode --input config_update.pb --type common.ConfigUpdate --output config_update.json
+echo &#39;{&quot;payload&quot;:{&quot;header&quot;:{&quot;channel_header&quot;:{&quot;channel_id&quot;:&quot;channel1&quot;, &quot;type&quot;:2}},&quot;data&quot;:{&quot;config_update&quot;:&#39;$(cat config_update.json)&#39;}}}&#39; | jq . &gt; config_update_in_envelope.json
+configtxlator proto_encode --input config_update_in_envelope.json --type common.Envelope --output config_update_in_envelope.pb
+</pre></div>
+</div>
+<p>We can now use the final artifact, <code class="docutils literal notranslate"><span class="pre">config_update_in_envelope.pb</span></code>, that can be used to update the channel. Navigate back to the <code class="docutils literal notranslate"><span class="pre">test-network</span></code> directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">..</span>
+</pre></div>
+</div>
+<p>We can add the anchor peer by providing the new channel configuration to the <code class="docutils literal notranslate"><span class="pre">peer</span> <span class="pre">channel</span> <span class="pre">update</span></code> command. Because we are updating a section of the channel configuration that only affects <code class="docutils literal notranslate"><span class="pre">Org1</span></code>, other channel members do not need to approve the channel update.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">peer</span> <span class="n">channel</span> <span class="n">update</span> <span class="o">-</span><span class="n">f</span> <span class="n">channel</span><span class="o">-</span><span class="n">artifacts</span><span class="o">/</span><span class="n">config_update_in_envelope</span><span class="o">.</span><span class="n">pb</span> <span class="o">-</span><span class="n">c</span> <span class="n">channel1</span> <span class="o">-</span><span class="n">o</span> <span class="n">localhost</span><span class="p">:</span><span class="mi">7050</span>  <span class="o">--</span><span class="n">ordererTLSHostnameOverride</span> <span class="n">orderer</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span> <span class="o">--</span><span class="n">tls</span> <span class="o">--</span><span class="n">cafile</span> <span class="s2">&quot;$</span><span class="si">{PWD}</span><span class="s2">/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem&quot;</span>
+</pre></div>
+</div>
+<p>When the channel update is successful, you should see the following response:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">channelCmd</span><span class="p">]</span> <span class="n">update</span> <span class="o">-&gt;</span> <span class="n">INFO</span> <span class="mi">002</span> <span class="n">Successfully</span> <span class="n">submitted</span> <span class="n">channel</span> <span class="n">update</span>
+</pre></div>
+</div>
+<p>We can also set the peer from <code class="docutils literal notranslate"><span class="pre">Org2</span></code> to be an anchor peer. Because we are going through the process a second time, we will go through the steps more quickly. Set the environment variables to operate the <code class="docutils literal notranslate"><span class="pre">peer</span></code> CLI as the <code class="docutils literal notranslate"><span class="pre">Org2</span></code> admin:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>export CORE_PEER_LOCALMSPID=&quot;Org2MSP&quot;
+export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
+export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
+export CORE_PEER_ADDRESS=localhost:9051
+</pre></div>
+</div>
+<p>Pull the latest channel configuration block, which is now the second block on the channel:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">peer</span> <span class="n">channel</span> <span class="n">fetch</span> <span class="n">config</span> <span class="n">channel</span><span class="o">-</span><span class="n">artifacts</span><span class="o">/</span><span class="n">config_block</span><span class="o">.</span><span class="n">pb</span> <span class="o">-</span><span class="n">o</span> <span class="n">localhost</span><span class="p">:</span><span class="mi">7050</span> <span class="o">--</span><span class="n">ordererTLSHostnameOverride</span> <span class="n">orderer</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span> <span class="o">-</span><span class="n">c</span> <span class="n">channel1</span> <span class="o">--</span><span class="n">tls</span> <span class="o">--</span><span class="n">cafile</span> <span class="s2">&quot;$</span><span class="si">{PWD}</span><span class="s2">/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem&quot;</span>
+</pre></div>
+</div>
+<p>Navigate back to the <code class="docutils literal notranslate"><span class="pre">channel-artifacts</span></code> directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">channel</span><span class="o">-</span><span class="n">artifacts</span>
+</pre></div>
+</div>
+<p>You can then decode and copy the configuration block.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">configtxlator</span> <span class="n">proto_decode</span> <span class="o">--</span><span class="nb">input</span> <span class="n">config_block</span><span class="o">.</span><span class="n">pb</span> <span class="o">--</span><span class="nb">type</span> <span class="n">common</span><span class="o">.</span><span class="n">Block</span> <span class="o">--</span><span class="n">output</span> <span class="n">config_block</span><span class="o">.</span><span class="n">json</span>
+<span class="n">jq</span> <span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">payload</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">config</span> <span class="n">config_block</span><span class="o">.</span><span class="n">json</span> <span class="o">&gt;</span> <span class="n">config</span><span class="o">.</span><span class="n">json</span>
+<span class="n">cp</span> <span class="n">config</span><span class="o">.</span><span class="n">json</span> <span class="n">config_copy</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+<p>Add the <code class="docutils literal notranslate"><span class="pre">Org2</span></code> peer that is joined to the channel as the anchor peer in the channel configuration:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jq</span> <span class="s1">&#39;.channel_group.groups.Application.groups.Org2MSP.values += {&quot;AnchorPeers&quot;:{&quot;mod_policy&quot;: &quot;Admins&quot;,&quot;value&quot;:{&quot;anchor_peers&quot;: [{&quot;host&quot;: &quot;peer0.org2.example.com&quot;,&quot;port&quot;: 9051}]},&quot;version&quot;: &quot;0&quot;}}&#39;</span> <span class="n">config_copy</span><span class="o">.</span><span class="n">json</span> <span class="o">&gt;</span> <span class="n">modified_config</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+<p>We can now convert both the original and updated channel configurations back into protobuf format and calculate the difference between them.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">configtxlator</span> <span class="n">proto_encode</span> <span class="o">--</span><span class="nb">input</span> <span class="n">config</span><span class="o">.</span><span class="n">json</span> <span class="o">--</span><span class="nb">type</span> <span class="n">common</span><span class="o">.</span><span class="n">Config</span> <span class="o">--</span><span class="n">output</span> <span class="n">config</span><span class="o">.</span><span class="n">pb</span>
+<span class="n">configtxlator</span> <span class="n">proto_encode</span> <span class="o">--</span><span class="nb">input</span> <span class="n">modified_config</span><span class="o">.</span><span class="n">json</span> <span class="o">--</span><span class="nb">type</span> <span class="n">common</span><span class="o">.</span><span class="n">Config</span> <span class="o">--</span><span class="n">output</span> <span class="n">modified_config</span><span class="o">.</span><span class="n">pb</span>
+<span class="n">configtxlator</span> <span class="n">compute_update</span> <span class="o">--</span><span class="n">channel_id</span> <span class="n">channel1</span> <span class="o">--</span><span class="n">original</span> <span class="n">config</span><span class="o">.</span><span class="n">pb</span> <span class="o">--</span><span class="n">updated</span> <span class="n">modified_config</span><span class="o">.</span><span class="n">pb</span> <span class="o">--</span><span class="n">output</span> <span class="n">config_update</span><span class="o">.</span><span class="n">pb</span>
+</pre></div>
+</div>
+<p>Wrap the configuration update in a transaction envelope to create the channel configuration update transaction:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>configtxlator proto_decode --input config_update.pb --type common.ConfigUpdate --output config_update.json
+echo &#39;{&quot;payload&quot;:{&quot;header&quot;:{&quot;channel_header&quot;:{&quot;channel_id&quot;:&quot;channel1&quot;, &quot;type&quot;:2}},&quot;data&quot;:{&quot;config_update&quot;:&#39;$(cat config_update.json)&#39;}}}&#39; | jq . &gt; config_update_in_envelope.json
+configtxlator proto_encode --input config_update_in_envelope.json --type common.Envelope --output config_update_in_envelope.pb
+</pre></div>
+</div>
+<p>Navigate back to the <code class="docutils literal notranslate"><span class="pre">test-network</span></code> directory.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">..</span>
+</pre></div>
+</div>
+<p>Update the channel and set the <code class="docutils literal notranslate"><span class="pre">Org2</span></code> anchor peer by issuing the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">peer</span> <span class="n">channel</span> <span class="n">update</span> <span class="o">-</span><span class="n">f</span> <span class="n">channel</span><span class="o">-</span><span class="n">artifacts</span><span class="o">/</span><span class="n">config_update_in_envelope</span><span class="o">.</span><span class="n">pb</span> <span class="o">-</span><span class="n">c</span> <span class="n">channel1</span> <span class="o">-</span><span class="n">o</span> <span class="n">localhost</span><span class="p">:</span><span class="mi">7050</span>  <span class="o">--</span><span class="n">ordererTLSHostnameOverride</span> <span class="n">orderer</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span> <span class="o">--</span><span class="n">tls</span> <span class="o">--</span><span class="n">cafile</span> <span class="s2">&quot;$</span><span class="si">{PWD}</span><span class="s2">/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem&quot;</span>
+</pre></div>
+</div>
+<p>If you want to learn more about how to submit a channel update request, see <a class="reference external" href="../config_update.html">update a channel configuration</a>.</p>
+<p>You can confirm that the channel has been updated successfully by running the <code class="docutils literal notranslate"><span class="pre">peer</span> <span class="pre">channel</span> <span class="pre">info</span></code> command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">peer</span> <span class="n">channel</span> <span class="n">getinfo</span> <span class="o">-</span><span class="n">c</span> <span class="n">channel1</span>
+</pre></div>
+</div>
+<p>Now that the channel has been updated by adding two channel configuration blocks to the channel genesis block, the height of the channel will have grown to three and the hashes are updated:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Blockchain</span> <span class="n">info</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;height&quot;</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="s2">&quot;currentBlockHash&quot;</span><span class="p">:</span><span class="s2">&quot;GKqqk/HNi9x/6YPnaIUpMBlb0Ew6ovUnSB5MEF7Y5Pc=&quot;</span><span class="p">,</span><span class="s2">&quot;previousBlockHash&quot;</span><span class="p">:</span><span class="s2">&quot;cl4TOQpZ30+d17OF5YOkX/mtMjJpUXiJmtw8+sON8a8=&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="deploy-a-chaincode-to-the-new-channel">
+<span id="deploy-a-chaincode-to-the-new-channel"></span><h2>Deploy a chaincode to the new channel<a class="headerlink" href="#deploy-a-chaincode-to-the-new-channel" title="Permalink to this headline">¶</a></h2>
+<p>We can confirm that the channel was created successfully by deploying a chaincode to the channel. We can use the <code class="docutils literal notranslate"><span class="pre">network.sh</span></code> script to deploy the Basic asset transfer chaincode to any test network channel. Deploy a chaincode to our new channel using the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">network</span><span class="o">.</span><span class="n">sh</span> <span class="n">deployCC</span> <span class="o">-</span><span class="n">ccn</span> <span class="n">basic</span> <span class="o">-</span><span class="n">ccp</span> <span class="o">../</span><span class="n">asset</span><span class="o">-</span><span class="n">transfer</span><span class="o">-</span><span class="n">basic</span><span class="o">/</span><span class="n">chaincode</span><span class="o">-</span><span class="n">go</span><span class="o">/</span> <span class="o">-</span><span class="n">ccl</span> <span class="n">go</span> <span class="o">-</span><span class="n">c</span> <span class="n">channel1</span>
+</pre></div>
+</div>
+<p>After you run the command, you should see the chaincode being deployed to the channel in your logs.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Committed</span> <span class="n">chaincode</span> <span class="n">definition</span> <span class="k">for</span> <span class="n">chaincode</span> <span class="s1">&#39;basic&#39;</span> <span class="n">on</span> <span class="n">channel</span> <span class="s1">&#39;channel1&#39;</span><span class="p">:</span>
+<span class="n">Version</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Endorsement</span> <span class="n">Plugin</span><span class="p">:</span> <span class="n">escc</span><span class="p">,</span> <span class="n">Validation</span> <span class="n">Plugin</span><span class="p">:</span> <span class="n">vscc</span><span class="p">,</span> <span class="n">Approvals</span><span class="p">:</span> <span class="p">[</span><span class="n">Org1MSP</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span> <span class="n">Org2MSP</span><span class="p">:</span> <span class="n">true</span><span class="p">]</span>
+<span class="n">Query</span> <span class="n">chaincode</span> <span class="n">definition</span> <span class="n">successful</span> <span class="n">on</span> <span class="n">peer0</span><span class="o">.</span><span class="n">org2</span> <span class="n">on</span> <span class="n">channel</span> <span class="s1">&#39;channel1&#39;</span>
+<span class="n">Chaincode</span> <span class="n">initialization</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">required</span>
+</pre></div>
+</div>
+<p>Then run the following command to initialize some assets on the ledger:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">peer</span> <span class="n">chaincode</span> <span class="n">invoke</span> <span class="o">-</span><span class="n">o</span> <span class="n">localhost</span><span class="p">:</span><span class="mi">7050</span> <span class="o">--</span><span class="n">ordererTLSHostnameOverride</span> <span class="n">orderer</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span> <span class="o">--</span><span class="n">tls</span> <span class="o">--</span><span class="n">cafile</span> <span class="s2">&quot;$ORDERER_CA&quot;</span> <span class="o">-</span><span class="n">C</span> <span class="n">channel1</span> <span class="o">-</span><span class="n">n</span> <span class="n">basic</span> <span class="o">--</span><span class="n">peerAddresses</span> <span class="n">localhost</span><span class="p">:</span><span class="mi">7051</span> <span class="o">--</span><span class="n">tlsRootCertFiles</span> <span class="s2">&quot;$</span><span class="si">{PWD}</span><span class="s2">/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt&quot;</span> <span class="o">--</span><span class="n">peerAddresses</span> <span class="n">localhost</span><span class="p">:</span><span class="mi">9051</span> <span class="o">--</span><span class="n">tlsRootCertFiles</span> <span class="s2">&quot;$</span><span class="si">{PWD}</span><span class="s2">/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt&quot;</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;{&quot;function&quot;:&quot;InitLedger&quot;,&quot;Args&quot;:[]}&#39;</span>
+</pre></div>
+</div>
+<p>When successful you will see:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">chaincodeCmd</span><span class="p">]</span> <span class="n">chaincodeInvokeOrQuery</span> <span class="o">-&gt;</span> <span class="n">INFO</span> <span class="mi">001</span> <span class="n">Chaincode</span> <span class="n">invoke</span> <span class="n">successful</span><span class="o">.</span> <span class="n">result</span><span class="p">:</span> <span class="n">status</span><span class="p">:</span><span class="mi">200</span>
+</pre></div>
+</div>
+<p>Confirm the assets were added to the ledger by issuing the following query:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">peer</span> <span class="n">chaincode</span> <span class="n">query</span> <span class="o">-</span><span class="n">C</span> <span class="n">channel1</span> <span class="o">-</span><span class="n">n</span> <span class="n">basic</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;{&quot;Args&quot;:[&quot;getAllAssets&quot;]}&#39;</span>
+</pre></div>
+</div>
+<p>You should see output similar to the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[{</span><span class="s2">&quot;ID&quot;</span><span class="p">:</span><span class="s2">&quot;asset1&quot;</span><span class="p">,</span><span class="s2">&quot;color&quot;</span><span class="p">:</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span><span class="s2">&quot;size&quot;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="s2">&quot;owner&quot;</span><span class="p">:</span><span class="s2">&quot;Tomoko&quot;</span><span class="p">,</span><span class="s2">&quot;appraisedValue&quot;</span><span class="p">:</span><span class="mi">300</span><span class="p">},</span>
+<span class="p">{</span><span class="s2">&quot;ID&quot;</span><span class="p">:</span><span class="s2">&quot;asset2&quot;</span><span class="p">,</span><span class="s2">&quot;color&quot;</span><span class="p">:</span><span class="s2">&quot;red&quot;</span><span class="p">,</span><span class="s2">&quot;size&quot;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="s2">&quot;owner&quot;</span><span class="p">:</span><span class="s2">&quot;Brad&quot;</span><span class="p">,</span><span class="s2">&quot;appraisedValue&quot;</span><span class="p">:</span><span class="mi">400</span><span class="p">},</span>
+<span class="p">{</span><span class="s2">&quot;ID&quot;</span><span class="p">:</span><span class="s2">&quot;asset3&quot;</span><span class="p">,</span><span class="s2">&quot;color&quot;</span><span class="p">:</span><span class="s2">&quot;green&quot;</span><span class="p">,</span><span class="s2">&quot;size&quot;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="s2">&quot;owner&quot;</span><span class="p">:</span><span class="s2">&quot;Jin Soo&quot;</span><span class="p">,</span><span class="s2">&quot;appraisedValue&quot;</span><span class="p">:</span><span class="mi">500</span><span class="p">},</span>
+<span class="p">{</span><span class="s2">&quot;ID&quot;</span><span class="p">:</span><span class="s2">&quot;asset4&quot;</span><span class="p">,</span><span class="s2">&quot;color&quot;</span><span class="p">:</span><span class="s2">&quot;yellow&quot;</span><span class="p">,</span><span class="s2">&quot;size&quot;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="s2">&quot;owner&quot;</span><span class="p">:</span><span class="s2">&quot;Max&quot;</span><span class="p">,</span><span class="s2">&quot;appraisedValue&quot;</span><span class="p">:</span><span class="mi">600</span><span class="p">},</span>
+<span class="p">{</span><span class="s2">&quot;ID&quot;</span><span class="p">:</span><span class="s2">&quot;asset5&quot;</span><span class="p">,</span><span class="s2">&quot;color&quot;</span><span class="p">:</span><span class="s2">&quot;black&quot;</span><span class="p">,</span><span class="s2">&quot;size&quot;</span><span class="p">:</span><span class="mi">15</span><span class="p">,</span><span class="s2">&quot;owner&quot;</span><span class="p">:</span><span class="s2">&quot;Adriana&quot;</span><span class="p">,</span><span class="s2">&quot;appraisedValue&quot;</span><span class="p">:</span><span class="mi">700</span><span class="p">},</span>
+<span class="p">{</span><span class="s2">&quot;ID&quot;</span><span class="p">:</span><span class="s2">&quot;asset6&quot;</span><span class="p">,</span><span class="s2">&quot;color&quot;</span><span class="p">:</span><span class="s2">&quot;white&quot;</span><span class="p">,</span><span class="s2">&quot;size&quot;</span><span class="p">:</span><span class="mi">15</span><span class="p">,</span><span class="s2">&quot;owner&quot;</span><span class="p">:</span><span class="s2">&quot;Michel&quot;</span><span class="p">,</span><span class="s2">&quot;appraisedValue&quot;</span><span class="p">:</span><span class="mi">800</span><span class="p">}]</span>
+</pre></div>
+</div>
+<div class="section" id="create-a-channel-without-the-test-network">
+<span id="create-a-channel-without-the-test-network"></span><h3>Create a channel without the test network<a class="headerlink" href="#create-a-channel-without-the-test-network" title="Permalink to this headline">¶</a></h3>
+<p>This tutorial has taken you through the basic steps to create a channel on the test network by using the <code class="docutils literal notranslate"><span class="pre">osnadmin</span> <span class="pre">channel</span> <span class="pre">join</span></code> command. When you are ready to build your own network, follow the steps in the <a class="reference external" href="create_channel_participation.html">Create a channel</a> tutorial to learn more about using the <code class="docutils literal notranslate"><span class="pre">osnadmin</span> <span class="pre">channel</span></code> commands.</p>
+<!--- Licensed under Creative Commons Attribution 4.0 International License
+https://creativecommons.org/licenses/by/4.0/ --></div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="create_channel_config.html" class="btn btn-neutral float-right" title="Using configtx.yaml to build a channel configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="create_channel_participation.html" class="btn btn-neutral" title="Create a channel" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright Hyperledger 2020.
+    <br>
+      <br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>
+      <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+        <img alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'master',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

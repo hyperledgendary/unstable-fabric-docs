@@ -1,0 +1,837 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Writing Your First Chaincode &mdash; hyperledger-fabricdocs master documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="hyperledger-fabricdocs master documentation" href="index.html"/>
+        <link rel="up" title="Tutorials" href="tutorials.html"/>
+        <link rel="next" title="Running chaincode in development mode" href="peer-chaincode-devmode.html"/>
+        <link rel="prev" title="Updating a channel configuration" href="config_update.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+
+          
+            <a href="index.html" class="icon icon-home"> hyperledger-fabricdocs
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                master
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+
+<br><img style="background-color: #fff; height: unset; width: unset;" alt="Hyperledger Fabric" src=_images/hyperledger_fabric_logo_color.png />
+<br>
+<a href="https://github.com/hyperledger/fabric"><img style="padding: 0px; margin: auto auto auto auto;" alt="GitHub" src="_static/images/github_button.png"/></a>
+&nbsp;<a href="https://stackoverflow.com/questions/tagged/hyperledger-fabric"><img style="padding: 0px; margin: auto auto auto auto;" alt="StackOverflow" src="_static/images/stackoverflow_button.png"/></a>
+&nbsp;<a href="https://chat.hyperledger.org"><img style="padding: 0px; margin: auto auto auto auto;" alt="Rocket Chat" src="_static/images/rocketchat_button.png"/></a>
+&nbsp;<a href="https://www.youtube.com/playlist?list=PL0MZ85B_96CH7wvtrRzV7SvtRY0sI0DEg"><img style="padding: 0px; margin: auto auto auto auto;" alt="Youtube Channel" src="_static/images/youtube_button.png"/></a>
+
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="whatis.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whatsnew.html">What’s new in Hyperledger Fabric v2.x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whatsnew.html#release-notes">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="key_concepts.html">Key Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started - Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started_run_fabric.html">Getting Started - Run Fabric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developapps/developing_applications.html">Developing Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tutorials.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="test_network.html">Using the Fabric test network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deploy_chaincode.html">Deploying a smart contract to a channel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="write_first_app.html">Running a Fabric Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/commercial_paper.html">Commercial paper tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="private_data_tutorial.html">Using Private Data in Fabric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="secured_asset_transfer/secured_private_asset_transfer_tutorial.html">Secured asset transfer in Fabric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="couchdb_tutorial.html">Using CouchDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="create_channel/create_channel_overview.html">Creating a channel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="channel_update_tutorial.html">Adding an Org to a Channel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config_update.html">Updating a channel configuration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Writing Your First Chaincode</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-is-chaincode">What is Chaincode?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fabric-contract-api">Fabric Contract API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#asset-transfer-chaincode">Asset Transfer Chaincode</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#choosing-a-location-for-the-code">Choosing a Location for the Code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#housekeeping">Housekeeping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#initializing-the-chaincode">Initializing the Chaincode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pulling-it-all-together">Pulling it All Together</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#chaincode-access-control">Chaincode access control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#managing-external-dependencies-for-chaincode-written-in-go">Managing external dependencies for chaincode written in Go</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="peer-chaincode-devmode.html">Running chaincode in development mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="videos.html">Videos</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="deployment_guide_overview.html">Deploying a production network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ops_guide.html">Operations Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upgrade.html">Upgrading to the latest release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_ref.html">Commands Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fabric-FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributions Welcome!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="releases.html">Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="questions.html">Still Have Questions?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="status.html">Status</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">hyperledger-fabricdocs</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="tutorials.html">Tutorials</a> &raquo;</li>
+        
+      <li>Writing Your First Chaincode</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/chaincode4ade.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="writing-your-first-chaincode">
+<h1>Writing Your First Chaincode<a class="headerlink" href="#writing-your-first-chaincode" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-chaincode">
+<h2>What is Chaincode?<a class="headerlink" href="#what-is-chaincode" title="Permalink to this headline">¶</a></h2>
+<p>Chaincode is a program, written in <a class="reference external" href="https://golang.org">Go</a>, <a class="reference external" href="https://nodejs.org">Node.js</a>,
+or <a class="reference external" href="https://java.com/en/">Java</a> that implements a prescribed interface.
+Chaincode runs in a separate process from the peer and initializes and manages
+the ledger state through transactions submitted by applications.</p>
+<p>A chaincode typically handles business logic agreed to by members of the
+network, so it similar to a “smart contract”. A chaincode can be invoked to update or query
+the ledger in a proposal transaction. Given the appropriate permission, a chaincode
+may invoke another chaincode, either in the same channel or in different channels, to access its state.
+Note that, if the called chaincode is on a different channel from the calling chaincode,
+only read query is allowed. That is, the called chaincode on a different channel is only a <code class="docutils literal notranslate"><span class="pre">Query</span></code>,
+which does not participate in state validation checks in subsequent commit phase.</p>
+<p>In the following sections, we will explore chaincode through the eyes of an
+application developer. We’ll present a asset-transfer chaincode sample walkthrough,
+and the purpose of each method in the Fabric Contract API. If you
+are a network operator who is deploying a chaincode to running network,
+visit the <a class="reference internal" href="deploy_chaincode.html"><span class="doc">Deploying a smart contract to a channel</span></a> tutorial and the <a class="reference internal" href="chaincode_lifecycle.html"><span class="doc">Fabric chaincode lifecycle</span></a>
+concept topic.</p>
+<p>This tutorial provides an overview of the high level APIs provided by the Fabric Contract API.
+To learn more about developing smart contracts using the Fabric contract API, visit the <a class="reference internal" href="developapps/smartcontract.html"><span class="doc">Smart Contract Processing</span></a> topic.</p>
+</div>
+<div class="section" id="fabric-contract-api">
+<h2>Fabric Contract API<a class="headerlink" href="#fabric-contract-api" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">fabric-contract-api</span></code> provides the contract interface, a high level API for application developers to implement Smart Contracts.
+Within Hyperledger Fabric, Smart Contracts are also known as Chaincode. Working with this API provides a high level entry point to writing business logic.
+Documentation of the Fabric Contract API for different languages can be found at the links below:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="https://godoc.org/github.com/hyperledger/fabric-contract-api-go/contractapi">Go</a></li>
+<li><a class="reference external" href="https://hyperledger.github.io/fabric-chaincode-node/master/api/">Node.js</a></li>
+<li><a class="reference external" href="https://hyperledger.github.io/fabric-chaincode-java/master/api/org/hyperledger/fabric/contract/package-summary.html">Java</a></li>
+</ul>
+</div></blockquote>
+<p>Note that when using the contract api, each chaincode function that is called is passed a transaction context “ctx”, from which
+you can get the chaincode stub (GetStub() ), which has functions to access the ledger (e.g. GetState() ) and make requests
+to update the ledger (e.g. PutState() ). You can learn more at the language-specific links below.</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="https://godoc.org/github.com/hyperledger/fabric-chaincode-go/shim#Chaincode">Go</a></li>
+<li><a class="reference external" href="https://hyperledger.github.io/fabric-chaincode-node/master/api/fabric-shim.ChaincodeInterface.html">Node.js</a></li>
+<li><a class="reference external" href="https://hyperledger.github.io/fabric-chaincode-java/master/api/org/hyperledger/fabric/shim/Chaincode.html">Java</a></li>
+</ul>
+</div></blockquote>
+<p>In this tutorial using Go chaincode, we will demonstrate the use of these APIs
+by implementing a asset-transfer chaincode application that manages simple “assets”.</p>
+</div>
+<div class="section" id="asset-transfer-chaincode">
+<span id="id1"></span><h2>Asset Transfer Chaincode<a class="headerlink" href="#asset-transfer-chaincode" title="Permalink to this headline">¶</a></h2>
+<p>Our application is a basic sample chaincode to initialize a ledger with assets, create, read, update, and delete assets, check to see
+if an asset exists, and transfer assets from one owner to another.</p>
+<div class="section" id="choosing-a-location-for-the-code">
+<h3>Choosing a Location for the Code<a class="headerlink" href="#choosing-a-location-for-the-code" title="Permalink to this headline">¶</a></h3>
+<p>If you haven’t been doing programming in Go, you may want to make sure that
+you have <a class="reference external" href="https://golang.org">Go</a> installed and your system properly configured. We assume
+you are using a version that supports modules.</p>
+<p>Now, you will want to create a directory for your chaincode application.</p>
+<p>To keep things simple, let’s use the following command:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">atcc</span> <span class="ow">is</span> <span class="n">shorthand</span> <span class="k">for</span> <span class="n">asset</span> <span class="n">transfer</span> <span class="n">chaincode</span>
+<span class="n">mkdir</span> <span class="n">atcc</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="n">atcc</span>
+</pre></div>
+</div>
+<p>Now, let’s create the module and the source file that we’ll fill in with code:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">go</span> <span class="n">mod</span> <span class="n">init</span> <span class="n">atcc</span>
+<span class="n">touch</span> <span class="n">atcc</span><span class="o">.</span><span class="n">go</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="housekeeping">
+<h3>Housekeeping<a class="headerlink" href="#housekeeping" title="Permalink to this headline">¶</a></h3>
+<p>First, let’s start with some housekeeping. As with every chaincode, it implements the
+<a class="reference external" href="https://godoc.org/github.com/hyperledger/fabric-contract-api-go/contractapi">fabric-contract-api interface</a>,
+so let’s add the Go import statements for the necessary dependencies for our chaincode. We’ll import the
+fabric contract api package and define our SmartContract.</p>
+<div class="code go highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">package</span> <span class="n">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+  <span class="s2">&quot;fmt&quot;</span>
+  <span class="s2">&quot;log&quot;</span>
+  <span class="s2">&quot;github.com/hyperledger/fabric-contract-api-go/contractapi&quot;</span>
+<span class="p">)</span>
+
+<span class="o">//</span> <span class="n">SmartContract</span> <span class="n">provides</span> <span class="n">functions</span> <span class="k">for</span> <span class="n">managing</span> <span class="n">an</span> <span class="n">Asset</span>
+<span class="nb">type</span> <span class="n">SmartContract</span> <span class="n">struct</span> <span class="p">{</span>
+  <span class="n">contractapi</span><span class="o">.</span><span class="n">Contract</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Next, let’s add a struct <code class="docutils literal notranslate"><span class="pre">Asset</span></code> to represent simple assets on the ledger.
+Note the JSON annotations, which will be used to marshal the asset to JSON which is stored on the ledger.</p>
+<div class="code go highlight-default notranslate"><div class="highlight"><pre><span></span>// Asset describes basic details of what makes up a simple asset
+type Asset struct {
+  ID             string `json:&quot;ID&quot;`
+  Color          string `json:&quot;color&quot;`
+  Size           int    `json:&quot;size&quot;`
+  Owner          string `json:&quot;owner&quot;`
+  AppraisedValue int    `json:&quot;appraisedValue&quot;`
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="initializing-the-chaincode">
+<h3>Initializing the Chaincode<a class="headerlink" href="#initializing-the-chaincode" title="Permalink to this headline">¶</a></h3>
+<p>Next, we’ll implement the <code class="docutils literal notranslate"><span class="pre">InitLedger</span></code> function to populate the ledger with some initial data.</p>
+<div class="code go highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">InitLedger</span> <span class="n">adds</span> <span class="n">a</span> <span class="n">base</span> <span class="nb">set</span> <span class="n">of</span> <span class="n">assets</span> <span class="n">to</span> <span class="n">the</span> <span class="n">ledger</span>
+<span class="n">func</span> <span class="p">(</span><span class="n">s</span> <span class="o">*</span><span class="n">SmartContract</span><span class="p">)</span> <span class="n">InitLedger</span><span class="p">(</span><span class="n">ctx</span> <span class="n">contractapi</span><span class="o">.</span><span class="n">TransactionContextInterface</span><span class="p">)</span> <span class="n">error</span> <span class="p">{</span>
+  <span class="n">assets</span> <span class="p">:</span><span class="o">=</span> <span class="p">[]</span><span class="n">Asset</span><span class="p">{</span>
+    <span class="p">{</span><span class="n">ID</span><span class="p">:</span> <span class="s2">&quot;asset1&quot;</span><span class="p">,</span> <span class="n">Color</span><span class="p">:</span> <span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">Size</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="n">Owner</span><span class="p">:</span> <span class="s2">&quot;Tomoko&quot;</span><span class="p">,</span> <span class="n">AppraisedValue</span><span class="p">:</span> <span class="mi">300</span><span class="p">},</span>
+    <span class="p">{</span><span class="n">ID</span><span class="p">:</span> <span class="s2">&quot;asset2&quot;</span><span class="p">,</span> <span class="n">Color</span><span class="p">:</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">Size</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="n">Owner</span><span class="p">:</span> <span class="s2">&quot;Brad&quot;</span><span class="p">,</span> <span class="n">AppraisedValue</span><span class="p">:</span> <span class="mi">400</span><span class="p">},</span>
+    <span class="p">{</span><span class="n">ID</span><span class="p">:</span> <span class="s2">&quot;asset3&quot;</span><span class="p">,</span> <span class="n">Color</span><span class="p">:</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">Size</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="n">Owner</span><span class="p">:</span> <span class="s2">&quot;Jin Soo&quot;</span><span class="p">,</span> <span class="n">AppraisedValue</span><span class="p">:</span> <span class="mi">500</span><span class="p">},</span>
+    <span class="p">{</span><span class="n">ID</span><span class="p">:</span> <span class="s2">&quot;asset4&quot;</span><span class="p">,</span> <span class="n">Color</span><span class="p">:</span> <span class="s2">&quot;yellow&quot;</span><span class="p">,</span> <span class="n">Size</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="n">Owner</span><span class="p">:</span> <span class="s2">&quot;Max&quot;</span><span class="p">,</span> <span class="n">AppraisedValue</span><span class="p">:</span> <span class="mi">600</span><span class="p">},</span>
+    <span class="p">{</span><span class="n">ID</span><span class="p">:</span> <span class="s2">&quot;asset5&quot;</span><span class="p">,</span> <span class="n">Color</span><span class="p">:</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">Size</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="n">Owner</span><span class="p">:</span> <span class="s2">&quot;Adriana&quot;</span><span class="p">,</span> <span class="n">AppraisedValue</span><span class="p">:</span> <span class="mi">700</span><span class="p">},</span>
+    <span class="p">{</span><span class="n">ID</span><span class="p">:</span> <span class="s2">&quot;asset6&quot;</span><span class="p">,</span> <span class="n">Color</span><span class="p">:</span> <span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">Size</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="n">Owner</span><span class="p">:</span> <span class="s2">&quot;Michel&quot;</span><span class="p">,</span> <span class="n">AppraisedValue</span><span class="p">:</span> <span class="mi">800</span><span class="p">},</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">asset</span> <span class="p">:</span><span class="o">=</span> <span class="nb">range</span> <span class="n">assets</span> <span class="p">{</span>
+    <span class="n">assetJSON</span><span class="p">,</span> <span class="n">err</span> <span class="p">:</span><span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">Marshal</span><span class="p">(</span><span class="n">asset</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="n">nil</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">err</span>
+    <span class="p">}</span>
+
+    <span class="n">err</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">GetStub</span><span class="p">()</span><span class="o">.</span><span class="n">PutState</span><span class="p">(</span><span class="n">asset</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span> <span class="n">assetJSON</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="n">nil</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">fmt</span><span class="o">.</span><span class="n">Errorf</span><span class="p">(</span><span class="s2">&quot;failed to put to world state. %v&quot;</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="n">nil</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Next, we write a function to create an asset on the ledger that does not yet exist. When writing chaincode, it
+is a good idea to check for the existence of something on the ledger prior to taking an action on it, as is demonstrated
+in the <code class="docutils literal notranslate"><span class="pre">CreateAsset</span></code> function below.</p>
+<div class="code go highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">CreateAsset</span> <span class="n">issues</span> <span class="n">a</span> <span class="n">new</span> <span class="n">asset</span> <span class="n">to</span> <span class="n">the</span> <span class="n">world</span> <span class="n">state</span> <span class="k">with</span> <span class="n">given</span> <span class="n">details</span><span class="o">.</span>
+<span class="n">func</span> <span class="p">(</span><span class="n">s</span> <span class="o">*</span><span class="n">SmartContract</span><span class="p">)</span> <span class="n">CreateAsset</span><span class="p">(</span><span class="n">ctx</span> <span class="n">contractapi</span><span class="o">.</span><span class="n">TransactionContextInterface</span><span class="p">,</span> <span class="nb">id</span> <span class="n">string</span><span class="p">,</span> <span class="n">color</span> <span class="n">string</span><span class="p">,</span> <span class="n">size</span> <span class="nb">int</span><span class="p">,</span> <span class="n">owner</span> <span class="n">string</span><span class="p">,</span> <span class="n">appraisedValue</span> <span class="nb">int</span><span class="p">)</span> <span class="n">error</span> <span class="p">{</span>
+  <span class="n">exists</span><span class="p">,</span> <span class="n">err</span> <span class="p">:</span><span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">AssetExists</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="n">nil</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">err</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="n">exists</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">fmt</span><span class="o">.</span><span class="n">Errorf</span><span class="p">(</span><span class="s2">&quot;the asset </span><span class="si">%s</span><span class="s2"> already exists&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="n">asset</span> <span class="p">:</span><span class="o">=</span> <span class="n">Asset</span><span class="p">{</span>
+    <span class="n">ID</span><span class="p">:</span>             <span class="nb">id</span><span class="p">,</span>
+    <span class="n">Color</span><span class="p">:</span>          <span class="n">color</span><span class="p">,</span>
+    <span class="n">Size</span><span class="p">:</span>           <span class="n">size</span><span class="p">,</span>
+    <span class="n">Owner</span><span class="p">:</span>          <span class="n">owner</span><span class="p">,</span>
+    <span class="n">AppraisedValue</span><span class="p">:</span> <span class="n">appraisedValue</span><span class="p">,</span>
+  <span class="p">}</span>
+  <span class="n">assetJSON</span><span class="p">,</span> <span class="n">err</span> <span class="p">:</span><span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">Marshal</span><span class="p">(</span><span class="n">asset</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="n">nil</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">err</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="n">ctx</span><span class="o">.</span><span class="n">GetStub</span><span class="p">()</span><span class="o">.</span><span class="n">PutState</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">assetJSON</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now that we have populated the ledger with some initial assets and created an asset,
+let’s write a function <code class="docutils literal notranslate"><span class="pre">ReadAsset</span></code> that allows us to read an asset from the ledger.</p>
+<div class="code go highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">ReadAsset</span> <span class="n">returns</span> <span class="n">the</span> <span class="n">asset</span> <span class="n">stored</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">world</span> <span class="n">state</span> <span class="k">with</span> <span class="n">given</span> <span class="nb">id</span><span class="o">.</span>
+<span class="n">func</span> <span class="p">(</span><span class="n">s</span> <span class="o">*</span><span class="n">SmartContract</span><span class="p">)</span> <span class="n">ReadAsset</span><span class="p">(</span><span class="n">ctx</span> <span class="n">contractapi</span><span class="o">.</span><span class="n">TransactionContextInterface</span><span class="p">,</span> <span class="nb">id</span> <span class="n">string</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="n">Asset</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">assetJSON</span><span class="p">,</span> <span class="n">err</span> <span class="p">:</span><span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">GetStub</span><span class="p">()</span><span class="o">.</span><span class="n">GetState</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="n">nil</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">nil</span><span class="p">,</span> <span class="n">fmt</span><span class="o">.</span><span class="n">Errorf</span><span class="p">(</span><span class="s2">&quot;failed to read from world state: %v&quot;</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="n">assetJSON</span> <span class="o">==</span> <span class="n">nil</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">nil</span><span class="p">,</span> <span class="n">fmt</span><span class="o">.</span><span class="n">Errorf</span><span class="p">(</span><span class="s2">&quot;the asset </span><span class="si">%s</span><span class="s2"> does not exist&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="n">var</span> <span class="n">asset</span> <span class="n">Asset</span>
+  <span class="n">err</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">Unmarshal</span><span class="p">(</span><span class="n">assetJSON</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">asset</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="n">nil</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">nil</span><span class="p">,</span> <span class="n">err</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="o">&amp;</span><span class="n">asset</span><span class="p">,</span> <span class="n">nil</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now that we have assets on our ledger we can interact with, let’s write a chaincode function
+<code class="docutils literal notranslate"><span class="pre">UpdateAsset</span></code> that allows us to update attributes of the asset that we are allowed to change.</p>
+<div class="code go highlight-default notranslate"><div class="highlight"><pre><span></span>// UpdateAsset updates an existing asset in the world state with provided parameters.
+func (s *SmartContract) UpdateAsset(ctx contractapi.TransactionContextInterface, id string, color string, size int, owner string, appraisedValue int) error {
+  exists, err := s.AssetExists(ctx, id)
+  if err != nil {
+    return err
+  }
+  if !exists {
+    return fmt.Errorf(&quot;the asset %s does not exist&quot;, id)
+  }
+
+  // overwriting original asset with new asset
+  asset := Asset{
+    ID:             id,
+    Color:          color,
+    Size:           size,
+    Owner:          owner,
+    AppraisedValue: appraisedValue,
+  }
+  assetJSON, err := json.Marshal(asset)
+  if err != nil {
+    return err
+  }
+
+  return ctx.GetStub().PutState(id, assetJSON)
+}
+</pre></div>
+</div>
+<p>There may be cases where we need the ability to delete an asset from the ledger,
+so let’s write a <code class="docutils literal notranslate"><span class="pre">DeleteAsset</span></code> function to handle that requirement.</p>
+<div class="code go highlight-default notranslate"><div class="highlight"><pre><span></span>// DeleteAsset deletes an given asset from the world state.
+func (s *SmartContract) DeleteAsset(ctx contractapi.TransactionContextInterface, id string) error {
+  exists, err := s.AssetExists(ctx, id)
+  if err != nil {
+    return err
+  }
+  if !exists {
+    return fmt.Errorf(&quot;the asset %s does not exist&quot;, id)
+  }
+
+  return ctx.GetStub().DelState(id)
+}
+</pre></div>
+</div>
+<p>We said earlier that is was a good idea to check to see if an asset exists before
+taking an action on it, so let’s write a function called <code class="docutils literal notranslate"><span class="pre">AssetExists</span></code> to implement that requirement.</p>
+<div class="code go highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">AssetExists</span> <span class="n">returns</span> <span class="n">true</span> <span class="n">when</span> <span class="n">asset</span> <span class="k">with</span> <span class="n">given</span> <span class="n">ID</span> <span class="n">exists</span> <span class="ow">in</span> <span class="n">world</span> <span class="n">state</span>
+<span class="n">func</span> <span class="p">(</span><span class="n">s</span> <span class="o">*</span><span class="n">SmartContract</span><span class="p">)</span> <span class="n">AssetExists</span><span class="p">(</span><span class="n">ctx</span> <span class="n">contractapi</span><span class="o">.</span><span class="n">TransactionContextInterface</span><span class="p">,</span> <span class="nb">id</span> <span class="n">string</span><span class="p">)</span> <span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">assetJSON</span><span class="p">,</span> <span class="n">err</span> <span class="p">:</span><span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">GetStub</span><span class="p">()</span><span class="o">.</span><span class="n">GetState</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="n">nil</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">false</span><span class="p">,</span> <span class="n">fmt</span><span class="o">.</span><span class="n">Errorf</span><span class="p">(</span><span class="s2">&quot;failed to read from world state: %v&quot;</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="n">assetJSON</span> <span class="o">!=</span> <span class="n">nil</span><span class="p">,</span> <span class="n">nil</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Next, we’ll write a function we’ll call <code class="docutils literal notranslate"><span class="pre">TransferAsset</span></code> that enables the transfer of an asset from one owner to another.</p>
+<div class="code go highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">TransferAsset</span> <span class="n">updates</span> <span class="n">the</span> <span class="n">owner</span> <span class="n">field</span> <span class="n">of</span> <span class="n">asset</span> <span class="k">with</span> <span class="n">given</span> <span class="nb">id</span> <span class="ow">in</span> <span class="n">world</span> <span class="n">state</span><span class="o">.</span>
+<span class="n">func</span> <span class="p">(</span><span class="n">s</span> <span class="o">*</span><span class="n">SmartContract</span><span class="p">)</span> <span class="n">TransferAsset</span><span class="p">(</span><span class="n">ctx</span> <span class="n">contractapi</span><span class="o">.</span><span class="n">TransactionContextInterface</span><span class="p">,</span> <span class="nb">id</span> <span class="n">string</span><span class="p">,</span> <span class="n">newOwner</span> <span class="n">string</span><span class="p">)</span> <span class="n">error</span> <span class="p">{</span>
+  <span class="n">asset</span><span class="p">,</span> <span class="n">err</span> <span class="p">:</span><span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">ReadAsset</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="n">nil</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">err</span>
+  <span class="p">}</span>
+
+  <span class="n">asset</span><span class="o">.</span><span class="n">Owner</span> <span class="o">=</span> <span class="n">newOwner</span>
+  <span class="n">assetJSON</span><span class="p">,</span> <span class="n">err</span> <span class="p">:</span><span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">Marshal</span><span class="p">(</span><span class="n">asset</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="n">nil</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">err</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="n">ctx</span><span class="o">.</span><span class="n">GetStub</span><span class="p">()</span><span class="o">.</span><span class="n">PutState</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">assetJSON</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Let’s write a function we’ll call <code class="docutils literal notranslate"><span class="pre">GetAllAssets</span></code> that enables the querying of the ledger to
+return all of the assets on the ledger.</p>
+<div class="code go highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">GetAllAssets</span> <span class="n">returns</span> <span class="nb">all</span> <span class="n">assets</span> <span class="n">found</span> <span class="ow">in</span> <span class="n">world</span> <span class="n">state</span>
+<span class="n">func</span> <span class="p">(</span><span class="n">s</span> <span class="o">*</span><span class="n">SmartContract</span><span class="p">)</span> <span class="n">GetAllAssets</span><span class="p">(</span><span class="n">ctx</span> <span class="n">contractapi</span><span class="o">.</span><span class="n">TransactionContextInterface</span><span class="p">)</span> <span class="p">([]</span><span class="o">*</span><span class="n">Asset</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+  <span class="o">//</span> <span class="nb">range</span> <span class="n">query</span> <span class="k">with</span> <span class="n">empty</span> <span class="n">string</span> <span class="k">for</span> <span class="n">startKey</span> <span class="ow">and</span> <span class="n">endKey</span> <span class="n">does</span> <span class="n">an</span>
+  <span class="o">//</span> <span class="nb">open</span><span class="o">-</span><span class="n">ended</span> <span class="n">query</span> <span class="n">of</span> <span class="nb">all</span> <span class="n">assets</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">chaincode</span> <span class="n">namespace</span><span class="o">.</span>
+  <span class="n">resultsIterator</span><span class="p">,</span> <span class="n">err</span> <span class="p">:</span><span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">GetStub</span><span class="p">()</span><span class="o">.</span><span class="n">GetStateByRange</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="n">nil</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">nil</span><span class="p">,</span> <span class="n">err</span>
+  <span class="p">}</span>
+  <span class="n">defer</span> <span class="n">resultsIterator</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span>
+
+  <span class="n">var</span> <span class="n">assets</span> <span class="p">[]</span><span class="o">*</span><span class="n">Asset</span>
+  <span class="k">for</span> <span class="n">resultsIterator</span><span class="o">.</span><span class="n">HasNext</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">queryResponse</span><span class="p">,</span> <span class="n">err</span> <span class="p">:</span><span class="o">=</span> <span class="n">resultsIterator</span><span class="o">.</span><span class="n">Next</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="n">nil</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">nil</span><span class="p">,</span> <span class="n">err</span>
+    <span class="p">}</span>
+
+    <span class="n">var</span> <span class="n">asset</span> <span class="n">Asset</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">Unmarshal</span><span class="p">(</span><span class="n">queryResponse</span><span class="o">.</span><span class="n">Value</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">asset</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="n">nil</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">nil</span><span class="p">,</span> <span class="n">err</span>
+    <span class="p">}</span>
+    <span class="n">assets</span> <span class="o">=</span> <span class="n">append</span><span class="p">(</span><span class="n">assets</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">asset</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="n">assets</span><span class="p">,</span> <span class="n">nil</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note" id="chaincode-sample">
+<p class="first admonition-title">Note</p>
+<p class="last">The full chaincode sample below is presented as a way to
+to keep this tutorial as clear and straightforward as possible. In a
+real-world implementation, it is likely that packages will be segmented
+where a <code class="docutils literal notranslate"><span class="pre">main</span></code> package imports the chaincode package to allow for easy unit testing.
+To see what this looks like, see the asset-transfer <a class="reference external" href="https://github.com/hyperledger/fabric-samples/tree/master/asset-transfer-basic/chaincode-go">Go chaincode</a>
+in fabric-samples. If you look at <code class="docutils literal notranslate"><span class="pre">assetTransfer.go</span></code>, you will see that
+it contains <code class="docutils literal notranslate"><span class="pre">package</span> <span class="pre">main</span></code> and imports <code class="docutils literal notranslate"><span class="pre">package</span> <span class="pre">chaincode</span></code> defined in <code class="docutils literal notranslate"><span class="pre">smartcontract.go</span></code> and
+located at <code class="docutils literal notranslate"><span class="pre">fabric-samples/asset-transfer-basic/chaincode-go/chaincode/</span></code>.</p>
+</div>
+</div>
+<div class="section" id="pulling-it-all-together">
+<h3>Pulling it All Together<a class="headerlink" href="#pulling-it-all-together" title="Permalink to this headline">¶</a></h3>
+<p>Finally, we need to add the <code class="docutils literal notranslate"><span class="pre">main</span></code> function, which will call the
+<a class="reference external" href="https://godoc.org/github.com/hyperledger/fabric-contract-api-go/contractapi#ContractChaincode.Start">ContractChaincode.Start</a>
+function. Here’s the whole chaincode program source.</p>
+<div class="code go highlight-default notranslate"><div class="highlight"><pre><span></span>package main
+
+import (
+  &quot;encoding/json&quot;
+  &quot;fmt&quot;
+  &quot;log&quot;
+
+  &quot;github.com/hyperledger/fabric-contract-api-go/contractapi&quot;
+)
+
+// SmartContract provides functions for managing an Asset
+type SmartContract struct {
+  contractapi.Contract
+}
+
+// Asset describes basic details of what makes up a simple asset
+type Asset struct {
+  ID             string `json:&quot;ID&quot;`
+  Color          string `json:&quot;color&quot;`
+  Size           int    `json:&quot;size&quot;`
+  Owner          string `json:&quot;owner&quot;`
+  AppraisedValue int    `json:&quot;appraisedValue&quot;`
+}
+
+// InitLedger adds a base set of assets to the ledger
+func (s *SmartContract) InitLedger(ctx contractapi.TransactionContextInterface) error {
+  assets := []Asset{
+    {ID: &quot;asset1&quot;, Color: &quot;blue&quot;, Size: 5, Owner: &quot;Tomoko&quot;, AppraisedValue: 300},
+    {ID: &quot;asset2&quot;, Color: &quot;red&quot;, Size: 5, Owner: &quot;Brad&quot;, AppraisedValue: 400},
+    {ID: &quot;asset3&quot;, Color: &quot;green&quot;, Size: 10, Owner: &quot;Jin Soo&quot;, AppraisedValue: 500},
+    {ID: &quot;asset4&quot;, Color: &quot;yellow&quot;, Size: 10, Owner: &quot;Max&quot;, AppraisedValue: 600},
+    {ID: &quot;asset5&quot;, Color: &quot;black&quot;, Size: 15, Owner: &quot;Adriana&quot;, AppraisedValue: 700},
+    {ID: &quot;asset6&quot;, Color: &quot;white&quot;, Size: 15, Owner: &quot;Michel&quot;, AppraisedValue: 800},
+  }
+
+  for _, asset := range assets {
+    assetJSON, err := json.Marshal(asset)
+    if err != nil {
+      return err
+    }
+
+    err = ctx.GetStub().PutState(asset.ID, assetJSON)
+    if err != nil {
+      return fmt.Errorf(&quot;failed to put to world state. %v&quot;, err)
+    }
+  }
+
+  return nil
+}
+
+// CreateAsset issues a new asset to the world state with given details.
+func (s *SmartContract) CreateAsset(ctx contractapi.TransactionContextInterface, id string, color string, size int, owner string, appraisedValue int) error {
+  exists, err := s.AssetExists(ctx, id)
+  if err != nil {
+    return err
+  }
+  if exists {
+    return fmt.Errorf(&quot;the asset %s already exists&quot;, id)
+  }
+
+  asset := Asset{
+    ID:             id,
+    Color:          color,
+    Size:           size,
+    Owner:          owner,
+    AppraisedValue: appraisedValue,
+  }
+  assetJSON, err := json.Marshal(asset)
+  if err != nil {
+    return err
+  }
+
+  return ctx.GetStub().PutState(id, assetJSON)
+}
+
+// ReadAsset returns the asset stored in the world state with given id.
+func (s *SmartContract) ReadAsset(ctx contractapi.TransactionContextInterface, id string) (*Asset, error) {
+  assetJSON, err := ctx.GetStub().GetState(id)
+  if err != nil {
+    return nil, fmt.Errorf(&quot;failed to read from world state: %v&quot;, err)
+  }
+  if assetJSON == nil {
+    return nil, fmt.Errorf(&quot;the asset %s does not exist&quot;, id)
+  }
+
+  var asset Asset
+  err = json.Unmarshal(assetJSON, &amp;asset)
+  if err != nil {
+    return nil, err
+  }
+
+  return &amp;asset, nil
+}
+
+// UpdateAsset updates an existing asset in the world state with provided parameters.
+func (s *SmartContract) UpdateAsset(ctx contractapi.TransactionContextInterface, id string, color string, size int, owner string, appraisedValue int) error {
+  exists, err := s.AssetExists(ctx, id)
+  if err != nil {
+    return err
+  }
+  if !exists {
+    return fmt.Errorf(&quot;the asset %s does not exist&quot;, id)
+  }
+
+  // overwriting original asset with new asset
+  asset := Asset{
+    ID:             id,
+    Color:          color,
+    Size:           size,
+    Owner:          owner,
+    AppraisedValue: appraisedValue,
+  }
+  assetJSON, err := json.Marshal(asset)
+  if err != nil {
+    return err
+  }
+
+  return ctx.GetStub().PutState(id, assetJSON)
+}
+
+// DeleteAsset deletes an given asset from the world state.
+func (s *SmartContract) DeleteAsset(ctx contractapi.TransactionContextInterface, id string) error {
+  exists, err := s.AssetExists(ctx, id)
+  if err != nil {
+    return err
+  }
+  if !exists {
+    return fmt.Errorf(&quot;the asset %s does not exist&quot;, id)
+  }
+
+  return ctx.GetStub().DelState(id)
+}
+
+// AssetExists returns true when asset with given ID exists in world state
+func (s *SmartContract) AssetExists(ctx contractapi.TransactionContextInterface, id string) (bool, error) {
+  assetJSON, err := ctx.GetStub().GetState(id)
+  if err != nil {
+    return false, fmt.Errorf(&quot;failed to read from world state: %v&quot;, err)
+  }
+
+  return assetJSON != nil, nil
+}
+
+// TransferAsset updates the owner field of asset with given id in world state.
+func (s *SmartContract) TransferAsset(ctx contractapi.TransactionContextInterface, id string, newOwner string) error {
+  asset, err := s.ReadAsset(ctx, id)
+  if err != nil {
+    return err
+  }
+
+  asset.Owner = newOwner
+  assetJSON, err := json.Marshal(asset)
+  if err != nil {
+    return err
+  }
+
+  return ctx.GetStub().PutState(id, assetJSON)
+}
+
+// GetAllAssets returns all assets found in world state
+func (s *SmartContract) GetAllAssets(ctx contractapi.TransactionContextInterface) ([]*Asset, error) {
+  // range query with empty string for startKey and endKey does an
+  // open-ended query of all assets in the chaincode namespace.
+  resultsIterator, err := ctx.GetStub().GetStateByRange(&quot;&quot;, &quot;&quot;)
+  if err != nil {
+    return nil, err
+  }
+  defer resultsIterator.Close()
+
+  var assets []*Asset
+  for resultsIterator.HasNext() {
+    queryResponse, err := resultsIterator.Next()
+    if err != nil {
+      return nil, err
+    }
+
+    var asset Asset
+    err = json.Unmarshal(queryResponse.Value, &amp;asset)
+    if err != nil {
+      return nil, err
+    }
+    assets = append(assets, &amp;asset)
+  }
+
+  return assets, nil
+}
+
+func main() {
+  assetChaincode, err := contractapi.NewChaincode(&amp;SmartContract{})
+  if err != nil {
+    log.Panicf(&quot;Error creating asset-transfer-basic chaincode: %v&quot;, err)
+  }
+
+  if err := assetChaincode.Start(); err != nil {
+    log.Panicf(&quot;Error starting asset-transfer-basic chaincode: %v&quot;, err)
+  }
+}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="chaincode-access-control">
+<h2>Chaincode access control<a class="headerlink" href="#chaincode-access-control" title="Permalink to this headline">¶</a></h2>
+<p>Chaincode can utilize the client (submitter) certificate for access
+control decisions with <code class="docutils literal notranslate"><span class="pre">ctx.GetStub().GetCreator()</span></code>. Additionally
+the Fabric Contract API provides extension APIs that extract client identity
+from the submitter’s certificate that can be used for access control decisions,
+whether that is based on client identity itself, or the org identity,
+or on a client identity attribute.</p>
+<p>For example an asset that is represented as a key/value may include the
+client’s identity as part of the value (for example as a JSON attribute
+indicating that asset owner), and only this client may be authorized
+to make updates to the key/value in the future. The client identity
+library extension APIs can be used within chaincode to retrieve this
+submitter information to make such access control decisions.</p>
+</div>
+<div class="section" id="managing-external-dependencies-for-chaincode-written-in-go">
+<span id="vendoring"></span><h2>Managing external dependencies for chaincode written in Go<a class="headerlink" href="#managing-external-dependencies-for-chaincode-written-in-go" title="Permalink to this headline">¶</a></h2>
+<p>Your Go chaincode depends on Go packages (like the chaincode shim) that are not
+part of the standard library. The source to these packages must be included in
+your chaincode package when it is installed to a peer. If you have structured
+your chaincode as a module, the easiest way to do this is to “vendor” the
+dependencies with <code class="docutils literal notranslate"><span class="pre">go</span> <span class="pre">mod</span> <span class="pre">vendor</span></code> before packaging your chaincode.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">go</span> <span class="n">mod</span> <span class="n">tidy</span>
+<span class="n">go</span> <span class="n">mod</span> <span class="n">vendor</span>
+</pre></div>
+</div>
+<p>This places the external dependencies for your chaincode into a local <code class="docutils literal notranslate"><span class="pre">vendor</span></code>
+directory.</p>
+<p>Once dependencies are vendored in your chaincode directory, <code class="docutils literal notranslate"><span class="pre">peer</span> <span class="pre">chaincode</span> <span class="pre">package</span></code>
+and <code class="docutils literal notranslate"><span class="pre">peer</span> <span class="pre">chaincode</span> <span class="pre">install</span></code> operations will then include code associated with the
+dependencies into the chaincode package.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="peer-chaincode-devmode.html" class="btn btn-neutral float-right" title="Running chaincode in development mode" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="config_update.html" class="btn btn-neutral" title="Updating a channel configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright Hyperledger 2020.
+    <br>
+      <br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>
+      <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+        <img alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'master',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

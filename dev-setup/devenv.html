@@ -1,0 +1,435 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Setting up the development environment &mdash; hyperledger-fabricdocs master documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="hyperledger-fabricdocs master documentation" href="../index.html"/>
+        <link rel="up" title="Contributions Welcome!" href="../CONTRIBUTING.html"/>
+        <link rel="next" title="Building Hyperledger Fabric" href="build.html"/>
+        <link rel="prev" title="Style guide for contributors" href="../style_guide.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+
+          
+            <a href="../index.html" class="icon icon-home"> hyperledger-fabricdocs
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                master
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+
+<br><img style="background-color: #fff; height: unset; width: unset;" alt="Hyperledger Fabric" src=../_images/hyperledger_fabric_logo_color.png />
+<br>
+<a href="https://github.com/hyperledger/fabric"><img style="padding: 0px; margin: auto auto auto auto;" alt="GitHub" src="../_static/images/github_button.png"/></a>
+&nbsp;<a href="https://stackoverflow.com/questions/tagged/hyperledger-fabric"><img style="padding: 0px; margin: auto auto auto auto;" alt="StackOverflow" src="../_static/images/stackoverflow_button.png"/></a>
+&nbsp;<a href="https://chat.hyperledger.org"><img style="padding: 0px; margin: auto auto auto auto;" alt="Rocket Chat" src="../_static/images/rocketchat_button.png"/></a>
+&nbsp;<a href="https://www.youtube.com/playlist?list=PL0MZ85B_96CH7wvtrRzV7SvtRY0sI0DEg"><img style="padding: 0px; margin: auto auto auto auto;" alt="Youtube Channel" src="../_static/images/youtube_button.png"/></a>
+
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../whatis.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html">What’s new in Hyperledger Fabric v2.x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html#release-notes">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../key_concepts.html">Key Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started - Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started_run_fabric.html">Getting Started - Run Fabric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developapps/developing_applications.html">Developing Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment_guide_overview.html">Deploying a production network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ops_guide.html">Operations Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../upgrade.html">Upgrading to the latest release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command_ref.html">Commands Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Architecture Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Fabric-FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../CONTRIBUTING.html">Contributions Welcome!</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../CONTRIBUTING.html#ways-to-contribute">Ways to contribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CONTRIBUTING.html#getting-a-linux-foundation-account">Getting a Linux Foundation account</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CONTRIBUTING.html#contributing-documentation">Contributing documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CONTRIBUTING.html#project-governance">Project Governance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CONTRIBUTING.html#contribution-guide">Contribution guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CONTRIBUTING.html#legal-stuff">Legal stuff</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../CONTRIBUTING.html#related-topics">Related Topics</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Setting up the development environment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#steps">Steps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#developing-on-windows">Developing on Windows</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="build.html">Building Hyperledger Fabric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build.html#configuration">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../style-guides/go-style.html">Coding guidelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../style-guides/go-style.html#adding-or-updating-go-packages">Adding or updating Go packages</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releases.html">Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../questions.html">Still Have Questions?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../status.html">Status</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">hyperledger-fabricdocs</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../CONTRIBUTING.html">Contributions Welcome!</a> &raquo;</li>
+        
+      <li>Setting up the development environment</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/dev-setup/devenv.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="setting-up-the-development-environment">
+<h1>Setting up the development environment<a class="headerlink" href="#setting-up-the-development-environment" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://git-scm.com/downloads">Git client</a></li>
+<li><a class="reference external" href="https://golang.org/dl/">Go</a> version 1.15.x</li>
+<li><a class="reference external" href="https://docs.docker.com/get-docker/">Docker</a> version 18.03 or later</li>
+<li>(macOS) <a class="reference external" href="https://developer.apple.com/downloads/">Xcode Command Line Tools</a></li>
+<li><a class="reference external" href="https://github.com/opendnssec/SoftHSMv2">SoftHSM</a></li>
+<li><a class="reference external" href="https://stedolan.github.io/jq/download/">jq</a></li>
+</ul>
+</div>
+<div class="section" id="steps">
+<h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="install-the-prerequisites">
+<h3>Install the Prerequisites<a class="headerlink" href="#install-the-prerequisites" title="Permalink to this headline">¶</a></h3>
+<p>For macOS, we recommend using <a class="reference external" href="https://brew.sh">Homebrew</a> to manage the
+development prereqs. The Xcode command line tools will be installed as part of
+the Homebrew installation.</p>
+<p>Once Homebrew is ready, installing the necessary prerequisites is very easy:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">git</span> <span class="n">go</span> <span class="n">jq</span> <span class="n">softhsm</span>
+<span class="n">brew</span> <span class="n">cask</span> <span class="n">install</span> <span class="o">--</span><span class="n">appdir</span><span class="o">=</span><span class="s2">&quot;/Applications&quot;</span> <span class="n">docker</span>
+</pre></div>
+</div>
+<p>Docker Desktop must be launched to complete the installation so be sure to open
+the application after installing it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">open</span> <span class="o">/</span><span class="n">Applications</span><span class="o">/</span><span class="n">Docker</span><span class="o">.</span><span class="n">app</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="developing-on-windows">
+<h2>Developing on Windows<a class="headerlink" href="#developing-on-windows" title="Permalink to this headline">¶</a></h2>
+<p>On Windows 10 you should use the native Docker distribution and you
+may use the Windows PowerShell. However, for the <code class="docutils literal notranslate"><span class="pre">binaries</span></code>
+command to succeed you will still need to have the <code class="docutils literal notranslate"><span class="pre">uname</span></code> command
+available. You can get it as part of Git but beware that only the
+64bit version is supported.</p>
+<p>Before running any <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> commands, run the following commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">core</span><span class="o">.</span><span class="n">autocrlf</span> <span class="n">false</span>
+<span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">core</span><span class="o">.</span><span class="n">longpaths</span> <span class="n">true</span>
+</pre></div>
+</div>
+<p>You can check the setting of these parameters with the following commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="n">get</span> <span class="n">core</span><span class="o">.</span><span class="n">autocrlf</span>
+<span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="n">get</span> <span class="n">core</span><span class="o">.</span><span class="n">longpaths</span>
+</pre></div>
+</div>
+<p>These need to be <code class="docutils literal notranslate"><span class="pre">false</span></code> and <code class="docutils literal notranslate"><span class="pre">true</span></code> respectively.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">curl</span></code> command that comes with Git and Docker Toolbox is old and
+does not handle properly the redirect used in
+<a class="reference internal" href="../getting_started.html"><span class="doc">Getting Started - Install</span></a>. Make sure you have and use a newer version
+which can be downloaded from the <a class="reference external" href="https://curl.haxx.se/download.html">cURL downloads page</a></p>
+<div class="section" id="clone-the-hyperledger-fabric-source">
+<h3>Clone the Hyperledger Fabric source<a class="headerlink" href="#clone-the-hyperledger-fabric-source" title="Permalink to this headline">¶</a></h3>
+<p>First navigate to <a class="reference external" href="https://github.com/hyperledger/fabric">https://github.com/hyperledger/fabric</a> and fork the fabric
+repository using the fork button in the top-right corner. After forking, clone
+the repository.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/&lt;</span><span class="n">your_github_userid</span><span class="o">&gt;</span>
+<span class="n">cd</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/&lt;</span><span class="n">your_github_userid</span><span class="o">&gt;</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/&lt;</span><span class="n">your_github_userid</span><span class="o">&gt;/</span><span class="n">fabric</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If you are running Windows, before cloning the repository, run the following
+command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="n">get</span> <span class="n">core</span><span class="o">.</span><span class="n">autocrlf</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">core.autocrlf</span></code> is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, you must set it to <code class="docutils literal notranslate"><span class="pre">false</span></code> by
+running:</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">core</span><span class="o">.</span><span class="n">autocrlf</span> <span class="n">false</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="configure-softhsm">
+<h3>Configure SoftHSM<a class="headerlink" href="#configure-softhsm" title="Permalink to this headline">¶</a></h3>
+<p>A PKCS #11 cryptographic token implementation is required to run the unit
+tests. The PKCS #11 API is used by the bccsp component of Fabric to interact
+with hardware security modules (HSMs) that store cryptographic information and
+perform cryptographic computations.  For test environments, SoftHSM can be used
+to satisfy this requirement.</p>
+<p>SoftHSM generally requires additional configuration before it can be used. For
+example, the default configuration will attempt to store token data in a system
+directory that unprivileged users are unable to write to.</p>
+<p>SoftHSM configuration typically involves copying <code class="docutils literal notranslate"><span class="pre">/etc/softhsm/softhsm2.conf</span></code> to
+<code class="docutils literal notranslate"><span class="pre">$HOME/.config/softhsm2/softhsm2.conf</span></code> and changing <code class="docutils literal notranslate"><span class="pre">directories.tokendir</span></code>
+to an appropriate location. Please see the man page for <code class="docutils literal notranslate"><span class="pre">softhsm2.conf</span></code> for
+details.</p>
+<p>After SoftHSM has been configured, the following command can be used to
+initialize the token required by the unit tests:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">softhsm2</span><span class="o">-</span><span class="n">util</span> <span class="o">--</span><span class="n">init</span><span class="o">-</span><span class="n">token</span> <span class="o">--</span><span class="n">slot</span> <span class="mi">0</span> <span class="o">--</span><span class="n">label</span> <span class="n">ForFabric</span> <span class="o">--</span><span class="n">so</span><span class="o">-</span><span class="n">pin</span> <span class="mi">1234</span> <span class="o">--</span><span class="n">pin</span> <span class="mi">98765432</span>
+</pre></div>
+</div>
+<p>If tests are unable to locate the libsofthsm2.so library in your environment,
+specify the library path, the PIN, and the label of your token in the
+appropriate environment variables. For example, on macOS:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">PKCS11_LIB</span><span class="o">=</span><span class="s2">&quot;/usr/local/Cellar/softhsm/2.6.1/lib/softhsm/libsofthsm2.so&quot;</span>
+<span class="n">export</span> <span class="n">PKCS11_PIN</span><span class="o">=</span><span class="mi">98765432</span>
+<span class="n">export</span> <span class="n">PKCS11_LABEL</span><span class="o">=</span><span class="s2">&quot;ForFabric&quot;</span>
+</pre></div>
+</div>
+<p>The tests don’t always clean up after themselves and, over time, this causes
+the PKCS #11 tests to take a long time to run. The easiest way to recover from
+this is to delete and recreate the token.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">softhsm2</span><span class="o">-</span><span class="n">util</span> <span class="o">--</span><span class="n">delete</span><span class="o">-</span><span class="n">token</span> <span class="o">--</span><span class="n">token</span> <span class="n">ForFabric</span>
+<span class="n">softhsm2</span><span class="o">-</span><span class="n">util</span> <span class="o">--</span><span class="n">init</span><span class="o">-</span><span class="n">token</span> <span class="o">--</span><span class="n">slot</span> <span class="mi">0</span> <span class="o">--</span><span class="n">label</span> <span class="n">ForFabric</span> <span class="o">--</span><span class="n">so</span><span class="o">-</span><span class="n">pin</span> <span class="mi">1234</span> <span class="o">--</span><span class="n">pin</span> <span class="mi">98765432</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="debugging-with-pkcs11-spy">
+<h3>Debugging with <code class="docutils literal notranslate"><span class="pre">pkcs11-spy</span></code><a class="headerlink" href="#debugging-with-pkcs11-spy" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference external" href="https://github.com/OpenSC/OpenSC">OpenSC Project</a> provides a shared
+library called <code class="docutils literal notranslate"><span class="pre">pkcs11-spy</span></code> that logs all interactions between an application
+and a PKCS #11 module. This library can be very useful when troubleshooting
+interactions with a cryptographic token device or service.</p>
+<p>Once the library has been installed, configure Fabric to use <code class="docutils literal notranslate"><span class="pre">pkcs11-spy</span></code> as
+the PKCS #11 library and set the <code class="docutils literal notranslate"><span class="pre">PKCS11SPY</span></code> environment variable to the real
+library. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">PKCS11_LIB</span><span class="o">=</span><span class="s2">&quot;/usr/lib/softhsm/libsofthsm2.so&quot;</span>
+<span class="n">export</span> <span class="n">PKCS11SPY</span><span class="o">=</span><span class="s2">&quot;/usr/lib/x86_64-linux-gnu/pkcs11/pkcs11-spy.so&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-the-development-tools">
+<h3>Install the development tools<a class="headerlink" href="#install-the-development-tools" title="Permalink to this headline">¶</a></h3>
+<p>Once the repository is cloned, you can use <code class="docutils literal notranslate"><span class="pre">make</span></code> to install some of the
+tools used in the development environment. By default, these tools will be
+installed into <code class="docutils literal notranslate"><span class="pre">$HOME/go/bin</span></code>. Please be sure your <code class="docutils literal notranslate"><span class="pre">PATH</span></code> includes that
+directory.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">gotools</span>
+</pre></div>
+</div>
+<p>After installing the tools, the build environment can be verified by running a
+few commands.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">basic</span><span class="o">-</span><span class="n">checks</span> <span class="n">integration</span><span class="o">-</span><span class="n">test</span><span class="o">-</span><span class="n">prereqs</span>
+<span class="n">ginkgo</span> <span class="o">-</span><span class="n">r</span> <span class="o">./</span><span class="n">integration</span><span class="o">/</span><span class="n">nwo</span>
+</pre></div>
+</div>
+<p>If those commands completely successfully, you’re ready to Go!</p>
+<p>If you plan to use the Hyperledger Fabric application SDKs then be sure to check out their prerequisites in the Node.js SDK <a class="reference external" href="https://github.com/hyperledger/fabric-sdk-node#build-and-test">README</a>, Java SDK <a class="reference external" href="https://github.com/hyperledger/fabric-gateway-java/blob/master/README.md">README</a>, and Go SDK <a class="reference external" href="https://github.com/hyperledger/fabric-sdk-go/blob/main/README.md">README</a>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="build.html" class="btn btn-neutral float-right" title="Building Hyperledger Fabric" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../style_guide.html" class="btn btn-neutral" title="Style guide for contributors" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright Hyperledger 2020.
+    <br>
+      <br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>
+      <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+        <img alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'master',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

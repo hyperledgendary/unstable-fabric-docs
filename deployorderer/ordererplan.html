@@ -1,0 +1,332 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Planning for an ordering service &mdash; hyperledger-fabricdocs master documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="hyperledger-fabricdocs master documentation" href="../index.html"/>
+        <link rel="up" title="Deploying a production network" href="../deployment_guide_overview.html"/>
+        <link rel="next" title="Checklist for a production ordering node" href="ordererchecklist.html"/>
+        <link rel="prev" title="Deploy the peer" href="../deploypeer/peerdeploy.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+
+          
+            <a href="../index.html" class="icon icon-home"> hyperledger-fabricdocs
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                master
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+
+<br><img style="background-color: #fff; height: unset; width: unset;" alt="Hyperledger Fabric" src=../_images/hyperledger_fabric_logo_color.png />
+<br>
+<a href="https://github.com/hyperledger/fabric"><img style="padding: 0px; margin: auto auto auto auto;" alt="GitHub" src="../_static/images/github_button.png"/></a>
+&nbsp;<a href="https://stackoverflow.com/questions/tagged/hyperledger-fabric"><img style="padding: 0px; margin: auto auto auto auto;" alt="StackOverflow" src="../_static/images/stackoverflow_button.png"/></a>
+&nbsp;<a href="https://chat.hyperledger.org"><img style="padding: 0px; margin: auto auto auto auto;" alt="Rocket Chat" src="../_static/images/rocketchat_button.png"/></a>
+&nbsp;<a href="https://www.youtube.com/playlist?list=PL0MZ85B_96CH7wvtrRzV7SvtRY0sI0DEg"><img style="padding: 0px; margin: auto auto auto auto;" alt="Youtube Channel" src="../_static/images/youtube_button.png"/></a>
+
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../whatis.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html">What’s new in Hyperledger Fabric v2.x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html#release-notes">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../key_concepts.html">Key Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started - Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started_run_fabric.html">Getting Started - Run Fabric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developapps/developing_applications.html">Developing Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../deployment_guide_overview.html">Deploying a production network</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../deployment_guide_overview.html#step-one-decide-on-your-network-configuration">Step one: Decide on your network configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment_guide_overview.html#step-two-set-up-a-cluster-for-your-resources">Step two: Set up a cluster for your resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment_guide_overview.html#step-three-set-up-your-cas">Step three: Set up your CAs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment_guide_overview.html#step-four-use-the-ca-to-create-identities-and-msps">Step four: Use the CA to create identities and MSPs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../deployment_guide_overview.html#step-five-deploy-peers-and-ordering-nodes">Step five: Deploy peers and ordering nodes</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../deployment_guide_overview.html#creating-a-peer">Creating a peer</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../deployment_guide_overview.html#creating-an-ordering-node">Creating an ordering node</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Planning for an ordering service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ordererchecklist.html">Checklist for a production ordering node</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ordererdeploy.html">Deploy the ordering service</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment_guide_overview.html#next-steps">Next steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ops_guide.html">Operations Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../upgrade.html">Upgrading to the latest release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command_ref.html">Commands Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Architecture Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Fabric-FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributions Welcome!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releases.html">Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../questions.html">Still Have Questions?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../status.html">Status</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">hyperledger-fabricdocs</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../deployment_guide_overview.html">Deploying a production network</a> &raquo;</li>
+        
+      <li>Planning for an ordering service</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/deployorderer/ordererplan.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="planning-for-an-ordering-service">
+<span id="planning-for-an-ordering-service"></span><h1>Planning for an ordering service<a class="headerlink" href="#planning-for-an-ordering-service" title="Permalink to this headline">¶</a></h1>
+<p>Audience: Architects, network operators, users setting up a production Fabric network who are familiar with Transport Layer Security (TLS), Public Key Infrastructure (PKI) and Membership Service Providers (MSPs).</p>
+<p>Check out the conceptual topic on <a class="reference external" href="../orderer/ordering_service.html">The Ordering Service</a> for an overview on ordering service concepts, implementations, and the role an ordering service plays in a transaction.</p>
+<p>In a Hyperledger Fabric network, a node or collection of nodes together form what’s called an “ordering service”, which literally orders transactions into blocks, which peers will then validate and commit to their ledgers. This separates Fabric from other distributed blockchains, such as Ethereum and Bitcoin, in which this ordering is done by any and all nodes.</p>
+<p>Whereas Fabric networks that will only be used for testing and development purposes (such as our <a class="reference external" href="../test_network.html">test network</a>) often feature an ordering service made up of only one node (these nodes are typically referred to as “orderers” or “ordering nodes”), production networks require a more robust deployment of at least three nodes. For this reason, our deployment guide will feature instructions on how to create a three-node ordering service. For more guidance on the number of nodes you should deploy, check out <a class="reference external" href="#cluster-considerations">Cluster considerations</a>.</p>
+<p>This tutorial assumes that a system channel genesis block will not be used when bootstrapping the orderer. Instead, these nodes (or a subset of them), will be joined to a channel using the process to <a class="reference external" href="../create_channel/create-channel_participation.html">Create a channel</a>. For information on how to create an orderer that will be bootstrapped with a system channel genesis block, check out <a class="reference external" href="https://hyperledger-fabric.readthedocs.io/en/release-2.2/deployorderer/ordererdeploy.html">Deploy the ordering service</a> from the Fabric v2.2 documentation.</p>
+<div class="section" id="generate-ordering-node-identities-and-membership-service-providers-msps">
+<span id="generate-ordering-node-identities-and-membership-service-providers-msps"></span><h2>Generate ordering node identities and Membership Service Providers (MSPs)<a class="headerlink" href="#generate-ordering-node-identities-and-membership-service-providers-msps" title="Permalink to this headline">¶</a></h2>
+<p>Before proceeding with this topic, you should have reviewed the process for a Deploying a Certificate Authority (CA) for your organization in order to generate the identities and MSPs for the admins and ordering nodes in your organization. To learn how to use a CA to create these identities, check out <a class="reference external" href="https://hyperledger-fabric-ca.readthedocs.io/en/release-1.4/deployguide/use_CA.html">Registering and enrolling identities with a CA</a>. Note that the best practice is to register and enroll a separate node identity for each ordering node and to use distinct TLS certificates for each node.</p>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">cryptogen</span></code> tool should never be used to generate any identities in a production scenario.</p>
+<p>In this deployment guide, we’ll assume that all ordering nodes will be created and owned by the same orderer organization. However, it is possible for multiple organizations to contribute nodes to an ordering service, both during the creation of the ordering service and after the ordering service has been created.</p>
+</div>
+<div class="section" id="folder-management">
+<span id="folder-management"></span><h2>Folder management<a class="headerlink" href="#folder-management" title="Permalink to this headline">¶</a></h2>
+<p>While it is possible to bootstrap an ordering node using a number of folder structures for your MSPs and certificates, we do recommend the folder structure outlined in <a class="reference external" href="https://hyperledger-fabric-ca.readthedocs.io/en/release-1.4/deployguide/use_CA.html#decide-on-the-structure-of-your-folders-and-certificates">Registering and enrolling identities with a CA</a> for the sake of consistency and repeatability. Although it is not required, these instructions will presume that you have used that folder structure.</p>
+</div>
+<div class="section" id="certificates-from-a-non-fabric-ca">
+<span id="certificates-from-a-non-fabric-ca"></span><h2>Certificates from a non-Fabric CA<a class="headerlink" href="#certificates-from-a-non-fabric-ca" title="Permalink to this headline">¶</a></h2>
+<p>While it is possible to use a non-Fabric CA to generate identities, this process requires that you manually construct the MSP folders the ordering service and its organization need. That process will not be covered here and will instead focus on using a Fabric CA to generate the identities and MSP folders for you.</p>
+</div>
+<div class="section" id="transport-layer-security-tls-enablement">
+<span id="transport-layer-security-tls-enablement"></span><h2>Transport Layer Security (TLS) enablement<a class="headerlink" href="#transport-layer-security-tls-enablement" title="Permalink to this headline">¶</a></h2>
+<p>To prevent “man in the middle” attacks and otherwise secure communications, the use of TLS is a requirement for any production network. Therefore, in addition to registering your ordering nodes identities with your organization CA, you will also need to create certificates for your ordering nodes with the TLS CA of your organization. These TLS certificates will be used by the ordering nodes when communicating with the network.</p>
+</div>
+<div class="section" id="sizing-your-ordering-node-resources">
+<span id="sizing-your-ordering-node-resources"></span><h2>Sizing your ordering node resources<a class="headerlink" href="#sizing-your-ordering-node-resources" title="Permalink to this headline">¶</a></h2>
+<p>Because ordering nodes do not host a state database or chaincode, an ordering node will typically only have a single container associated with it. Like the “peer container” associated with the peer, this container encapsulates the ordering process that orders transactions into blocks for all channels on which the ordering node is a consenter (ordering nodes also validate actions in particular cases). The ordering node storage includes the blockchain for all of the channels on which the node is a consenter.</p>
+<p>Note that, at a logical level, every “consenter set” for each channel is a separate ordering service, in which “alive” messages and other communications are duplicated. This affects the CPU and memory required for each node. Similarly, there is a direct relationship between the size of a consenter set and the amount of resources each node will need. This is because in a Raft ordering service, the nodes do not collaborate in ordering transactions. One node, a “leader” elected by the other nodes, performs all ordering and validation functions, and then replicates decisions to the other nodes. As a result, as consenter sets increase in size, there is more traffic and burden on the leader node and more communications across the consenter set.</p>
+<p>More on this in <a class="reference external" href="#cluster-considerations">Cluster considerations</a>.</p>
+</div>
+<div class="section" id="cluster-considerations">
+<span id="cluster-considerations"></span><h2>Cluster considerations<a class="headerlink" href="#cluster-considerations" title="Permalink to this headline">¶</a></h2>
+<p>For more guidance on the number of nodes you should deploy, check out <a class="reference external" href="../orderer/ordering_service.html#raft">Raft</a>.</p>
+<p>Raft is a leader based protocol, where a single leader validates transactions, orders blocks, and replicates the data out to the followers. Raft works based on the concept of a quorum in which as long as a majority of the Raft nodes are online, the Raft cluster stays available.</p>
+<p>On the one hand, the more Raft nodes that are deployed, the more nodes can be lost while maintaining that a majority of the nodes are still available (unless a majority of nodes are available, the cluster will cease to process and create blocks). A five node cluster, for example, can tolerate two down nodes, while a seven node cluster can tolerate three down nodes.</p>
+<p>However, more nodes means a larger communication overhead, as the leader must communicate with all of the nodes in order for the ordering service to function properly. If a node thinks it has lost connection with the leader, even if this loss of communication is only due to a networking or processing delay, it is designed to trigger a leader election. Unnecessary leader elections only add to the communications overhead for the leader, progressively escalating the burden on the cluster. And because, each channel an ordering node participates in is, logically, a separate Raft instance, an orderer participating in 100 channels is actually doing 100x the work as an ordering node in a single channel.</p>
+<p>For these reasons, Raft clusters of more than a few dozen nodes begin to see noticeable performance degradation. Once clusters reach about 100 nodes, they begin having trouble maintaining quorum. The stage at which a deployment experiences issues is dependent on factors such as networking speeds and other resources available, and there are parameters such as the tick interval which can be used to mitigate the larger communications overhead.</p>
+<p>The optimal number of ordering nodes for your ordering service ultimately depends on your use case, your resources, and your topology. However, clusters of three, five, seven, or nine nodes, are the most popular, with no more than about 50 channels per orderer.</p>
+</div>
+<div class="section" id="storage-considerations-and-monitoring">
+<span id="storage-considerations-and-monitoring"></span><h2>Storage considerations and monitoring<a class="headerlink" href="#storage-considerations-and-monitoring" title="Permalink to this headline">¶</a></h2>
+<p>The storage that should be allocated to an ordering node depends on factors such as the expected transaction throughput, the size of blocks, and number of channels the node will be joined to. Your needs will depend on your use case. However, the best practice is to monitor the storage available to your nodes closely. You may also decide to enable an autoscaler, which will allocate more resources to your node, if your infrastructure allows it.</p>
+<p>If the storage for an ordering node is exhausted you also have the option to deploy a new node with a larger storage allocation and allow it to sync with the relevant ledgers. If you have several ordering nodes available to use, ensure that each node is a consenter on approximately the same number of channels.</p>
+<p>In a production environment you should also monitor the CPU and memory allocated to an ordering node using widely available tooling. If you see an ordering node struggling to keep up (for example, it might be calling for leader elections when none is needed), it is a sign that you might need to increase its resource allocation.</p>
+<!--- Licensed under Creative Commons Attribution 4.0 International License
+https://creativecommons.org/licenses/by/4.0/ --></div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ordererchecklist.html" class="btn btn-neutral float-right" title="Checklist for a production ordering node" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../deploypeer/peerdeploy.html" class="btn btn-neutral" title="Deploy the peer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright Hyperledger 2020.
+    <br>
+      <br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>
+      <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+        <img alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'master',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

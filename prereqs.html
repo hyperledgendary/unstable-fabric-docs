@@ -1,0 +1,486 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Prerequisites &mdash; hyperledger-fabricdocs master documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="hyperledger-fabricdocs master documentation" href="index.html"/>
+        <link rel="up" title="Getting Started - Install" href="getting_started.html"/>
+        <link rel="next" title="Install Fabric and Fabric Samples" href="install.html"/>
+        <link rel="prev" title="Getting Started - Install" href="getting_started.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+
+          
+            <a href="index.html" class="icon icon-home"> hyperledger-fabricdocs
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                master
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+
+<br><img style="background-color: #fff; height: unset; width: unset;" alt="Hyperledger Fabric" src=_images/hyperledger_fabric_logo_color.png />
+<br>
+<a href="https://github.com/hyperledger/fabric"><img style="padding: 0px; margin: auto auto auto auto;" alt="GitHub" src="_static/images/github_button.png"/></a>
+&nbsp;<a href="https://stackoverflow.com/questions/tagged/hyperledger-fabric"><img style="padding: 0px; margin: auto auto auto auto;" alt="StackOverflow" src="_static/images/stackoverflow_button.png"/></a>
+&nbsp;<a href="https://chat.hyperledger.org"><img style="padding: 0px; margin: auto auto auto auto;" alt="Rocket Chat" src="_static/images/rocketchat_button.png"/></a>
+&nbsp;<a href="https://www.youtube.com/playlist?list=PL0MZ85B_96CH7wvtrRzV7SvtRY0sI0DEg"><img style="padding: 0px; margin: auto auto auto auto;" alt="Youtube Channel" src="_static/images/youtube_button.png"/></a>
+
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="whatis.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whatsnew.html">What’s new in Hyperledger Fabric v2.x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whatsnew.html#release-notes">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="key_concepts.html">Key Concepts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="getting_started.html">Getting Started - Install</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Prerequisites</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mac">Mac</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#homebrew">Homebrew</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#git">Git</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#curl">cURL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#docker">Docker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#go">Go</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#jq">JQ</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#linux"><strong>Linux</strong></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#git">Git</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#curl">cURL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#docker">Docker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#go">Go</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#jq">JQ</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#windows"><strong>Windows</strong></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#git">Git</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#curl">cURL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#docker">Docker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#go">Go</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#jq">JQ</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#notes"><strong>Notes</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Install Fabric and Fabric Samples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdk_chaincode.html">Fabric Contract APIs and Application SDKs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started_run_fabric.html">Getting Started - Run Fabric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developapps/developing_applications.html">Developing Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment_guide_overview.html">Deploying a production network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ops_guide.html">Operations Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upgrade.html">Upgrading to the latest release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_ref.html">Commands Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fabric-FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">Contributions Welcome!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="releases.html">Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="questions.html">Still Have Questions?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="status.html">Status</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">hyperledger-fabricdocs</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="getting_started.html">Getting Started - Install</a> &raquo;</li>
+        
+      <li>Prerequisites</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/prereqs.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="prerequisites">
+<span id="prerequisites"></span><h1>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h1>
+<p>The following prerequisites are required to run a Docker-based Fabric test network on your local machine.</p>
+<div class="section" id="mac">
+<span id="mac"></span><h2>Mac<a class="headerlink" href="#mac" title="Permalink to this headline">¶</a></h2>
+<!--- Indent entire section -->
+<div style="margin-left: 1.5em;"><div class="section" id="homebrew">
+<span id="homebrew"></span><h3>Homebrew<a class="headerlink" href="#homebrew" title="Permalink to this headline">¶</a></h3>
+<p>For macOS, we recommend using <a class="reference external" href="https://brew.sh">Homebrew</a> to manage the prereqs.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ /bin/bash -c <span class="s2">&quot;</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh<span class="k">)</span><span class="s2">&quot;</span>
+$ brew --version
+Homebrew 2.5.2
+</pre></div>
+</div>
+<p>The Xcode command line tools will be installed as part of the Homebrew installation.
+Once Homebrew is ready, installing the necessary prerequisites is very easy:</p>
+</div>
+<div class="section" id="git">
+<span id="git"></span><h3>Git<a class="headerlink" href="#git" title="Permalink to this headline">¶</a></h3>
+<p>Install the latest version of <a class="reference external" href="https://git-scm.com/downloads">git</a> if it is not already installed.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ brew install git
+$ git --version
+git version 2.23.0
+</pre></div>
+</div>
+</div>
+<div class="section" id="curl">
+<span id="curl"></span><h3>cURL<a class="headerlink" href="#curl" title="Permalink to this headline">¶</a></h3>
+<p>Install the latest version of <a class="reference external" href="https://curl.haxx.se/download.html">cURL</a> if it is not already installed.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ brew install curl
+$ curl --version
+curl 7.64.1 <span class="o">(</span>x86_64-apple-darwin19.0<span class="o">)</span> libcurl/7.64.1 <span class="o">(</span>SecureTransport<span class="o">)</span> LibreSSL/2.8.3 zlib/1.2.11 nghttp2/1.39.2
+Release-Date: 2019-03-27
+</pre></div>
+</div>
+</div>
+<div class="section" id="docker">
+<span id="docker"></span><h3>Docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h3>
+<p>Install the latest version of <a class="reference external" href="https://docs.docker.com/get-docker/">Docker Desktop</a> if it is not already installed.
+Since Docker Desktop is a UI application on Mac, use <code class="docutils literal notranslate"><span class="pre">cask</span></code> to install it.</p>
+<p>Homebrew v2.x:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ brew cask install --appdir<span class="o">=</span><span class="s2">&quot;/Applications&quot;</span> docker
+</pre></div>
+</div>
+<p>Homebrew v3.x:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ brew install --cask --appdir<span class="o">=</span><span class="s2">&quot;/Applications&quot;</span> docker
+</pre></div>
+</div>
+<p>Docker Desktop must be launched to complete the installation so be sure to open the application after installing it:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ open /Applications/Docker.app
+</pre></div>
+</div>
+<p>Once installed, confirm the latest versions of both <code class="docutils literal notranslate"><span class="pre">docker</span></code> and <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code> executables were installed.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ docker --version
+Docker version 19.03.12, build 48a66213fe
+$ docker-compose --version
+docker-compose version 1.27.2, build 18f557f9
+</pre></div>
+</div>
+<blockquote>
+<div><strong>Note:</strong> Some users have reported errors while running Fabric-Samples with the Docker Desktop <code class="docutils literal notranslate"><span class="pre">gRPC</span> <span class="pre">FUSE</span> <span class="pre">for</span> <span class="pre">file</span> <span class="pre">sharing</span></code> option checked.
+Please uncheck this option in your Docker Preferences to continue using <code class="docutils literal notranslate"><span class="pre">osxfs</span> <span class="pre">for</span> <span class="pre">file</span> <span class="pre">sharing</span></code>.</div></blockquote>
+</div>
+<div class="section" id="go">
+<span id="go"></span><h3>Go<a class="headerlink" href="#go" title="Permalink to this headline">¶</a></h3>
+<p>Optional: Install the latest version of <a class="reference external" href="https://golang.org/doc/install">Go</a> if it is not already installed
+(only required if you will be writing Go chaincode or SDK applications).</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ brew install go
+$ go version
+go1.15.7 darwin/amd64
+</pre></div>
+</div>
+</div>
+<div class="section" id="jq">
+<span id="jq"></span><h3>JQ<a class="headerlink" href="#jq" title="Permalink to this headline">¶</a></h3>
+<p>Optional: Install the latest version of <a class="reference external" href="https://stedolan.github.io/jq/download/">jq</a> if it is not already installed
+(only required for the tutorials related to channel configuration transactions).</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ brew install jq
+$ jq --version
+jq-1.6
+</pre></div>
+</div>
+</div></div>
+</div>
+<div class="section" id="linux">
+<span id="linux"></span><h2><strong>Linux</strong><a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h2>
+<!--- Indent entire section -->
+<div style="margin-left: 1.5em;"><div class="section" id="git">
+<span id="id1"></span><h3>Git<a class="headerlink" href="#git" title="Permalink to this headline">¶</a></h3>
+<p>Install the latest version of <a class="reference external" href="https://git-scm.com/downloads">git</a> if it is not already installed.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install git
+</pre></div>
+</div>
+</div>
+<div class="section" id="curl">
+<span id="id2"></span><h3>cURL<a class="headerlink" href="#curl" title="Permalink to this headline">¶</a></h3>
+<p>Install the latest version of <a class="reference external" href="https://curl.haxx.se/download.html">cURL</a> if it is not already installed.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get install curl
+</pre></div>
+</div>
+</div>
+<div class="section" id="docker">
+<span id="id3"></span><h3>Docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h3>
+<p>Install the latest version of <a class="reference external" href="https://docs.docker.com/get-docker/">Docker</a> if it is not already installed.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo apt-get -y install docker-compose
+</pre></div>
+</div>
+<p>Once installed, confirm that the latest versions of both Docker and Docker Compose executables were installed.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ docker --version
+Docker version 19.03.12, build 48a66213fe
+$ docker-compose --version
+docker-compose version 1.27.2, build 18f557f9
+</pre></div>
+</div>
+<p>Make sure the Docker daemon is running.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo systemctl start docker
+</pre></div>
+</div>
+<p>Optional: If you want the Docker daemon to start when the system starts, use the following:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo systemctl <span class="nb">enable</span> docker
+</pre></div>
+</div>
+<p>Add your user to the Docker group.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo usermod -a -G docker &lt;username&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="go">
+<span id="id4"></span><h3>Go<a class="headerlink" href="#go" title="Permalink to this headline">¶</a></h3>
+<p>Optional: Install the latest version of <a class="reference external" href="https://golang.org/doc/install">Go</a> if it is not already installed
+(only required if you will be writing Go chaincode or SDK applications).</p>
+</div>
+<div class="section" id="jq">
+<span id="id5"></span><h3>JQ<a class="headerlink" href="#jq" title="Permalink to this headline">¶</a></h3>
+<p>Optional: Install the latest version of <a class="reference external" href="https://stedolan.github.io/jq/download/">jq</a> if it is not already installed
+(only required for the tutorials related to channel configuration transactions).</p>
+</div></div>
+</div>
+<div class="section" id="windows">
+<span id="windows"></span><h2><strong>Windows</strong><a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h2>
+<!--- Indent entire section -->
+<div style="margin-left: 1.5em;"><div class="section" id="git">
+<span id="id6"></span><h3>Git<a class="headerlink" href="#git" title="Permalink to this headline">¶</a></h3>
+<p>Install the latest version of <a class="reference external" href="https://git-scm.com/downloads">git</a> if it is not already installed.
+To use <code class="docutils literal notranslate"><span class="pre">Fabric</span> <span class="pre">binaries</span></code>, you will need to have the <code class="docutils literal notranslate"><span class="pre">uname</span></code> command available. You can get it as part of <code class="docutils literal notranslate"><span class="pre">Git</span></code> but beware that only the 64bit version is supported.</p>
+<p>Update the following <code class="docutils literal notranslate"><span class="pre">git</span></code> configurations</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git config --global core.autocrlf <span class="nb">false</span>
+git config --global core.longpaths <span class="nb">true</span>
+</pre></div>
+</div>
+<p>You can check the setting of these parameters with the following commands:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git config --get core.autocrlf
+git config --get core.longpaths
+</pre></div>
+</div>
+<p>These need to be false and true respectively.</p>
+</div>
+<div class="section" id="curl">
+<span id="id7"></span><h3>cURL<a class="headerlink" href="#curl" title="Permalink to this headline">¶</a></h3>
+<p>Install the latest version of <a class="reference external" href="https://curl.haxx.se/download.html">cURL</a> if it is not already installed.</p>
+</div>
+<div class="section" id="docker">
+<span id="id8"></span><h3>Docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h3>
+<p>Install the latest version of <a class="reference external" href="https://docs.docker.com/get-docker/">Docker</a> if it is not already installed.</p>
+<p>Once installed, confirm the latest versions of both Docker and Docker Compose executables were installed.</p>
+</div>
+<div class="section" id="go">
+<span id="id9"></span><h3>Go<a class="headerlink" href="#go" title="Permalink to this headline">¶</a></h3>
+<p>Optional: Install the latest version of <a class="reference external" href="https://golang.org/doc/install">Go</a> if it is not already installed
+(only required if you will be writing Go chaincode or SDK applications).</p>
+</div>
+<div class="section" id="jq">
+<span id="id10"></span><h3>JQ<a class="headerlink" href="#jq" title="Permalink to this headline">¶</a></h3>
+<p>Optional: Install the latest version of <a class="reference external" href="https://stedolan.github.io/jq/download/">jq</a> if it is not already installed.
+(only required for the tutorials related to channel configuration transactions).</p>
+</div></div>
+</div>
+<div class="section" id="notes">
+<span id="notes"></span><h2><strong>Notes</strong><a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>The <code class="docutils literal notranslate"><span class="pre">cURL</span></code> command that comes with Git and Docker Toolbox is old and does not handle properly the redirect used in <a class="reference external" href="https://hyperledger-fabric.readthedocs.io/en/latest/getting_started.html">Getting Started</a>. Please make sure you use a newer version from the <a class="reference external" href="https://curl.haxx.se/download.html">cURL downloads page</a></li>
+<li>These prerequisites are recommended for Fabric users. If you are a Fabric developer, please refer to the instructions for <a class="reference external" href="https://hyperledger-fabric.readthedocs.io/en/latest/dev-setup/devenv.html">Setting up the development environment</a>.</li>
+</ul>
+<!--- Licensed under Creative Commons Attribution 4.0 International License
+https://creativecommons.org/licenses/by/4.0/ --></div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="install.html" class="btn btn-neutral float-right" title="Install Fabric and Fabric Samples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="getting_started.html" class="btn btn-neutral" title="Getting Started - Install" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright Hyperledger 2020.
+    <br>
+      <br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>
+      <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+        <img alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'master',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

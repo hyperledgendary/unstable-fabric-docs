@@ -1,0 +1,671 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Checklist for a production ordering node &mdash; hyperledger-fabricdocs master documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="hyperledger-fabricdocs master documentation" href="../index.html"/>
+        <link rel="up" title="Deploying a production network" href="../deployment_guide_overview.html"/>
+        <link rel="next" title="Deploy the ordering service" href="ordererdeploy.html"/>
+        <link rel="prev" title="Planning for an ordering service" href="ordererplan.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+
+          
+            <a href="../index.html" class="icon icon-home"> hyperledger-fabricdocs
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                master
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+
+<br><img style="background-color: #fff; height: unset; width: unset;" alt="Hyperledger Fabric" src=../_images/hyperledger_fabric_logo_color.png />
+<br>
+<a href="https://github.com/hyperledger/fabric"><img style="padding: 0px; margin: auto auto auto auto;" alt="GitHub" src="../_static/images/github_button.png"/></a>
+&nbsp;<a href="https://stackoverflow.com/questions/tagged/hyperledger-fabric"><img style="padding: 0px; margin: auto auto auto auto;" alt="StackOverflow" src="../_static/images/stackoverflow_button.png"/></a>
+&nbsp;<a href="https://chat.hyperledger.org"><img style="padding: 0px; margin: auto auto auto auto;" alt="Rocket Chat" src="../_static/images/rocketchat_button.png"/></a>
+&nbsp;<a href="https://www.youtube.com/playlist?list=PL0MZ85B_96CH7wvtrRzV7SvtRY0sI0DEg"><img style="padding: 0px; margin: auto auto auto auto;" alt="Youtube Channel" src="../_static/images/youtube_button.png"/></a>
+
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../whatis.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html">What’s new in Hyperledger Fabric v2.x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html#release-notes">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../key_concepts.html">Key Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started - Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started_run_fabric.html">Getting Started - Run Fabric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developapps/developing_applications.html">Developing Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../deployment_guide_overview.html">Deploying a production network</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../deployment_guide_overview.html#step-one-decide-on-your-network-configuration">Step one: Decide on your network configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment_guide_overview.html#step-two-set-up-a-cluster-for-your-resources">Step two: Set up a cluster for your resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment_guide_overview.html#step-three-set-up-your-cas">Step three: Set up your CAs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment_guide_overview.html#step-four-use-the-ca-to-create-identities-and-msps">Step four: Use the CA to create identities and MSPs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../deployment_guide_overview.html#step-five-deploy-peers-and-ordering-nodes">Step five: Deploy peers and ordering nodes</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../deployment_guide_overview.html#creating-a-peer">Creating a peer</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../deployment_guide_overview.html#creating-an-ordering-node">Creating an ordering node</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="ordererplan.html">Planning for an ordering service</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Checklist for a production ordering node</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ordererdeploy.html">Deploy the ordering service</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment_guide_overview.html#next-steps">Next steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ops_guide.html">Operations Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../upgrade.html">Upgrading to the latest release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command_ref.html">Commands Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Architecture Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Fabric-FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributions Welcome!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releases.html">Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../questions.html">Still Have Questions?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../status.html">Status</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">hyperledger-fabricdocs</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../deployment_guide_overview.html">Deploying a production network</a> &raquo;</li>
+        
+      <li>Checklist for a production ordering node</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/deployorderer/ordererchecklist.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="checklist-for-a-production-ordering-node">
+<span id="checklist-for-a-production-ordering-node"></span><h1>Checklist for a production ordering node<a class="headerlink" href="#checklist-for-a-production-ordering-node" title="Permalink to this headline">¶</a></h1>
+<p>As you prepare to build a production ordering service (or a single ordering node), you need to customize the configuration by editing the <a class="reference external" href="https://github.com/hyperledger/fabric/blob/master/sampleconfig/orderer.yaml">orderer.yaml</a> file, which is copied into the <code class="docutils literal notranslate"><span class="pre">/config</span></code> directory when downloading the Fabric binaries, and available within the Fabric ordering node image at <code class="docutils literal notranslate"><span class="pre">/etc/hyperledger/fabric/orderer.yaml</span></code>.</p>
+<p>While in a production environment you could override the environment variables in the <code class="docutils literal notranslate"><span class="pre">orderer.yaml</span></code> file in your Docker container or your Kubernetes job, these instructions show how to edit <code class="docutils literal notranslate"><span class="pre">orderer.yaml</span></code> instead. It’s important to understand the parameters in the configuration file and their dependencies on other parameter settings in the file. Blindly overriding one setting using an environment variable could affect the functionality of another setting. Therefore, the recommendation is that before starting the ordering node, you make the modifications to the settings in the configuration file to become familiar with the available settings and how they work. Afterwards, you may choose to override these parameters using environment variables.</p>
+<p>This checklist covers key configuration parameters for setting up a production ordering service. Of course, you can always refer to the orderer.yaml file for additional parameters or more information. It also provides guidance on which parameters should be overridden. The list of parameters that you need to understand and that are described in this topic include:</p>
+<ul class="simple">
+<li><a class="reference external" href="#general-listenaddress">General.ListenAddress</a></li>
+<li><a class="reference external" href="#general-listenport">General.ListenPort</a></li>
+<li><a class="reference external" href="#general-tls">General.TLS.*</a></li>
+<li><a class="reference external" href="#general-keepalive">General.Keepalive.*</a></li>
+<li><a class="reference external" href="#general-cluster">General.Cluster.*</a></li>
+<li><a class="reference external" href="#general-bootstrapmethod">General.BoostrapMethod</a></li>
+<li><a class="reference external" href="#general-bootstrapfile">General.BoostrapFile</a></li>
+<li><a class="reference external" href="#general-localmspdir">General.LocalMSPDir</a></li>
+<li><a class="reference external" href="#general-localmspid">General.LocalMSPID</a></li>
+<li><a class="reference external" href="#fileledger-location">FileLedger.Location</a></li>
+<li><a class="reference external" href="#operations">Operations.*</a></li>
+<li><a class="reference external" href="#metrics">Metrics.*</a></li>
+<li><a class="reference external" href="#admin">Admin.*</a></li>
+<li><a class="reference external" href="#channelparticipation">ChannelParticipation.*</a></li>
+<li><a class="reference external" href="#consensus">Consensus.*</a></li>
+</ul>
+<div class="section" id="general-listenaddress">
+<span id="general-listenaddress"></span><h2>General.ListenAddress<a class="headerlink" href="#general-listenaddress" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Listen address: The IP on which to bind to listen.</span>
+<span class="n">ListenAddress</span><span class="p">:</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">ListenAddress</span></code></strong>: (default value should be overridden) This is the location where the orderer will listen, for example, <code class="docutils literal notranslate"><span class="pre">0.0.0.0</span></code>. Note: unlike the peer, the <code class="docutils literal notranslate"><span class="pre">orderer.yaml</span></code> separates the address and the port, hence the <a class="reference external" href="#general-listenport">General.ListenPort</a> parameter.</li>
+</ul>
+</div>
+<div class="section" id="general-listenport">
+<span id="general-listenport"></span><h2>General.ListenPort<a class="headerlink" href="#general-listenport" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Listen port: The port on which to bind to listen.</span>
+<span class="n">ListenPort</span><span class="p">:</span> <span class="mi">7050</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">ListenPort</span></code></strong>: (default value should be overridden) This is the port that the orderer listens on.</li>
+</ul>
+</div>
+<div class="section" id="general-tls">
+<span id="general-tls"></span><h2>General.TLS<a class="headerlink" href="#general-tls" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Require server-side TLS</span>
+<span class="n">Enabled</span><span class="p">:</span> <span class="n">false</span>
+<span class="c1"># PrivateKey governs the file location of the private key of the TLS certificate.</span>
+<span class="n">PrivateKey</span><span class="p">:</span> <span class="n">tls</span><span class="o">/</span><span class="n">server</span><span class="o">.</span><span class="n">key</span>
+<span class="c1"># Certificate governs the file location of the server TLS certificate.</span>
+<span class="n">Certificate</span><span class="p">:</span> <span class="n">tls</span><span class="o">/</span><span class="n">server</span><span class="o">.</span><span class="n">crt</span>
+<span class="c1"># RootCAs contains a list additional root certificates used for verifying certificates</span>
+<span class="c1"># of other orderer nodes during outbound connections.</span>
+<span class="c1"># It is not required to be set, but can be used to augment the set of TLS CA certificates</span>
+<span class="c1"># available from the MSPs of each channel’s configuration.</span>
+<span class="n">RootCAs</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">tls</span><span class="o">/</span><span class="n">ca</span><span class="o">.</span><span class="n">crt</span>
+<span class="c1"># Require client certificates / mutual TLS for inbound connections.</span>
+<span class="n">ClientAuthRequired</span><span class="p">:</span> <span class="n">false</span>
+<span class="c1"># If mutual TLS is enabled, ClientRootCAs contains a list of additional root certificates</span>
+<span class="c1"># used for verifying certificates of client connections.</span>
+<span class="c1"># It is not required to be set, but can be used to augment the set of TLS CA certificates</span>
+<span class="c1"># available from the MSPs of each channel’s configuration.</span>
+<span class="n">ClientRootCAs</span><span class="p">:</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">Enabled</span></code></strong>: (default value should be overridden) In a production network, you should be using TLS-secured communications. This value should be <code class="docutils literal notranslate"><span class="pre">true</span></code>.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">PrivateKey</span></code></strong>: (default value should be overridden). Provide the path to, and filename of, the private key generated by your TLS CA for this node.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">Certificate</span></code></strong>: (default value should be overridden) Provide the path to, and filename of, the public certificate (also known as the sign certificate) generated by your TLS CA for this node.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">RootCAs</span></code></strong>: (should be commented out) This parameter is typically unset for normal use. It is a list of the paths to additional root certificates used for verifying certificates of other orderer nodes during outbound connections. It can be used to augment the set of TLS CA certificates available from the MSPs of each channel’s configuration.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">ClientAuthRequired</span></code></strong>: (Mutual TLS only) Setting this value to “true” will enable mutual TLS on your network, and must be done for the entire network, not just one node.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">ClientRootCAs</span></code></strong>: (Mutual TLS only) Can be left blank if mutual TLS is disabled. If mutual TLS is enabled, this is a list of the paths to additional root certificates used for verifying certificates of client connections. It can be used to augment the set of TLS CA certificates available from the MSPs of each channel’s configuration.</li>
+</ul>
+</div>
+<div class="section" id="general-keepalive">
+<span id="general-keepalive"></span><h2>General.KeepAlive<a class="headerlink" href="#general-keepalive" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">KeepAlive</span></code> values might need to be tuned for compatibility with any networking devices or software (like firewalls or proxies) in between components of your network. Ideally, these settings would be manipulated if needed in a test or pre-prod environment and then set accordingly for your production environment.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># ServerMinInterval is the minimum permitted time between client pings.</span>
+<span class="c1"># If clients send pings more frequently, the server will</span>
+<span class="c1"># disconnect them.</span>
+<span class="n">ServerMinInterval</span><span class="p">:</span> <span class="mi">60</span><span class="n">s</span>
+<span class="c1"># ServerInterval is the time between pings to clients.</span>
+<span class="n">ServerInterval</span><span class="p">:</span> <span class="mi">7200</span><span class="n">s</span>
+<span class="c1"># ServerTimeout is the duration the server waits for a response from</span>
+<span class="c1"># a client before closing the connection.</span>
+<span class="n">ServerTimeout</span><span class="p">:</span> <span class="mi">20</span><span class="n">s</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">ServerMinInterval</span></code></strong>: (default value should not be overridden, unless determined necessary through testing)</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">ServerInterval</span></code></strong>: (default value should not be overridden, unless determined necessary through testing)</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">ServerTimeout</span></code></strong>: (default value should not be overridden, unless determined necessary through testing)</li>
+</ul>
+</div>
+<div class="section" id="general-cluster">
+<span id="general-cluster"></span><h2>General.Cluster<a class="headerlink" href="#general-cluster" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># SendBufferSize is the maximum number of messages in the egress buffer.</span>
+<span class="c1"># Consensus messages are dropped if the buffer is full, and transaction</span>
+<span class="c1"># messages are waiting for space to be freed.</span>
+<span class="n">SendBufferSize</span><span class="p">:</span> <span class="mi">10</span>
+<span class="c1"># ClientCertificate governs the file location of the client TLS certificate</span>
+<span class="c1"># If not set, the server General.TLS.Certificate is re-used.</span>
+<span class="n">ClientCertificate</span><span class="p">:</span>
+<span class="c1"># If not set, the server General.TLS.PrivateKey is re-used.</span>
+<span class="n">ClientPrivateKey</span><span class="p">:</span>
+<span class="c1"># The below 4 properties should be either set together, or be unset together.</span>
+<span class="c1"># If they are set, then the orderer node uses a separate listener for intra-cluster</span>
+<span class="c1"># communication. If they are unset, then the general orderer listener is used.</span>
+<span class="c1"># This is useful if you want to use a different TLS server certificates on the</span>
+<span class="c1"># client-facing and the intra-cluster listeners.</span>
+
+<span class="c1"># ListenPort defines the port on which the cluster listens to connections.</span>
+<span class="n">ListenPort</span><span class="p">:</span>
+<span class="c1"># ListenAddress defines the IP on which to listen to intra-cluster communication.</span>
+<span class="n">ListenAddress</span><span class="p">:</span>
+<span class="c1"># ServerCertificate defines the file location of the server TLS certificate used for intra-cluster</span>
+<span class="c1"># communication.</span>
+<span class="n">ServerCertificate</span><span class="p">:</span>
+<span class="c1"># ServerPrivateKey defines the file location of the private key of the TLS certificate.</span>
+<span class="n">ServerPrivateKey</span><span class="p">:</span>
+</pre></div>
+</div>
+<p>If unset, the <code class="docutils literal notranslate"><span class="pre">ClientCertificate</span></code> and <code class="docutils literal notranslate"><span class="pre">ClientPrivateKey</span></code> default to the server <code class="docutils literal notranslate"><span class="pre">General.TLS.Certificate</span></code> and <code class="docutils literal notranslate"><span class="pre">General.TLS.PrivateKey</span></code> when the orderer is not configured to use a separate cluster port.</p>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">ClientCertificate</span></code></strong>:  Provide the path to, and filename of, the public certificate (also known as a signed certificate) generated by your TLS CA for this node.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">ClientPrivateKey</span></code></strong>: Provide the path to, and filename of, the private key generated by your TLS CA for this node.</li>
+</ul>
+<p>In general, these four parameters would only need to be configured if you want to configure a separate listener and TLS certificates for intra-cluster communication (with other Raft orderers), as opposed to using the listener that peer clients and application clients utilize. This is an advanced deployment option. These four parameters should be set together or left unset, and if they are set, note that the <code class="docutils literal notranslate"><span class="pre">ClientCertificate</span></code> and <code class="docutils literal notranslate"><span class="pre">ClientPrivateKey</span></code> must be set as well.</p>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">ListenPort</span></code></strong></li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">ListenAddress</span></code></strong></li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">ServerCertificate</span></code></strong></li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">ServerPrivateKey</span></code></strong></li>
+</ul>
+</div>
+<div class="section" id="general-boostrapmethod">
+<span id="general-boostrapmethod"></span><h2>General.BoostrapMethod<a class="headerlink" href="#general-boostrapmethod" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Bootstrap method: The method by which to obtain the bootstrap block</span>
+<span class="c1"># system channel is specified. The option can be one of:</span>
+<span class="c1">#   &quot;file&quot; - path to a file containing the genesis block or config block of system channel</span>
+<span class="c1">#   &quot;none&quot; - allows an orderer to start without a system channel configuration</span>
+<span class="n">BootstrapMethod</span><span class="p">:</span> <span class="n">file</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">BootstrapMethod</span></code></strong>: If you plan to create this node on a network that is not using a system channel, override this value to <code class="docutils literal notranslate"><span class="pre">none</span></code> and then ensure that <a class="reference external" href="#channelparticipation"><code class="docutils literal notranslate"><span class="pre">ChannelParticipation.Enabled</span></code></a> is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, otherwise you will get an error when you attempt to start the node. If you are creating a node to be joined to a system channel, unless you plan to use a file type other than “file”, this value should be left as is.</li>
+</ul>
+</div>
+<div class="section" id="general-boostrapfile">
+<span id="general-boostrapfile"></span><h2>General.BoostrapFile<a class="headerlink" href="#general-boostrapfile" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Bootstrap file: The file containing the bootstrap block to use when</span>
+<span class="c1"># initializing the orderer system channel and BootstrapMethod is set to</span>
+<span class="c1"># &quot;file&quot;.  The bootstrap file can be the genesis block, and it can also be</span>
+<span class="c1"># a config block for late bootstrap of some consensus methods like Raft.</span>
+<span class="c1"># Generate a genesis block by updating $FABRIC_CFG_PATH/configtx.yaml and</span>
+<span class="c1"># using configtxgen command with &quot;-outputBlock&quot; option.</span>
+<span class="c1"># Defaults to file &quot;genesisblock&quot; (in $FABRIC_CFG_PATH directory) if not specified.</span>
+<span class="n">BootstrapFile</span><span class="p">:</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">BoostrapFile</span></code></strong>: (if you are creating this node to be joined to a system channel, the default value should be overridden) Specify the location and name of the system channel genesis block to use when this node is created. If you are creating this node without using a system channel, this value will not be used, and can therefore be left blank.</li>
+</ul>
+</div>
+<div class="section" id="general-localmspdir">
+<span id="general-localmspdir"></span><h2>General.LocalMSPDir<a class="headerlink" href="#general-localmspdir" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># LocalMSPDir is where to find the private crypto material needed by the</span>
+<span class="c1"># orderer. It is set relative here as a default for dev environments but</span>
+<span class="c1"># should be changed to the real location in production.</span>
+<span class="n">LocalMSPDir</span><span class="p">:</span> <span class="n">msp</span>
+</pre></div>
+</div>
+<p><strong><code class="docutils literal notranslate"><span class="pre">LocalMSPDir</span></code></strong>: (default value will often be overridden) This is the path to the ordering node’s local MSP, which must be created before it can be deployed. The path can be absolute or relative to <code class="docutils literal notranslate"><span class="pre">FABRIC_CFG_PATH</span></code> (by default, it is <code class="docutils literal notranslate"><span class="pre">/etc/hyperledger/fabric</span></code> in the orderer image). Unless an absolute path is specified to a folder named something other than “msp”, the ordering node defaults to looking for a folder called “msp” at the path (in other words, <code class="docutils literal notranslate"><span class="pre">FABRIC_CFG_PATH/msp</span></code>) and when using the orderer image: <code class="docutils literal notranslate"><span class="pre">/etc/hyperledger/fabric/msp</span></code>. If you are using the recommended folder structure described in the <a class="reference external" href="https://hyperledger-fabric-ca.readthedocs.io/en/release-1.4/deployguide/use_CA.html">Registering and enrolling identities with a CA</a> topic, it would be relative to the <code class="docutils literal notranslate"><span class="pre">FABRIC_CFG_PATH</span></code> as follows:
+<code class="docutils literal notranslate"><span class="pre">config/organizations/ordererOrganizations/org0.example.com/orderers/orderer0.org0.example.com/msp</span></code>. <strong>The best practice is to store this data in persistent storage</strong>. This prevents the MSP from being lost if your orderer containers are destroyed for some reason.</p>
+</div>
+<div class="section" id="general-localmspid">
+<span id="general-localmspid"></span><h2>General.LocalMSPID<a class="headerlink" href="#general-localmspid" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># LocalMSPID is the identity to register the local MSP material with the MSP</span>
+<span class="c1"># manager. IMPORTANT: The local MSP ID of an orderer needs to match the MSP</span>
+<span class="c1"># ID of one of the organizations defined in the orderer system channel&#39;s</span>
+<span class="c1"># /Channel/Orderer configuration. The sample organization defined in the</span>
+<span class="c1"># sample configuration provided has an MSP ID of &quot;SampleOrg&quot;.</span>
+<span class="n">LocalMSPID</span><span class="p">:</span> <span class="n">SampleOrg</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">LocalMSPID</span></code></strong>: (default value should be overridden) This identifies the organization this ordering node belongs to. The MSP ID must match the orderer organization MSP ID that exists in the configuration of any channel this joined will be joined to.</li>
+</ul>
+</div>
+<div class="section" id="general-bccsp">
+<span id="general-bccsp"></span><h2>General.BCCSP.*<a class="headerlink" href="#general-bccsp" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Default specifies the preferred blockchain crypto service provider</span>
+        <span class="c1"># to use. If the preferred provider is not available, the software</span>
+        <span class="c1"># based provider (&quot;SW&quot;) will be used.</span>
+        <span class="c1"># Valid providers are:</span>
+        <span class="c1">#  - SW: a software based crypto provider</span>
+        <span class="c1">#  - PKCS11: a CA hardware security module crypto provider.</span>
+        <span class="n">Default</span><span class="p">:</span> <span class="n">SW</span>
+
+        <span class="c1"># SW configures the software based blockchain crypto provider.</span>
+        <span class="n">SW</span><span class="p">:</span>
+            <span class="c1"># TODO: The default Hash and Security level needs refactoring to be</span>
+            <span class="c1"># fully configurable. Changing these defaults requires coordination</span>
+            <span class="c1"># SHA2 is hardcoded in several places, not only BCCSP</span>
+            <span class="n">Hash</span><span class="p">:</span> <span class="n">SHA2</span>
+            <span class="n">Security</span><span class="p">:</span> <span class="mi">256</span>
+            <span class="c1"># Location of key store. If this is unset, a location will be</span>
+            <span class="c1"># chosen using: &#39;LocalMSPDir&#39;/keystore</span>
+            <span class="n">FileKeyStore</span><span class="p">:</span>
+                <span class="n">KeyStore</span><span class="p">:</span>
+</pre></div>
+</div>
+<p>(Optional) This section is used to configure the Blockchain crypto provider.</p>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">BCCSP.Default:</span></code></strong> If you plan to use a Hardware Security Module (HSM), then this must be set to <code class="docutils literal notranslate"><span class="pre">PKCS11</span></code>.</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Settings for the PKCS#11 crypto provider (i.e. when DEFAULT: PKCS11)</span>
+        <span class="n">PKCS11</span><span class="p">:</span>
+            <span class="c1"># Location of the PKCS11 module library</span>
+            <span class="n">Library</span><span class="p">:</span>
+            <span class="c1"># Token Label</span>
+            <span class="n">Label</span><span class="p">:</span>
+            <span class="c1"># User PIN</span>
+            <span class="n">Pin</span><span class="p">:</span>
+            <span class="n">Hash</span><span class="p">:</span>
+            <span class="n">Security</span><span class="p">:</span>
+            <span class="n">FileKeyStore</span><span class="p">:</span>
+                <span class="n">KeyStore</span><span class="p">:</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">BCCSP.PKCS11.*:</span></code></strong> Provide this set of parameters according to your HSM configuration. Refer to this <a class="reference external" href="../hsm.html">example</a> of an HSM configuration for more information.</li>
+</ul>
+</div>
+<div class="section" id="fileledger-location">
+<span id="fileledger-location"></span><h2>FileLedger.Location<a class="headerlink" href="#fileledger-location" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Location: The directory to store the blocks in.</span>
+<span class="n">Location</span><span class="p">:</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">hyperledger</span><span class="o">/</span><span class="n">production</span><span class="o">/</span><span class="n">orderer</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">Location</span></code></strong>: (default value should be overridden in the unlikely event where two ordering nodes are running on the same node) Every channel on which the node is a consenter will have its own subdirectory at this location. The user running the orderer needs to own and have write access to this directory. <strong>The best practice is to store this data in persistent storage</strong>. This prevents the ledger from being lost if your orderer containers are destroyed for some reason.</li>
+</ul>
+</div>
+<div class="section" id="operations">
+<span id="operations"></span><h2>Operations.*<a class="headerlink" href="#operations" title="Permalink to this headline">¶</a></h2>
+<p>The operations service is used for monitoring the health of the ordering node and relies on mutual TLS to secure its communication. Therefore, you need to set <code class="docutils literal notranslate"><span class="pre">operations.tls.clientAuthRequired</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code>. When this parameter is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, clients attempting to ascertain the health of the node are required to provide a valid certificate for authentication. If the client does not provide a certificate or the service cannot verify the client’s certificate, the request is rejected. This means that the clients will need to register with the ordering node’s TLS CA and provide their TLS signing certificate on the requests. See <a class="reference external" href="../operations_service.html">The Operations Service</a> to learn more.</p>
+<p>If you plan to use Prometheus <a class="reference external" href="#metrics">metrics</a> to monitor your ordering node, you must configure the operations service here.</p>
+<p>In the unlikely case where two ordering nodes are running on the same node on your infrastructure, you need to modify the addresses for the second ordering node to use a different port. Otherwise, when you start the second ordering node, it will fail to start, reporting that the addresses are already in use.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># host and port for the operations server</span>
+    <span class="n">ListenAddress</span><span class="p">:</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">8443</span>
+
+    <span class="c1"># TLS configuration for the operations endpoint</span>
+    <span class="n">TLS</span><span class="p">:</span>
+        <span class="c1"># TLS enabled</span>
+        <span class="n">Enabled</span><span class="p">:</span> <span class="n">false</span>
+
+        <span class="c1"># Certificate is the location of the PEM encoded TLS certificate</span>
+        <span class="n">Certificate</span><span class="p">:</span>
+
+        <span class="c1"># PrivateKey points to the location of the PEM-encoded key</span>
+        <span class="n">PrivateKey</span><span class="p">:</span>
+
+        <span class="c1"># Most operations service endpoints require client authentication when TLS</span>
+        <span class="c1"># is enabled. ClientAuthRequired requires client certificate authentication</span>
+        <span class="c1"># at the TLS layer to access all resources.</span>
+        <span class="n">ClientAuthRequired</span><span class="p">:</span> <span class="n">false</span>
+
+        <span class="c1"># Paths to PEM encoded ca certificates to trust for client authentication</span>
+        <span class="n">ClientRootCAs</span><span class="p">:</span> <span class="p">[]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">ListenAddress</span></code></strong>: (required when using the operations service) Specify the address and port of the operations server.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">Enabled</span></code></strong>: (required when using the operations service) Must be <code class="docutils literal notranslate"><span class="pre">true</span></code> if the operations service is being used.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">Certificate</span></code></strong>: (required when using the operations service) Can be the same file as the <code class="docutils literal notranslate"><span class="pre">General.TLS.Certificate</span></code>.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">PrivateKey</span></code></strong>: (required when using the operations service) Can be the same file as the <code class="docutils literal notranslate"><span class="pre">General.TLS.PrivateKey</span></code>.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">ClientAuthRequired</span></code></strong>: (required when using the operations service) Must be set to <code class="docutils literal notranslate"><span class="pre">true</span></code> to enable mutual TLS between the client and the server.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">ClientRootCAs</span></code></strong>: (required when using the operations service) Similar to the client root CA cert file in TLS, it contains a list of client root CA certificates that can be used to verify client certificates. If the client enrolled with the orderer organization CA, then this value is the orderer organization root CA cert.</li>
+</ul>
+</div>
+<div class="section" id="metrics">
+<span id="metrics"></span><h2>Metrics.*<a class="headerlink" href="#metrics" title="Permalink to this headline">¶</a></h2>
+<p>By default this is disabled, but if you want to monitor the metrics for the orderer, you need to use <code class="docutils literal notranslate"><span class="pre">StatsD</span></code> or <code class="docutils literal notranslate"><span class="pre">Prometheus</span></code> as your metric provider. <code class="docutils literal notranslate"><span class="pre">StatsD</span></code> uses a “push” model, pushing metrics from the ordering node to a <code class="docutils literal notranslate"><span class="pre">StatsD</span></code> endpoint. Because of this, it does not require configuration of the operations service itself. <code class="docutils literal notranslate"><span class="pre">Prometheus</span></code> metrics, by contrast, are pulled from an ordering node.</p>
+<p>For more information about the available <code class="docutils literal notranslate"><span class="pre">Prometheus</span></code> metrics, check out <a class="reference external" href="../metrics_reference.html#prometheus">Prometheus</a></p>
+<p>For more information about the available <code class="docutils literal notranslate"><span class="pre">StatsD</span></code> metrics, check out <a class="reference external" href="../metrics_reference.html#statsd">StatsD</a>.</p>
+<p>Because Prometheus utilizes a “pull” model there is not any configuration required, beyond making the operations service available. Rather, Prometheus will send requests to the operations URL to poll for available metrics.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># The metrics provider is one of statsd, prometheus, or disabled</span>
+    <span class="n">Provider</span><span class="p">:</span> <span class="n">disabled</span>
+
+    <span class="c1"># The statsd configuration</span>
+    <span class="n">Statsd</span><span class="p">:</span>
+      <span class="c1"># network type: tcp or udp</span>
+      <span class="n">Network</span><span class="p">:</span> <span class="n">udp</span>
+
+      <span class="c1"># the statsd server address</span>
+      <span class="n">Address</span><span class="p">:</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">8125</span>
+
+      <span class="c1"># The interval at which locally cached counters and gauges are pushed</span>
+      <span class="c1"># to statsd; timings are pushed immediately</span>
+      <span class="n">WriteInterval</span><span class="p">:</span> <span class="mi">30</span><span class="n">s</span>
+
+      <span class="c1"># The prefix is prepended to all emitted statsd metrics</span>
+      <span class="n">Prefix</span><span class="p">:</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">Provider</span></code></strong>: Set this value to <code class="docutils literal notranslate"><span class="pre">statsd</span></code> if using <code class="docutils literal notranslate"><span class="pre">StatsD</span></code> or <code class="docutils literal notranslate"><span class="pre">prometheus</span></code> if using <code class="docutils literal notranslate"><span class="pre">Prometheus</span></code>.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">Statsd.Address</span></code></strong>: (required to use <code class="docutils literal notranslate"><span class="pre">StatsD</span></code> metrics for the ordering node) When <code class="docutils literal notranslate"><span class="pre">StatsD</span></code> is enabled, you will need to configure the <code class="docutils literal notranslate"><span class="pre">hostname</span></code> and <code class="docutils literal notranslate"><span class="pre">port</span></code> of the <code class="docutils literal notranslate"><span class="pre">StatsD</span></code> server so that the ordering node can push metric updates.</li>
+</ul>
+</div>
+<div class="section" id="admin">
+<span id="admin"></span><h2>Admin.*<a class="headerlink" href="#admin" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Admin</span><span class="p">:</span>
+    <span class="c1"># host and port for the admin server</span>
+    <span class="n">ListenAddress</span><span class="p">:</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">9443</span>
+
+    <span class="c1"># TLS configuration for the admin endpoint</span>
+    <span class="n">TLS</span><span class="p">:</span>
+        <span class="c1"># TLS enabled</span>
+        <span class="n">Enabled</span><span class="p">:</span> <span class="n">false</span>
+
+        <span class="c1"># Certificate is the location of the PEM encoded TLS certificate</span>
+        <span class="n">Certificate</span><span class="p">:</span>
+
+        <span class="c1"># PrivateKey points to the location of the PEM-encoded key</span>
+        <span class="n">PrivateKey</span><span class="p">:</span>
+
+        <span class="c1"># Most admin service endpoints require client authentication when TLS</span>
+        <span class="c1"># is enabled. ClientAuthRequired requires client certificate authentication</span>
+        <span class="c1"># at the TLS layer to access all resources.</span>
+        <span class="c1">#</span>
+        <span class="c1"># NOTE: When TLS is enabled, the admin endpoint requires mutual TLS. The</span>
+        <span class="c1"># orderer will panic on startup if this value is set to false.</span>
+        <span class="n">ClientAuthRequired</span><span class="p">:</span> <span class="n">true</span>
+
+        <span class="c1"># Paths to PEM encoded ca certificates to trust for client authentication</span>
+        <span class="n">ClientRootCAs</span><span class="p">:</span> <span class="p">[]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">ListenAddress</span></code></strong>: The orderer admin server address (host and port) that can be used by the <code class="docutils literal notranslate"><span class="pre">osnadmin</span></code> command to configure channels on the ordering service. This value should be a unique <code class="docutils literal notranslate"><span class="pre">host:port</span></code> combination to avoid conflicts.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">TLS.Enabled</span></code></strong>: Technically this can be set to <code class="docutils literal notranslate"><span class="pre">false</span></code>, but this is not recommended. In general, you should always set this value to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">TLS.Certificate</span></code></strong>: The path to and file name of the orderer signed certificate issued by the TLS CA.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">TLS.PrivateKey</span></code></strong>: The path to and file name of the orderer private key issued by the TLS CA.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">TLS.ClientAuthRequired</span></code></strong>: This value must be set to <code class="docutils literal notranslate"><span class="pre">true</span></code>. Note that while mutual TLS is required for all operations on the orderer <code class="docutils literal notranslate"><span class="pre">Admin</span></code> endpoint, the entire network is not required to use mutual TLS.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">TLS.ClientRootCAs</span></code></strong>: The path to and file name of the admin client TLS CA root certificate.</li>
+</ul>
+</div>
+<div class="section" id="channelparticipation">
+<span id="channelparticipation"></span><h2>ChannelParticipation.*<a class="headerlink" href="#channelparticipation" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ChannelParticipation</span><span class="p">:</span>
+    <span class="c1"># Channel participation API is enabled.</span>
+    <span class="n">Enabled</span><span class="p">:</span> <span class="n">false</span>
+
+    <span class="c1"># The maximum size of the request body when joining a channel.</span>
+    <span class="n">MaxRequestBodySize</span><span class="p">:</span> <span class="mi">1</span> <span class="n">MB</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">Enabled</span></code></strong>: If you are bootstrapping the ordering node with a system channel genesis block, this value can be set to either <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code> (setting the value to <code class="docutils literal notranslate"><span class="pre">true</span></code> allows you to list channels and to migrate away from the system channel in the future). If you are <strong>not</strong> bootstrapping the ordering node with a system channel genesis block, this value must be set to <code class="docutils literal notranslate"><span class="pre">true</span></code> and the <a class="reference external" href="#general-boostrapmethod"><code class="docutils literal notranslate"><span class="pre">General.BoostrapMethod</span></code></a> should be set to <code class="docutils literal notranslate"><span class="pre">none</span></code>.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">MaxRequestBodySize</span></code></strong>: (default value should not be overridden) This value controls the maximum size a configuration block can be and be accepted by this ordering node. Most configuration blocks are smaller than 1 MB, but if for some reason a configuration block is too large to be accept, bring down the node, increase this value, and restart the node.</li>
+</ul>
+</div>
+<div class="section" id="consensus">
+<span id="consensus"></span><h2>Consensus.*<a class="headerlink" href="#consensus" title="Permalink to this headline">¶</a></h2>
+<p>The values of this section vary by consensus plugin. The values below are for the <code class="docutils literal notranslate"><span class="pre">etcdraft</span></code> consensus plugin. If you are using a different consensus plugin, refer to its documentation for allowed keys and recommended values.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># The allowed key-value pairs here depend on consensus plugin. For etcd/raft,</span>
+<span class="c1"># we use following options:</span>
+
+<span class="c1"># WALDir specifies the location at which Write Ahead Logs for etcd/raft are</span>
+<span class="c1"># stored. Each channel will have its own subdir named after channel ID.</span>
+<span class="n">WALDir</span><span class="p">:</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">hyperledger</span><span class="o">/</span><span class="n">production</span><span class="o">/</span><span class="n">orderer</span><span class="o">/</span><span class="n">etcdraft</span><span class="o">/</span><span class="n">wal</span>
+
+<span class="c1"># SnapDir specifies the location at which snapshots for etcd/raft are</span>
+<span class="c1"># stored. Each channel will have its own subdir named after channel ID.</span>
+<span class="n">SnapDir</span><span class="p">:</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">hyperledger</span><span class="o">/</span><span class="n">production</span><span class="o">/</span><span class="n">orderer</span><span class="o">/</span><span class="n">etcdraft</span><span class="o">/</span><span class="n">snapshot</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">WALDir</span></code></strong>: (default value should be overridden) This is the path to the write ahead logs on the local filesystem of the ordering node. It can be an absolute path or relative to <code class="docutils literal notranslate"><span class="pre">FABRIC_CFG_PATH</span></code>. It defaults to <code class="docutils literal notranslate"><span class="pre">/var/hyperledger/production/orderer/etcdraft/wal</span></code>. Each channel will have its own subdirectory named after the channel ID. The user running the ordering node needs to own and have write access to this directory. <strong>The best practice is to store this data in persistent storage</strong>. This prevents the write ahead log from being lost if your orderer containers are destroyed for some reason.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">SnapDir</span></code></strong>: (default value should be overridden) This is the path to the snapshots on the local filesystem of the ordering node. For more information about how snapshots work in a Raft ordering service, check out <a class="reference external" href="../orderer/ordering_service.html#snapshots">Snapshots</a>/ It can be an absolute path or relative to <code class="docutils literal notranslate"><span class="pre">FABRIC_CFG_PATH</span></code>. It defaults to <code class="docutils literal notranslate"><span class="pre">/var/hyperledger/production/orderer/etcdraft/wal</span></code>. Each channel will have its own subdirectory named after the channel ID. The user running the ordering node needs to own and have write access to this directory. <strong>The best practice is to store this data in persistent storage</strong>. This prevents snapshots from being lost if your orderer containers are destroyed for some reason.</li>
+</ul>
+<p>For more information about ordering node configuration, including how to set parameters that are not available in <code class="docutils literal notranslate"><span class="pre">orderer.yaml</span></code>, check out <a class="reference external" href="../raft_configuration.html">Configuring and operating a Raft ordering service</a>.</p>
+<!--- Licensed under Creative Commons Attribution 4.0 International License
+https://creativecommons.org/licenses/by/4.0/) --></div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ordererdeploy.html" class="btn btn-neutral float-right" title="Deploy the ordering service" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ordererplan.html" class="btn btn-neutral" title="Planning for an ordering service" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright Hyperledger 2020.
+    <br>
+      <br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>
+      <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+        <img alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'master',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

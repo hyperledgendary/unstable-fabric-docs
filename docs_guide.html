@@ -1,0 +1,615 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Contributing documentation &mdash; hyperledger-fabricdocs master documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="hyperledger-fabricdocs master documentation" href="index.html"/>
+        <link rel="up" title="Contributions Welcome!" href="CONTRIBUTING.html"/>
+        <link rel="next" title="Creating a new translation" href="international_languages.html"/>
+        <link rel="prev" title="Connect with other writers" href="advice_for_writers.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+
+          
+            <a href="index.html" class="icon icon-home"> hyperledger-fabricdocs
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                master
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+
+<br><img style="background-color: #fff; height: unset; width: unset;" alt="Hyperledger Fabric" src=_images/hyperledger_fabric_logo_color.png />
+<br>
+<a href="https://github.com/hyperledger/fabric"><img style="padding: 0px; margin: auto auto auto auto;" alt="GitHub" src="_static/images/github_button.png"/></a>
+&nbsp;<a href="https://stackoverflow.com/questions/tagged/hyperledger-fabric"><img style="padding: 0px; margin: auto auto auto auto;" alt="StackOverflow" src="_static/images/stackoverflow_button.png"/></a>
+&nbsp;<a href="https://chat.hyperledger.org"><img style="padding: 0px; margin: auto auto auto auto;" alt="Rocket Chat" src="_static/images/rocketchat_button.png"/></a>
+&nbsp;<a href="https://www.youtube.com/playlist?list=PL0MZ85B_96CH7wvtrRzV7SvtRY0sI0DEg"><img style="padding: 0px; margin: auto auto auto auto;" alt="Youtube Channel" src="_static/images/youtube_button.png"/></a>
+
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="whatis.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whatsnew.html">What’s new in Hyperledger Fabric v2.x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="whatsnew.html#release-notes">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="key_concepts.html">Key Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started - Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started_run_fabric.html">Getting Started - Run Fabric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developapps/developing_applications.html">Developing Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment_guide_overview.html">Deploying a production network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ops_guide.html">Operations Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="upgrade.html">Upgrading to the latest release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="command_ref.html">Commands Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Fabric-FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="CONTRIBUTING.html">Contributions Welcome!</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="CONTRIBUTING.html#ways-to-contribute">Ways to contribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CONTRIBUTING.html#getting-a-linux-foundation-account">Getting a Linux Foundation account</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="CONTRIBUTING.html#contributing-documentation">Contributing documentation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="advice_for_writers.html">Connect with other writers</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Contributing documentation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#repository-folders">Repository folders</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#international-folders">International folders</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#making-changes">Making changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-locally">Building locally</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-on-github">Building on GitHub</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#making-a-pr">Making a PR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#commands-reference-updates">Commands Reference updates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#adding-a-new-cli-command">Adding a new CLI command</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="international_languages.html">Creating a new translation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="style_guide.html">Style guide for contributors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="CONTRIBUTING.html#project-governance">Project Governance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CONTRIBUTING.html#contribution-guide">Contribution guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CONTRIBUTING.html#legal-stuff">Legal stuff</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CONTRIBUTING.html#related-topics">Related Topics</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="releases.html">Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="questions.html">Still Have Questions?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="status.html">Status</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">hyperledger-fabricdocs</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="CONTRIBUTING.html">Contributions Welcome!</a> &raquo;</li>
+        
+      <li>Contributing documentation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/docs_guide.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="contributing-documentation">
+<span id="contributing-documentation"></span><h1>Contributing documentation<a class="headerlink" href="#contributing-documentation" title="Permalink to this headline">¶</a></h1>
+<p><strong>Audience</strong>: Anyone who would like to contribute to the Fabric documentation.</p>
+<p>This short guide describes how the Fabric documentation is structured, built and
+published, as well as a few conventions that help writers make changes to the
+Fabric documentation.</p>
+<p>In this topic, we’re going to cover:</p>
+<ul class="simple">
+<li><a class="reference external" href="#introduction">An introduction to the documentation</a></li>
+<li><a class="reference external" href="#repository-folders">Repository folder structure</a></li>
+<li><a class="reference external" href="#international-folders">International language folder structure</a></li>
+<li><a class="reference external" href="#making-changes">Making documentation changes</a></li>
+<li><a class="reference external" href="#building-locally">Building the documentation on your local machine</a></li>
+<li><a class="reference external" href="#building-on-github">Building the documentation on GitHub with ReadTheDocs</a></li>
+<li><a class="reference external" href="#making-a-pr">Getting your change approved</a></li>
+<li><a class="reference external" href="#commands-reference-updates">Making a change to Commands Reference</a></li>
+<li><a class="reference external" href="#adding-a-new-cli-command">Adding a new CLI command</a></li>
+</ul>
+<div class="section" id="introduction">
+<span id="introduction"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The Fabric documentation is written in a combination of
+<a class="reference external" href="https://www.markdownguide.org/">Markdown</a> and
+<a class="reference external" href="http://docutils.sourceforge.net/rst.html">reStructuredText</a> source files. As a
+new author you can use either format. We recommend that you use Markdown as an
+easy and powerful way to get started. If you have a background in Python, you
+may prefer to use rST.</p>
+<p>During the documentation build process, the documentation source files are
+converted to HTML using <a class="reference external" href="http://www.sphinx-doc.org/en/stable/">Sphinx</a>. The
+generated HTML files are subsequently published on the <a class="reference external" href="http://hyperledger-fabric.readthedocs.io">public documentation
+website</a>. Users can select both
+different languages and different versions of the Fabric documentation.</p>
+<p>For example:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://hyperledger-fabric.readthedocs.io/en/latest/">Latest version of US English</a></li>
+<li><a class="reference external" href="https://hyperledger-fabric.readthedocs.io/zh_CN/latest/">Latest version of Chinese</a></li>
+<li><a class="reference external" href="https://hyperledger-fabric.readthedocs.io/en/release-2.2/">Version 2.2 of US English</a></li>
+<li><a class="reference external" href="https://hyperledger-fabric.readthedocs.io/en/release-1.4/">Version 1.4 of US English</a></li>
+</ul>
+<p>For historical reasons, the US English source files live in the main <a class="reference external" href="https://github.com/hyperledger/fabric/">Fabric
+repository</a>, whereas all international
+language source files live in a single <a class="reference external" href="https://github.com/hyperledger/fabric-docs-i18n">Fabric i18n
+repository</a>. Different versions
+of the documentation are held within the appropriate GitHub release branch.</p>
+</div>
+<div class="section" id="repository-folders">
+<span id="repository-folders"></span><h2>Repository folders<a class="headerlink" href="#repository-folders" title="Permalink to this headline">¶</a></h2>
+<p>Both the US English and international language repositories have essentially the
+same structure, so let’s start by examining the US English source files.</p>
+<p>All files relating to documentation reside within the <code class="docutils literal notranslate"><span class="pre">fabric/docs/</span></code> folder:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>fabric/docs
+├── custom_theme
+├── <span class="nb">source</span>
+│   ├── _static
+│   ├── _templates
+│   ├── commands
+│   ├── create_channel
+│   ├── dev-setup
+│   ├── developapps
+│   ├── diagrams
+│   ...
+│   ├── orderer
+│   ├── peers
+│   ├── policies
+│   ├── private-data
+│   ├── smartcontract
+│   ├── style-guides
+│   └── tutorial
+└── wrappers
+</pre></div>
+</div>
+<p>The most important folders is <code class="docutils literal notranslate"><span class="pre">source/</span></code> becuase it holds the source language
+files. The documentation build process uses the <code class="docutils literal notranslate"><span class="pre">make</span></code> command to convert these
+source files to HTML, which are stored in the dynamically created <code class="docutils literal notranslate"><span class="pre">build/html/</span></code>
+folder:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>fabric/docs
+├── build
+│   ├── html
+├── custom_theme
+├── <span class="nb">source</span>
+│   ├── _static
+│   ├── _templates
+│   ├── commands
+│   ├── create_channel
+│   ├── dev-setup
+│   ├── developapps
+│   ├── diagrams
+    ...
+</pre></div>
+</div>
+<p>Spend a little time navigating the <a class="reference external" href="https://github.com/hyperledger/fabric/tree/master/docs">docs
+folder</a> in the
+Hyperledger Fabric repository. Click on the following links to see how different
+source files map to their corresponding published topics.</p>
+<ul class="simple">
+<li><a class="reference external" href="https://raw.githubusercontent.com/hyperledger/fabric/master/docs/source/index.rst"><code class="docutils literal notranslate"><span class="pre">/docs/source/index.rst</span></code></a> maps to <a class="reference external" href="https://hyperledger-fabric.readthedocs.io/en/latest/">Hyperledger Fabric title page</a></li>
+<li><a class="reference external" href="https://raw.githubusercontent.com/hyperledger/fabric/master/docs/source/developapps/developing_applications.rst"><code class="docutils literal notranslate"><span class="pre">/docs/source/developapps/developing-applications.rst</span></code></a>
+maps to <a class="reference external" href="https://hyperledger-fabric.readthedocs.io/en/latest/developapps/developing_applications.html">Developing
+applications</a></li>
+<li><a class="reference external" href="https://raw.githubusercontent.com/hyperledger/fabric/master/docs/source/peers/peers.md"><code class="docutils literal notranslate"><span class="pre">/docs/source/peers/peers.md</span></code></a>
+maps to
+<a class="reference external" href="https://hyperledger-fabric.readthedocs.io/en/latest/peers/peers.html">Peers</a></li>
+</ul>
+<p>We’ll see how to make changes to these files a little later.</p>
+</div>
+<div class="section" id="international-folders">
+<span id="international-folders"></span><h2>International folders<a class="headerlink" href="#international-folders" title="Permalink to this headline">¶</a></h2>
+<p>The international language repository,
+<a class="reference external" href="https://github.com/hyperledger/fabric-docs-i18n"><code class="docutils literal notranslate"><span class="pre">fabric-docs-i18n</span></code></a>, follows
+almost exactly the same structure as the
+<a class="reference external" href="https://github.com/hyperledger/fabric"><code class="docutils literal notranslate"><span class="pre">fabric</span></code></a> repository which holds the US
+English files.  The difference is that each language is located within its own
+folder within <code class="docutils literal notranslate"><span class="pre">docs/locale/</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>fabric-docs-i18n/docs
+└── locale
+    ├── ja_JP
+    ├── ml_IN
+    ├── pt_BR
+    └── zh_CN
+</pre></div>
+</div>
+<p>Examining any one of these folders shows a familiar structure:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>locale/ml_IN
+├── custom_theme
+├── <span class="nb">source</span>
+│   ├── _static
+│   ├── _templates
+│   ├── commands
+│   ├── dev-setup
+│   ├── developapps
+│   ├── diagrams
+│   ...
+│   ├── orderer
+│   ├── peers
+│   ├── policies
+│   ├── private-data
+│   ├── smartcontract
+│   ├── style-guides
+│   └── tutorial
+└── wrappers
+</pre></div>
+</div>
+<p>As we’ll soon see, the similarity of the international language and US English
+folder structures means that the same instructions and commands can be used to
+manage different language translations.</p>
+<p>Again, spend some time examining the <a class="reference external" href="https://github.com/hyperledger/fabric-docs-i18n">international language
+repository</a>.</p>
+</div>
+<div class="section" id="making-changes">
+<span id="making-changes"></span><h2>Making changes<a class="headerlink" href="#making-changes" title="Permalink to this headline">¶</a></h2>
+<p>To update the documentation, you simply change one or more language source files
+in a local git feature branch, build the changes locally to check they’re OK,
+and submit a Pull request (PR) to merge your branch with the appropriate Fabric
+repository branch. Once your PR has been reviewed and approved by the appropriate
+maintainers for the language, it will be merged into the repository and become
+part of the published documentation. It really is that easy!</p>
+<p>As well as being polite, it’s a really good idea to test any documentation
+changes before you request to include it in a repository. The following sections
+show you how to:</p>
+<ul class="simple">
+<li>Build and review a documentation change on your own machine.</li>
+</ul>
+<ul class="simple">
+<li>Push these changes to your GitHub repository fork where they can populate your
+personal <a class="reference external" href="https://readthedocs.org/">ReadTheDocs</a> publication website for
+collaborators to review.</li>
+</ul>
+<ul class="simple">
+<li>Submit your documentation PR for inclusion in the <code class="docutils literal notranslate"><span class="pre">fabric</span></code> or
+<code class="docutils literal notranslate"><span class="pre">fabric-docs-i18n</span></code> repository.</li>
+</ul>
+</div>
+<div class="section" id="building-locally">
+<span id="building-locally"></span><h2>Building locally<a class="headerlink" href="#building-locally" title="Permalink to this headline">¶</a></h2>
+<p>Use these simple steps to build the documentation.</p>
+<ol>
+<li><p class="first">Create a fork of the appropriate
+<a class="reference external" href="https://github.com/hyperledger/fabric"><code class="docutils literal notranslate"><span class="pre">fabric</span></code></a> or
+<a class="reference external" href="https://github.com/hyperledger/fabric-docs-i18n"><code class="docutils literal notranslate"><span class="pre">fabric-i18n</span></code></a> repository to
+your GitHub account.</p>
+</li>
+<li><p class="first">Install the following prerequisites; you may need to adjust depending on your
+OS:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://docs.docker.com/get-docker/">Docker</a></li>
+</ul>
+</li>
+<li><p class="first">For US English:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone git@github.com:hyperledger/fabric.git
+<span class="nb">cd</span> fabric
+make docs
+</pre></div>
+</div>
+<p>For International Languages (Malayalam as an example):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone git@github.com:hyperledger/fabric-docs-i18n.git
+<span class="nb">cd</span> fabric
+make docs-lang-ml_IN
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">make</span></code> command generates documentation html files in the <code class="docutils literal notranslate"><span class="pre">build/html/</span></code>
+folder which you can now view locally; simply navigate your browser to the
+<code class="docutils literal notranslate"><span class="pre">build/html/index.html</span></code> file.</p>
+</li>
+<li><p class="first">Now make a small change to a file, and rebuild the documentation to verify
+that your change was as expected. Every time you make a change to the
+documentation you will of course need to rerun <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docs</span></code>.</p>
+</li>
+<li><p class="first">If you’d like, you may also run a local web server with the following
+commands (or equivalent depending on your OS):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get install apache2
+<span class="nb">cd</span> build/html
+sudo cp -r * /var/www/html/
+</pre></div>
+</div>
+<p>You can then access the html files at <code class="docutils literal notranslate"><span class="pre">http://localhost/index.html</span></code>.</p>
+</li>
+<li><p class="first">You can learn how to make a PR <a class="reference external" href="./github/github.html">here</a>. Moreover, if you
+are new to git or GitHub, you will find the <a class="reference external" href="https://git-scm.com/book/en/v2">Git
+book</a> invaluable.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="building-on-github">
+<span id="building-on-github"></span><h2>Building on GitHub<a class="headerlink" href="#building-on-github" title="Permalink to this headline">¶</a></h2>
+<p>It is often helpful to use your fork of the Fabric repository to build the
+Fabric documentation so that others can review your changes before you submit
+them for approval. The following instructions show you how to use ReadTheDocs to
+do this.</p>
+<ol class="simple">
+<li>Go to <a class="reference external" href="http://readthedocs.org"><code class="docutils literal notranslate"><span class="pre">http://readthedocs.org</span></code></a> and sign up for an
+account.</li>
+<li>Create a project. Your username will preface the URL and you may want to
+append <code class="docutils literal notranslate"><span class="pre">-fabric</span></code> to ensure that you can distinguish between this and other
+docs that you need to create for other projects. So for example:
+<code class="docutils literal notranslate"><span class="pre">YOURGITHUBID-fabric.readthedocs.io/en/latest</span></code>.</li>
+<li>Click <code class="docutils literal notranslate"><span class="pre">Admin</span></code>, click <code class="docutils literal notranslate"><span class="pre">Integrations</span></code>, click <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">integration</span></code>, choose <code class="docutils literal notranslate"><span class="pre">GitHub</span> <span class="pre">incoming</span> <span class="pre">webhook</span></code>, then click <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">integration</span></code>.</li>
+<li>Fork the <a class="reference external" href="https://github.com/hyperledger/fabric"><code class="docutils literal notranslate"><span class="pre">fabric</span></code></a> repository.</li>
+<li>From your fork, go to <code class="docutils literal notranslate"><span class="pre">Settings</span></code> in the upper right portion of the screen.</li>
+<li>Click <code class="docutils literal notranslate"><span class="pre">Webhooks</span></code>.</li>
+<li>Click <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">webhook</span></code>.</li>
+<li>Add the ReadTheDocs’s URL into <code class="docutils literal notranslate"><span class="pre">Payload</span> <span class="pre">URL</span></code>.</li>
+<li>Choose <code class="docutils literal notranslate"><span class="pre">Let</span> <span class="pre">me</span> <span class="pre">select</span> <span class="pre">individual</span> <span class="pre">events</span></code>:<code class="docutils literal notranslate"><span class="pre">Pushes</span></code>、<code class="docutils literal notranslate"><span class="pre">Branch</span> <span class="pre">or</span> <span class="pre">tag</span> <span class="pre">creation</span></code>、
+<code class="docutils literal notranslate"><span class="pre">Branch</span> <span class="pre">or</span> <span class="pre">tag</span> <span class="pre">deletion</span></code>.</li>
+<li>Click <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">webhook</span></code>.</li>
+</ol>
+<p>Use <code class="docutils literal notranslate"><span class="pre">fabric-docs-i18n</span></code> instead of <code class="docutils literal notranslate"><span class="pre">fabric</span></code> in the above instructions if you’re
+building an international language translation.</p>
+<p>Now, anytime you modify or add documentation content to your fork, this URL will
+automatically get updated with your changes!</p>
+</div>
+<div class="section" id="making-a-pr">
+<span id="making-a-pr"></span><h2>Making a PR<a class="headerlink" href="#making-a-pr" title="Permalink to this headline">¶</a></h2>
+<p>You can submit your PR for inclusion using the following
+<a class="reference external" href="./github/github.html">instructions</a>.</p>
+<p>Pay special attention to signing your commit with the <code class="docutils literal notranslate"><span class="pre">-s</span></code> option:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git commit -s -m <span class="s2">&quot;My Doc change&quot;</span>
+</pre></div>
+</div>
+<p>This states that your changes conform to the <a class="reference external" href="https://en.wikipedia.org/wiki/Developer_Certificate_of_Origin">Developer Certificate of
+Origin</a>.</p>
+<p>Before your PR can be included in the appropriate <code class="docutils literal notranslate"><span class="pre">fabric</span></code> or <code class="docutils literal notranslate"><span class="pre">fabric-docs-i18n</span></code>
+repository, it must be approved by an appropriate maintainer. For example, a
+Japanese translation must be approved by a Japanese maintainer, and so on. You
+can find the maintainers listed in the following <code class="docutils literal notranslate"><span class="pre">CODEOWNERS</span></code> files:</p>
+<ul class="simple">
+<li>US English
+<a class="reference external" href="https://github.com/hyperledger/fabric/blob/master/CODEOWNERS"><code class="docutils literal notranslate"><span class="pre">CODEOWNERS</span></code></a>
+and their <a class="reference external" href="https://github.com/orgs/hyperledger/teams/fabric-core-doc-maintainers">maintainer GitHub
+IDs</a></li>
+<li>International language
+<a class="reference external" href="https://github.com/hyperledger/fabric-docs-i18n/blob/master/CODEOWNERS"><code class="docutils literal notranslate"><span class="pre">CODEOWNERS</span></code></a>
+and their <a class="reference external" href="https://github.com/orgs/hyperledger/teams/fabric-contributors">maintainer GitHub
+IDs</a></li>
+</ul>
+<p>Both language repositories have a GitHub webhook defined so that, once approved,
+your newly merged content in the <code class="docutils literal notranslate"><span class="pre">docs/</span></code> folder will trigger an automatic build
+and publication of the updated documentation.</p>
+<p><strong>Note:</strong> Documentation maintainers are not able to to merge documentation PRs by clicking the <code class="docutils literal notranslate"><span class="pre">Merge</span> <span class="pre">pull</span> <span class="pre">request</span></code> button. Instead, if you are a documentation maintainer and have approved the PR, simply add the label <code class="docutils literal notranslate"><span class="pre">doc-merge</span></code> to the PR and a <code class="docutils literal notranslate"><span class="pre">Mergify</span></code> bot that runs every minute will merge the PR.</p>
+</div>
+<div class="section" id="commands-reference-updates">
+<span id="commands-reference-updates"></span><h2>Commands Reference updates<a class="headerlink" href="#commands-reference-updates" title="Permalink to this headline">¶</a></h2>
+<p>Updating content in the <a class="reference external" href="https://hyperledger-fabric.readthedocs.io/en/latest/command_ref.html">Commands
+Reference</a>
+topic requires additional steps. Because the information in the Commands
+Reference topic is generated content, you cannot simply update the associated
+markdown files.</p>
+<ul class="simple">
+<li>Instead you need to update the <code class="docutils literal notranslate"><span class="pre">_preamble.md</span></code> or <code class="docutils literal notranslate"><span class="pre">_postscript.md</span></code> files under
+<code class="docutils literal notranslate"><span class="pre">src/github.com/hyperledger/fabric/docs/wrappers</span></code> for the command.</li>
+<li>To update the command help text, you need to edit the associated <code class="docutils literal notranslate"><span class="pre">.go</span></code> file
+for the command that is located under <code class="docutils literal notranslate"><span class="pre">/fabric/internal/peer</span></code>.</li>
+<li>Then, from the <code class="docutils literal notranslate"><span class="pre">fabric</span></code> folder, you need to run the command <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">help-docs</span></code>
+which generates the updated markdown files under <code class="docutils literal notranslate"><span class="pre">docs/source/commands</span></code>.</li>
+</ul>
+<p>Remember that when you push the changes to GitHub, you need to include the
+<code class="docutils literal notranslate"><span class="pre">_preamble.md</span></code>, <code class="docutils literal notranslate"><span class="pre">_postscript.md</span></code> or <code class="docutils literal notranslate"><span class="pre">_.go</span></code> file that was modified as well as the
+generated markdown file.</p>
+<p>This process only applies to English language translations. Command Reference
+translation is currently not possible in international languages.</p>
+</div>
+<div class="section" id="adding-a-new-cli-command">
+<span id="adding-a-new-cli-command"></span><h2>Adding a new CLI command<a class="headerlink" href="#adding-a-new-cli-command" title="Permalink to this headline">¶</a></h2>
+<p>To add a new CLI command, perform the following steps:</p>
+<ul class="simple">
+<li>Create a new folder under <code class="docutils literal notranslate"><span class="pre">/fabric/internal/peer</span></code> for the new command and the
+associated help text. See <code class="docutils literal notranslate"><span class="pre">internal/peer/version</span></code> for a simple example to get
+started.</li>
+<li>Add a section for your CLI command in
+<code class="docutils literal notranslate"><span class="pre">src/github.com/hyperledger/fabric/scripts/generateHelpDoc.sh</span></code>.</li>
+<li>Create two new files under <code class="docutils literal notranslate"><span class="pre">/src/github.com/hyperledger/fabric/docs/wrappers</span></code>
+with the associated content:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;command&gt;_preamble.md</span></code> (Command name and syntax)</li>
+<li><code class="docutils literal notranslate"><span class="pre">&lt;command&gt;_postscript.md</span></code> (Example usage)</li>
+</ul>
+</li>
+<li>Run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">help-docs</span></code> to generate the markdown content and push all of the
+changed files to GitHub.</li>
+</ul>
+<p>This process only applies to English language translations. CLI
+command translation is currently not possible in international languages.</p>
+<!--- Licensed under Creative Commons Attribution 4.0 International License
+https://creativecommons.org/licenses/by/4.0/ --></div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="international_languages.html" class="btn btn-neutral float-right" title="Creating a new translation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="advice_for_writers.html" class="btn btn-neutral" title="Connect with other writers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright Hyperledger 2020.
+    <br>
+      <br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>
+      <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+        <img alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'master',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

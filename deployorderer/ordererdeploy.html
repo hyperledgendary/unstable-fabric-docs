@@ -1,0 +1,446 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Deploy the ordering service &mdash; hyperledger-fabricdocs master documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="hyperledger-fabricdocs master documentation" href="../index.html"/>
+        <link rel="up" title="Deploying a production network" href="../deployment_guide_overview.html"/>
+        <link rel="next" title="Operations Guides" href="../ops_guide.html"/>
+        <link rel="prev" title="Checklist for a production ordering node" href="ordererchecklist.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+
+          
+            <a href="../index.html" class="icon icon-home"> hyperledger-fabricdocs
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                master
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+
+<br><img style="background-color: #fff; height: unset; width: unset;" alt="Hyperledger Fabric" src=../_images/hyperledger_fabric_logo_color.png />
+<br>
+<a href="https://github.com/hyperledger/fabric"><img style="padding: 0px; margin: auto auto auto auto;" alt="GitHub" src="../_static/images/github_button.png"/></a>
+&nbsp;<a href="https://stackoverflow.com/questions/tagged/hyperledger-fabric"><img style="padding: 0px; margin: auto auto auto auto;" alt="StackOverflow" src="../_static/images/stackoverflow_button.png"/></a>
+&nbsp;<a href="https://chat.hyperledger.org"><img style="padding: 0px; margin: auto auto auto auto;" alt="Rocket Chat" src="../_static/images/rocketchat_button.png"/></a>
+&nbsp;<a href="https://www.youtube.com/playlist?list=PL0MZ85B_96CH7wvtrRzV7SvtRY0sI0DEg"><img style="padding: 0px; margin: auto auto auto auto;" alt="Youtube Channel" src="../_static/images/youtube_button.png"/></a>
+
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../whatis.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html">What’s new in Hyperledger Fabric v2.x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html#release-notes">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../key_concepts.html">Key Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started - Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started_run_fabric.html">Getting Started - Run Fabric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developapps/developing_applications.html">Developing Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../deployment_guide_overview.html">Deploying a production network</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../deployment_guide_overview.html#step-one-decide-on-your-network-configuration">Step one: Decide on your network configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment_guide_overview.html#step-two-set-up-a-cluster-for-your-resources">Step two: Set up a cluster for your resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment_guide_overview.html#step-three-set-up-your-cas">Step three: Set up your CAs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment_guide_overview.html#step-four-use-the-ca-to-create-identities-and-msps">Step four: Use the CA to create identities and MSPs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../deployment_guide_overview.html#step-five-deploy-peers-and-ordering-nodes">Step five: Deploy peers and ordering nodes</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../deployment_guide_overview.html#creating-a-peer">Creating a peer</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../deployment_guide_overview.html#creating-an-ordering-node">Creating an ordering node</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="ordererplan.html">Planning for an ordering service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ordererchecklist.html">Checklist for a production ordering node</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Deploy the ordering service</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment_guide_overview.html#next-steps">Next steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ops_guide.html">Operations Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../upgrade.html">Upgrading to the latest release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command_ref.html">Commands Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Architecture Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Fabric-FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributions Welcome!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releases.html">Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../questions.html">Still Have Questions?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../status.html">Status</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">hyperledger-fabricdocs</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../deployment_guide_overview.html">Deploying a production network</a> &raquo;</li>
+        
+      <li>Deploy the ordering service</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/deployorderer/ordererdeploy.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="deploy-the-ordering-service">
+<span id="deploy-the-ordering-service"></span><h1>Deploy the ordering service<a class="headerlink" href="#deploy-the-ordering-service" title="Permalink to this headline">¶</a></h1>
+<p>Before deploying an ordering service, review the material in <a class="reference external" href="./ordererplan.html">Planning for an ordering service</a> and <a class="reference external" href="./ordererchecklist.html">Checklist for a production ordering service</a>, which discusses all of the relevant decisions you need to make and parameters you need to configure before deploying an ordering service.</p>
+<p>This tutorial is based on the Raft consensus protocol and can be used to build an ordering service, which is comprised of ordering nodes, or “orderers”. It describes the process to create a three-node Raft ordering service where all of the ordering nodes belong to the same organization. This tutorial assumes that a system channel genesis block will not be used when bootstrapping the orderer. Instead, these nodes (or a subset of them), will be joined to a channel using the process to <a class="reference external" href="../create_channel/create_channel_participation.html">Create a channel</a>.</p>
+<p>For information on how to create an orderer that will be bootstrapped with a system channel genesis block, check out <a class="reference external" href="https://hyperledger-fabric.readthedocs.io/en/release-2.2/deployorderer/ordererdeploy.html">Deploy the ordering service</a> from the Fabric v2.2 documentation.</p>
+<div class="section" id="download-the-ordering-service-binary-and-configuration-files">
+<span id="download-the-ordering-service-binary-and-configuration-files"></span><h2>Download the ordering service binary and configuration files<a class="headerlink" href="#download-the-ordering-service-binary-and-configuration-files" title="Permalink to this headline">¶</a></h2>
+<p>To get started, download the Fabric binaries from <a class="reference external" href="https://github.com/hyperledger/fabric/releases">GitHub</a> to a folder on your local system, for example <code class="docutils literal notranslate"><span class="pre">fabric/</span></code>. In GitHub, scroll to the Fabric release you want to download, click the <strong>Assets</strong> twistie, and select the binary for your system type. After you extract the <code class="docutils literal notranslate"><span class="pre">.zip</span></code> file, you will find all of the Fabric binaries in the <code class="docutils literal notranslate"><span class="pre">/bin</span></code> folder and the associated configuration files in the <code class="docutils literal notranslate"><span class="pre">/config</span></code> folder.
+The resulting folder structure is similar to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>├── fabric
+  ├── bin
+  │   ├── configtxgen
+  │   ├── configtxlator
+  │   ├── cryptogen
+  │   ├── discover
+  │   ├── idemixgen
+  │   ├── orderer
+  │   └── osnadmin
+  └── config
+    ├── configtx.yaml
+    ├── orderer.yaml
+    └── core.yaml
+</pre></div>
+</div>
+<p>Along with the relevant binary file, the orderer configuration file, <code class="docutils literal notranslate"><span class="pre">orderer.yaml</span></code> is required to launch an orderer on the network. The other files are not required for the orderer deployment but are useful when you attempt to create or edit channels, among other tasks.</p>
+<p><strong>Tip:</strong> Add the location of the orderer binary to your <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment variable so that it can be picked up without fully qualifying the path to the binary executable, for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>export PATH=&lt;path to download location&gt;/bin:$PATH
+</pre></div>
+</div>
+<p>After you have mastered deploying and running an ordering service by using the orderer binary and <code class="docutils literal notranslate"><span class="pre">orderer.yaml</span></code> configuration file, it is likely that you will want to use an orderer container in a Kubernetes or Docker deployment. The Hyperledger Fabric project publishes an <a class="reference external" href="https://hub.docker.com/r/hyperledger/fabric-orderer">orderer image</a> that can be used for development and test, and various vendors provide supported orderer images. For now though, the purpose of this topic is to teach you how to properly use the orderer binary so you can take that knowledge and apply it to the production environment of your choice.</p>
+</div>
+<div class="section" id="prerequisites">
+<span id="prerequisites"></span><h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>Before you can launch an orderer in a production network, you need to make sure you’ve created and organized the necessary certificates, generate the genesis block, decided on storage, and configured <code class="docutils literal notranslate"><span class="pre">orderer.yaml</span></code>.</p>
+<div class="section" id="certificates">
+<span id="certificates"></span><h3>Certificates<a class="headerlink" href="#certificates" title="Permalink to this headline">¶</a></h3>
+<p>While <strong>cryptogen</strong> is a convenient utility that can be used to generate certificates for a test environment, it should <strong>never</strong> be used on a production network. The core requirement for certificates for Fabric nodes is that they are Elliptic Curve (EC) certificates. You can use any tool you prefer to issue these certificates (for example, OpenSSL). However, the Fabric CA streamlines the process because it generates the Membership Service Providers (MSPs) for you.</p>
+<p>Before you can deploy the orderer, create the recommended folder structure for the orderer or orderer certificates that is described in the <a class="reference external" href="https://hyperledger-fabric-ca.readthedocs.io/en/release-1.4/deployguide/use_CA.html">Registering and enrolling identities with a CA</a> topic to store the generated certificates and MSPs.</p>
+<p>This folder structure isn’t mandatory, but these instructions presume you have created it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>├── organizations
+  └── ordererOrganizations
+      └── ordererOrg1.example.com
+          ├── msp
+            ├── cacerts
+            └── tlscacerts
+          ├── orderers
+              └── orderer0.ordererOrg1.example.com
+                  ├── msp
+                  └── tls
+</pre></div>
+</div>
+<p>You should have already used your certificate authority of choice to generate the orderer enrollment certificate, TLS certificate, private keys, and the MSPs that Fabric must consume. Refer to the <a class="reference external" href="https://hyperledger-fabric-ca.readthedocs.io/en/release-1.4/deployguide/cadeploy.html">CA deployment guide</a> and <a class="reference external" href="https://hyperledger-fabric-ca.readthedocs.io/en/release-1.4/deployguide/use_CA.html">Registering and enrolling identities with a CA</a> topics for instructions on how to create a Fabric CA and how to generate these certificates. You need to generate the following sets of certificates:</p>
+<ul class="simple">
+<li><strong>Orderer organization MSP</strong></li>
+<li><strong>Orderer TLS CA certificates</strong></li>
+<li><strong>Orderer local MSP (enrollment certificate and private key of the orderer)</strong></li>
+</ul>
+<p>You will either need to use the Fabric CA client to generate the certificates directly into the recommended folder structure or you will need to copy the generated certificates to their recommended folders after they are generated. Whichever method you choose, most users are ultimately likely to script this process so it can be repeated as needed. A list of the certificates and their locations is provided here for your convenience.</p>
+<p>If you are using a containerized solution for running your network (which for obvious reasons is a popular choice), <strong>it is a best practice to mount volumes for the certificate directories external to the container where the node itself is running. This will allow the certificates to be used by an ordering node container, regardless whether the ordering node container goes down, becomes corrupted, or is restarted.</strong></p>
+<div class="section" id="tls-certificates">
+<span id="tls-certificates"></span><h4>TLS certificates<a class="headerlink" href="#tls-certificates" title="Permalink to this headline">¶</a></h4>
+<p>For the ordering node to launch successfully, the locations of the TLS certificates you specified in the <a class="reference external" href="./ordererchecklist.html">Checklist for a production ordering node</a> must point to the correct certificates. To do this:</p>
+<ul class="simple">
+<li>Copy the <strong>TLS CA Root certificate</strong>, which by default is called <code class="docutils literal notranslate"><span class="pre">ca-cert.pem</span></code>, to the orderer organization MSP definition <code class="docutils literal notranslate"><span class="pre">organizations/ordererOrganizations/ordererOrg1.example.com/msp/tlscacerts/tls-cert.pem</span></code>.</li>
+<li>Copy the <strong>CA Root certificate</strong>, which by default is called <code class="docutils literal notranslate"><span class="pre">ca-cert.pem</span></code>, to the orderer organization MSP definition <code class="docutils literal notranslate"><span class="pre">organizations/ordererOrganizations/ordererOrg1.example.com/msp/cacerts/ca-cert.pem</span></code>.</li>
+<li>When you enroll the orderer identity with the TLS CA, the public key is generated in the <code class="docutils literal notranslate"><span class="pre">signcerts</span></code> folder, and the private key is located in the <code class="docutils literal notranslate"><span class="pre">keystore</span></code> directory. Rename the private key in the <code class="docutils literal notranslate"><span class="pre">keystore</span></code> folder to <code class="docutils literal notranslate"><span class="pre">orderer0-tls-key.pem</span></code> so that it can be easily recognized later as the TLS private key for this node.</li>
+<li>Copy the orderer TLS certificate and private key files to <code class="docutils literal notranslate"><span class="pre">organizations/ordererOrganizations/ordererOrg1.example.com/orderers/orderer0.ordererOrg1.example.com/tls</span></code>. The path and name of the certificate and private key files correspond to the values of the <code class="docutils literal notranslate"><span class="pre">General.TLS.Certificate</span></code> and <code class="docutils literal notranslate"><span class="pre">General.TLS.PrivateKey</span></code> parameters in the <code class="docutils literal notranslate"><span class="pre">orderer.yaml</span></code>.</li>
+</ul>
+<p><strong>Note:</strong> Don’t forget to create the <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code> file and add it to the organization MSP and local MSP folder for each ordering node. This file enables Node OU support for the MSP, an important feature that allows the MSP’s admin to be identified based on an “admin” OU in an identity’s certificate. Learn more in the <a class="reference external" href="https://hyperledger-fabric-ca.readthedocs.io/en/release-1.4/deployguide/use_CA.html#nodeous">Fabric CA</a> documentation.</p>
+<p>If you are using a containerized solution for running your network (which for obvious reasons is a popular choice), <strong>it is a best practice to mount volumes for the certificate directories external to the container where the node itself is running. This will allow the certificates to be used by an ordering node container, regardless whether the ordering node container goes down, becomes corrupted, or is restarted.</strong></p>
+</div>
+<div class="section" id="orderer-local-msp-enrollment-certificate-and-private-key">
+<span id="orderer-local-msp-enrollment-certificate-and-private-key"></span><h4>Orderer local MSP (enrollment certificate and private key)<a class="headerlink" href="#orderer-local-msp-enrollment-certificate-and-private-key" title="Permalink to this headline">¶</a></h4>
+<p>Similarly, you need to point to the <a class="reference external" href="https://hyperledger-fabric-ca.readthedocs.io/en/release-1.4/deployguide/use_CA.html#create-the-local-msp-of-a-node">local MSP of your orderer</a> by copying the MSP folder to <code class="docutils literal notranslate"><span class="pre">organizations/ordererOrganizations/ordererOrg1.example.com/orderers/orderer0.ordererOrg1.example.com/msp</span></code>. This path corresponds to the value of the <code class="docutils literal notranslate"><span class="pre">General.LocalMSPDir</span></code> parameter in the <code class="docutils literal notranslate"><span class="pre">orderer.yaml</span></code> file. Because of the Fabric concept of <a class="reference external" href="https://hyperledger-fabric-ca.readthedocs.io/en/release-1.4/deployguide/use_CA.html#nodeous">“Node Organization Unit (OU)”</a>, you do not need to specify an admin of the orderer when bootstrapping. Rather, the role of “admin” is conferred onto an identity by setting an OU value of “admin” inside a certificate and enabled by the <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code> file. When Node OUs are enabled, any admin identity from this organization will be able to administer the orderer.</p>
+<p>Note that the local MSP contains the signed certificate (public key) and the private key for the orderer. The private key is used by the node to sign transactions, and is therefore not shared and must be secured. For maximum security, a Hardware Security Module (HSM) can be configured to generate and store this private key.</p>
+</div>
+</div>
+<div class="section" id="storage">
+<span id="storage"></span><h3>Storage<a class="headerlink" href="#storage" title="Permalink to this headline">¶</a></h3>
+<p>You must provision persistent storage for your ledgers. The default location for the ledger is located at <code class="docutils literal notranslate"><span class="pre">/var/hyperledger/production/orderer</span></code>. Ensure that your orderer has write access to the folder. If you choose to use a different location, provide that path in the <code class="docutils literal notranslate"><span class="pre">FileLedger:</span></code> parameter in the <code class="docutils literal notranslate"><span class="pre">orderer.yaml</span></code> file. If you decide to use Kubernetes or Docker, recall that in a containerized environment, local storage disappears when the container goes away, so you will need to provision or mount persistent storage for the ledger before you deploy an orderer.</p>
+</div>
+<div class="section" id="configuration-of-orderer-yaml">
+<span id="configuration-of-orderer-yaml"></span><h3>Configuration of <code class="docutils literal notranslate"><span class="pre">orderer.yaml</span></code><a class="headerlink" href="#configuration-of-orderer-yaml" title="Permalink to this headline">¶</a></h3>
+<p>Now you can use the <a class="reference external" href="./ordererchecklist.html">Checklist for a production orderer</a> to modify the default settings in the <code class="docutils literal notranslate"><span class="pre">orderer.yaml</span></code> file. In the future, if you decide to deploy the orderer through Kubernetes or Docker, you can override the same default settings by using environment variables instead. Check out the <a class="reference external" href="../deployment_guide_overview.html#step-five-deploy-orderers-and-ordering-nodes">note</a> in the deployment guide overview for instructions on how to construct the environment variable names for an override.</p>
+<p>At a minimum, you need to configure the following parameters:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">General.ListenAddress</span></code> - Hostname that the ordering node listens on.</li>
+<li><code class="docutils literal notranslate"><span class="pre">General.ListenPort</span></code> - Port that the ordering node listens on.</li>
+<li><code class="docutils literal notranslate"><span class="pre">General.TLS.Enabled:</span> <span class="pre">true</span></code> - Server-side TLS should be enabled in all production networks.</li>
+<li><code class="docutils literal notranslate"><span class="pre">General.TLS.PrivateKey</span></code> - Ordering node private key from TLS CA.</li>
+<li><code class="docutils literal notranslate"><span class="pre">General.TLS.Certificate</span></code> - Ordering node signed certificate (public key) from the TLS CA.</li>
+<li><code class="docutils literal notranslate"><span class="pre">General.TLS.RootCAS</span></code> - This value should be unset.</li>
+<li><code class="docutils literal notranslate"><span class="pre">General.BoostrapMethod:none</span></code> - This allows the orderer to start without needing a system channel configuration block.</li>
+<li><code class="docutils literal notranslate"><span class="pre">General.LocalMSPDir</span></code> - Path to the ordering node MSP folder.</li>
+<li><code class="docutils literal notranslate"><span class="pre">General.LocalMSPID</span></code> - MSP ID of the ordering organization as specified in the channel configuration.</li>
+<li><code class="docutils literal notranslate"><span class="pre">FileLedger.Location</span></code> - Location on the file system to the ledgers of the channels this orderer will be servicing.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ChannelParticipation.Enabled</span></code> - Set to <code class="docutils literal notranslate"><span class="pre">true</span></code>. This allows the orderer to be joined to an application channel without joining a system channel first.</li>
+</ul>
+<p>Because this tutorial assumes that a system channel genesis block will not be used when bootstrapping the orderer, the following additional parameters are required if you want to create an application channel with the <code class="docutils literal notranslate"><span class="pre">osnadmin</span></code> command.</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">Admin.ListenAddress</span></code> - The orderer admin server address (host and port) that can be used by the <code class="docutils literal notranslate"><span class="pre">osnadmin</span></code> command to configure channels on the ordering service. This value should be a unique <code class="docutils literal notranslate"><span class="pre">host:port</span></code> combination to avoid conflicts.</li>
+<li><code class="docutils literal notranslate"><span class="pre">Admin.TLS.Enabled:</span></code> - Technically this can be set to <code class="docutils literal notranslate"><span class="pre">false</span></code>, but this is not recommended. In general, you should always set this value to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">Admin.TLS.PrivateKey:</span></code> - The path to and file name of the orderer private key issued by the TLS CA.</li>
+<li><code class="docutils literal notranslate"><span class="pre">Admin.TLS.Certificate:</span></code> - The path to and file name of the orderer signed certificate issued by the TLS CA.</li>
+<li><code class="docutils literal notranslate"><span class="pre">Admin.TLS.ClientAuthRequired:</span></code> This value must be set to <code class="docutils literal notranslate"><span class="pre">true</span></code>. Note that while mutual TLS is required for all operations on the orderer Admin endpoint, the entire network is not required to use Mutual TLS.</li>
+<li><code class="docutils literal notranslate"><span class="pre">Admin.TLS.ClientRootCAs:</span></code> - The path to and file name of the admin client TLS CA Root certificate. In the folder structure above, this is <code class="docutils literal notranslate"><span class="pre">admin-client/client-tls-ca-cert.pem</span></code>.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="start-the-orderer">
+<span id="start-the-orderer"></span><h2>Start the orderer<a class="headerlink" href="#start-the-orderer" title="Permalink to this headline">¶</a></h2>
+<p>Make sure you have set the value of the <code class="docutils literal notranslate"><span class="pre">FABRIC_CFG_PATH</span></code> to be the location of the <code class="docutils literal notranslate"><span class="pre">orderer.yaml</span></code> file relative to where you are invoking the orderer binary. For example, if you run the orderer binary from the <code class="docutils literal notranslate"><span class="pre">fabric/bin</span></code> folder, it would point to the  <code class="docutils literal notranslate"><span class="pre">/config</span></code> folder:
+<code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">FABRIC_CFG_PATH=../config</span></code></p>
+<p>After <code class="docutils literal notranslate"><span class="pre">orderer.yaml</span></code> has been configured and your deployment backend is ready, you can simply start the orderer node with the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="nb">bin</span>
+<span class="o">./</span><span class="n">orderer</span> <span class="n">start</span>
+</pre></div>
+</div>
+<p>When the orderer starts successfully, you should see a message similar to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span> <span class="mi">01</span><span class="n">d</span> <span class="n">Registrar</span> <span class="n">initializing</span> <span class="n">without</span> <span class="n">a</span> <span class="n">system</span> <span class="n">channel</span><span class="p">,</span> <span class="n">number</span> <span class="n">of</span> <span class="n">application</span> <span class="n">channels</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="k">with</span> <span class="mi">0</span> <span class="n">consensus</span><span class="o">.</span><span class="n">Chain</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="ow">and</span> <span class="mi">0</span> <span class="n">follower</span><span class="o">.</span><span class="n">Chain</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="n">INFO</span> <span class="mi">01</span><span class="n">f</span> <span class="n">Starting</span> <span class="n">orderer</span><span class="p">:</span>
+</pre></div>
+</div>
+<p>You have successfully started one node, you now need to repeat these steps to configure and start the other two orderers.</p>
+</div>
+<div class="section" id="next-steps">
+<span id="next-steps"></span><h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
+<p>Your ordering service is started and ready to order transactions into blocks. Depending on your use case, you may need to add or remove orderers from the consenter set, or other organizations may want to contribute their own orderers to the cluster. See the topic on ordering service <a class="reference external" href="../raft_configuration.html#reconfiguration">reconfiguration</a> for considerations and instructions.</p>
+<p>Once your nodes have been created, you are ready to join them to a channel. Check out <a class="reference external" href="../create_channel/create_channel_participation.html">Create a channel</a> for more information.</p>
+</div>
+<div class="section" id="troubleshooting">
+<span id="troubleshooting"></span><h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="when-you-start-the-orderer-it-fails-with-the-following-error">
+<span id="when-you-start-the-orderer-it-fails-with-the-following-error"></span><h3>When you start the orderer, it fails with the following error:<a class="headerlink" href="#when-you-start-the-orderer-it-fails-with-the-following-error" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ERRO</span> <span class="mi">001</span> <span class="n">failed</span> <span class="n">to</span> <span class="n">parse</span> <span class="n">config</span><span class="p">:</span>  <span class="n">Error</span> <span class="n">reading</span> <span class="n">configuration</span><span class="p">:</span> <span class="n">Unsupported</span> <span class="n">Config</span> <span class="n">Type</span> <span class="s2">&quot;&quot;</span>
+</pre></div>
+</div>
+<p><strong>Solution:</strong></p>
+<p>Your <code class="docutils literal notranslate"><span class="pre">FABRIC_CFG_PATH</span></code> is not set. Run the following command to set it to the location of your <code class="docutils literal notranslate"><span class="pre">orderer.yaml</span></code> file.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">FABRIC_CFG_PATH</span><span class="o">=&lt;</span><span class="n">PATH_TO_ORDERER_YAML</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="when-you-start-the-orderer-it-fails-with-the-following-error">
+<span id="id1"></span><h3>When you start the orderer, it fails with the following error:<a class="headerlink" href="#when-you-start-the-orderer-it-fails-with-the-following-error" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PANI</span> <span class="mi">003</span> <span class="n">Failed</span> <span class="n">to</span> <span class="n">setup</span> <span class="n">local</span> <span class="n">msp</span> <span class="k">with</span> <span class="n">config</span><span class="p">:</span> <span class="n">administrators</span> <span class="n">must</span> <span class="n">be</span> <span class="n">declared</span> <span class="n">when</span> <span class="n">no</span> <span class="n">admin</span> <span class="n">ou</span> <span class="n">classification</span> <span class="ow">is</span> <span class="nb">set</span>
+</pre></div>
+</div>
+<p><strong>Solution:</strong></p>
+<p>Your local MSP definition is missing the <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code> file. Create the file and copy it into the local MSP <code class="docutils literal notranslate"><span class="pre">/msp</span></code> folder of orderer. See the <a class="reference external" href="https://hyperledger-fabric-ca.readthedocs.io/en/release-1.4/deployguide/use_CA.html#nodeous">Fabric CA</a> documentation for more instructions.</p>
+</div>
+<div class="section" id="when-you-start-the-orderer-it-fails-with-the-following-error">
+<span id="id2"></span><h3>When you start the orderer, it fails with the following error:<a class="headerlink" href="#when-you-start-the-orderer-it-fails-with-the-following-error" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PANI</span> <span class="mi">27</span><span class="n">c</span> <span class="n">Failed</span> <span class="n">creating</span> <span class="n">a</span> <span class="n">block</span> <span class="n">puller</span><span class="p">:</span> <span class="n">client</span> <span class="n">certificate</span> <span class="n">isn</span><span class="s1">&#39;t in PEM format:  channel=mychannel node=3</span>
+</pre></div>
+</div>
+<p><strong>Solution:</strong></p>
+<p>Your <code class="docutils literal notranslate"><span class="pre">orderer.yaml</span></code> file is missing the <code class="docutils literal notranslate"><span class="pre">General.Cluster.ClientCertificate</span></code> and <code class="docutils literal notranslate"><span class="pre">General.Cluster.ClientPrivateKey</span></code> definitions. Provide the path to and filename of the public certificate (also known as a signed certificate) and private key generated by your TLS CA for the orderer in these two fields and restart the node.</p>
+<!--- Licensed under Creative Commons Attribution 4.0 International License
+https://creativecommons.org/licenses/by/4.0/) --></div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../ops_guide.html" class="btn btn-neutral float-right" title="Operations Guides" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="ordererchecklist.html" class="btn btn-neutral" title="Checklist for a production ordering node" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright Hyperledger 2020.
+    <br>
+      <br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>
+      <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+        <img alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'master',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

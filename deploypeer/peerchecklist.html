@@ -1,0 +1,703 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Checklist for a production peer &mdash; hyperledger-fabricdocs master documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="hyperledger-fabricdocs master documentation" href="../index.html"/>
+        <link rel="up" title="Deploying a production network" href="../deployment_guide_overview.html"/>
+        <link rel="next" title="Deploy the peer" href="peerdeploy.html"/>
+        <link rel="prev" title="Planning for a production peer" href="peerplan.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+
+          
+            <a href="../index.html" class="icon icon-home"> hyperledger-fabricdocs
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                master
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+
+<br><img style="background-color: #fff; height: unset; width: unset;" alt="Hyperledger Fabric" src=../_images/hyperledger_fabric_logo_color.png />
+<br>
+<a href="https://github.com/hyperledger/fabric"><img style="padding: 0px; margin: auto auto auto auto;" alt="GitHub" src="../_static/images/github_button.png"/></a>
+&nbsp;<a href="https://stackoverflow.com/questions/tagged/hyperledger-fabric"><img style="padding: 0px; margin: auto auto auto auto;" alt="StackOverflow" src="../_static/images/stackoverflow_button.png"/></a>
+&nbsp;<a href="https://chat.hyperledger.org"><img style="padding: 0px; margin: auto auto auto auto;" alt="Rocket Chat" src="../_static/images/rocketchat_button.png"/></a>
+&nbsp;<a href="https://www.youtube.com/playlist?list=PL0MZ85B_96CH7wvtrRzV7SvtRY0sI0DEg"><img style="padding: 0px; margin: auto auto auto auto;" alt="Youtube Channel" src="../_static/images/youtube_button.png"/></a>
+
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../whatis.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html">What’s new in Hyperledger Fabric v2.x</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whatsnew.html#release-notes">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../key_concepts.html">Key Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started - Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started_run_fabric.html">Getting Started - Run Fabric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developapps/developing_applications.html">Developing Applications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../deployment_guide_overview.html">Deploying a production network</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../deployment_guide_overview.html#step-one-decide-on-your-network-configuration">Step one: Decide on your network configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment_guide_overview.html#step-two-set-up-a-cluster-for-your-resources">Step two: Set up a cluster for your resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment_guide_overview.html#step-three-set-up-your-cas">Step three: Set up your CAs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment_guide_overview.html#step-four-use-the-ca-to-create-identities-and-msps">Step four: Use the CA to create identities and MSPs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../deployment_guide_overview.html#step-five-deploy-peers-and-ordering-nodes">Step five: Deploy peers and ordering nodes</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../deployment_guide_overview.html#creating-a-peer">Creating a peer</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="peerplan.html">Planning for a production peer</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Checklist for a production peer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="peerdeploy.html">Deploy the peer</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../deployment_guide_overview.html#creating-an-ordering-node">Creating an ordering node</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../deployment_guide_overview.html#next-steps">Next steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ops_guide.html">Operations Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../upgrade.html">Upgrading to the latest release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../command_ref.html">Commands Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture.html">Architecture Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Fabric-FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributions Welcome!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releases.html">Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../questions.html">Still Have Questions?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../status.html">Status</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">hyperledger-fabricdocs</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../deployment_guide_overview.html">Deploying a production network</a> &raquo;</li>
+        
+      <li>Checklist for a production peer</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/deploypeer/peerchecklist.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="checklist-for-a-production-peer">
+<span id="checklist-for-a-production-peer"></span><h1>Checklist for a production peer<a class="headerlink" href="#checklist-for-a-production-peer" title="Permalink to this headline">¶</a></h1>
+<p>As you prepare to build a production peer, you need to customize the configuration by editing the <a class="reference external" href="https://github.com/hyperledger/fabric/blob/master/sampleconfig/core.yaml">core.yaml</a> file, which is copied into the <code class="docutils literal notranslate"><span class="pre">/config</span></code> directory when downloading the Fabric binaries, and available within the Fabric peer image at <code class="docutils literal notranslate"><span class="pre">/etc/hyperledger/fabric/core.yaml</span></code>.</p>
+<p>While in a production environment you could override the environment variables in the <code class="docutils literal notranslate"><span class="pre">core.yaml</span></code> file in your Docker container or your Kubernetes job, these instructions show how to edit <code class="docutils literal notranslate"><span class="pre">core.yaml</span></code> instead. It’s important to understand the parameters in the configuration file and their dependencies on other parameter settings in the file. Blindly overriding one setting using an environment variable could affect the functionality of another setting. Therefore, the recommendation is that before starting the peer, you make the modifications to the settings in the configuration file to become familiar with the available settings and how they work. Afterwards, you may choose to override these parameters using environment variables.</p>
+<p>This checklist covers key configuration parameters for setting up a production network. Of course, you can always refer to the core.yaml file for additional parameters or more information. It also provides guidance on which parameters should be overridden. The list of parameters that you need to understand and that are described in this topic include:</p>
+<ul class="simple">
+<li><a class="reference external" href="#peer-id">peer.id</a></li>
+<li><a class="reference external" href="#peer-networkid">peer.networkId</a></li>
+<li><a class="reference external" href="#peer-listenaddress">peer.listenAddress</a></li>
+<li><a class="reference external" href="#peer-chaincodelistenaddress">peer.chaincodeListenAddress</a></li>
+<li><a class="reference external" href="#peer-chaincodeaddress">peer.chaincodeAddress</a></li>
+<li><a class="reference external" href="#peer-address">peer.address</a></li>
+<li><a class="reference external" href="#peer-mspconfigpath">peer.mspConfigPath</a></li>
+<li><a class="reference external" href="#peer-localmspid">peer.localMspId</a></li>
+<li><a class="reference external" href="#peer-filesystempath">peer.fileSystemPath</a></li>
+<li><a class="reference external" href="#peer-gossip">peer.gossip.*</a></li>
+<li><a class="reference external" href="#peer-tls">peer.tls.*</a></li>
+<li><a class="reference external" href="#peer-bccsp">peer.bccsp.*</a></li>
+<li><a class="reference external" href="#chaincode-externalbuilders">chaincode.externalBuilders.*</a></li>
+<li><a class="reference external" href="#ledger">ledger.*</a></li>
+<li><a class="reference external" href="#operations">operations.*</a></li>
+<li><a class="reference external" href="#metrics">metrics.*</a></li>
+</ul>
+<div class="section" id="peer-id">
+<span id="peer-id"></span><h2>peer.id<a class="headerlink" href="#peer-id" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># The peer id provides a name for this peer instance and is used when</span>
+<span class="c1"># naming docker resources.</span>
+<span class="nb">id</span><span class="p">:</span> <span class="n">jdoe</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">id</span></code></strong>: (Default value should be overridden.) Start by giving your peer an ID (which is analogous to giving it a name). Often the name indicates the organization that the peer belongs to, for example <code class="docutils literal notranslate"><span class="pre">peer0.org1.example.com</span></code>. It is used for naming the peer’s chaincode images and containers.</li>
+</ul>
+</div>
+<div class="section" id="peer-networkid">
+<span id="peer-networkid"></span><h2>peer.networkId<a class="headerlink" href="#peer-networkid" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># The networkId allows for logical separation of networks and is used when</span>
+<span class="c1"># naming docker resources.</span>
+<span class="n">networkId</span><span class="p">:</span> <span class="n">dev</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">networkId</span></code></strong>: (Default value should be overridden.) Specify any name that you want. One recommendation would be to differentiate the network by naming it based on its planned usage (for example, “dev”, “staging”, “test”, ”production”, etc). This value is also used to build the name of the chaincode images and containers.</li>
+</ul>
+</div>
+<div class="section" id="peer-listenaddress">
+<span id="peer-listenaddress"></span><h2>peer.listenAddress<a class="headerlink" href="#peer-listenaddress" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># The Address at local network interface this Peer will listen on.</span>
+<span class="c1"># By default, it will listen on all network interfaces</span>
+<span class="n">listenAddress</span><span class="p">:</span> <span class="mf">0.0</span><span class="o">.</span><span class="mf">0.0</span><span class="p">:</span><span class="mi">7051</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">listenAddress</span></code></strong>: (Default value should be overridden.) Specify the address that the peer will listen on, for example, <code class="docutils literal notranslate"><span class="pre">0.0.0.0:7051</span></code>.</li>
+</ul>
+</div>
+<div class="section" id="peer-chaincodelistenaddress">
+<span id="peer-chaincodelistenaddress"></span><h2>peer.chaincodeListenAddress<a class="headerlink" href="#peer-chaincodelistenaddress" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># The endpoint this peer uses to listen for inbound chaincode connections.</span>
+<span class="c1"># If this is commented-out, the listen address is selected to be</span>
+<span class="c1"># the peer&#39;s address (see below) with port 7052</span>
+<span class="n">chaincodeListenAddress</span><span class="p">:</span> <span class="mf">0.0</span><span class="o">.</span><span class="mf">0.0</span><span class="p">:</span><span class="mi">7052</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">chaincodeListenAddress</span></code></strong>: (Default value should be overridden.) Uncomment this parameter and specify the address where this peer listens for chaincode requests. It needs to be different than the <code class="docutils literal notranslate"><span class="pre">peer.listenAddress</span></code>, for example, <code class="docutils literal notranslate"><span class="pre">0.0.0.0:7052</span></code>.</li>
+</ul>
+</div>
+<div class="section" id="peer-chaincodeaddress">
+<span id="peer-chaincodeaddress"></span><h2>peer.chaincodeAddress<a class="headerlink" href="#peer-chaincodeaddress" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># The endpoint the chaincode for this peer uses to connect to the peer.</span>
+<span class="c1"># If this is not specified, the chaincodeListenAddress address is selected.</span>
+<span class="c1"># And if chaincodeListenAddress is not specified, address is selected from</span>
+<span class="c1"># peer address (see below). If specified peer address is invalid then it</span>
+<span class="c1"># will fallback to the auto detected IP (local IP) regardless of the peer</span>
+<span class="c1"># addressAutoDetect value.</span>
+<span class="n">chaincodeAddress</span><span class="p">:</span> <span class="mf">0.0</span><span class="o">.</span><span class="mf">0.0</span><span class="p">:</span><span class="mi">7052</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">chaincodeAddress</span></code></strong>: (Default value should be overridden.) Uncomment this parameter and specify the address that chaincode containers can use to connect to this peer, for example, <code class="docutils literal notranslate"><span class="pre">peer0.org1.example.com:7052</span></code>.</li>
+</ul>
+</div>
+<div class="section" id="peer-address">
+<span id="peer-address"></span><h2>peer.address<a class="headerlink" href="#peer-address" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># When used as peer config, this represents the endpoint to other peers</span>
+<span class="c1"># in the same organization. For peers in other organization, see</span>
+<span class="c1"># gossip.externalEndpoint for more info.</span>
+<span class="c1"># When used as CLI config, this means the peer&#39;s endpoint to interact with</span>
+<span class="n">address</span><span class="p">:</span> <span class="mf">0.0</span><span class="o">.</span><span class="mf">0.0</span><span class="p">:</span><span class="mi">7051</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">address</span></code></strong>: (Default value should be overridden.) Specify the address that other peers in the organization use to connect to this peer, for example, <code class="docutils literal notranslate"><span class="pre">peer0.org1.example.com:7051</span></code>.</li>
+</ul>
+</div>
+<div class="section" id="peer-mspconfigpath">
+<span id="peer-mspconfigpath"></span><h2>peer.mspConfigPath<a class="headerlink" href="#peer-mspconfigpath" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mspConfigPath</span><span class="p">:</span> <span class="n">msp</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">mspConfigPath</span></code></strong>: (Default value should be overridden.) This is the path to the peer’s local MSP, which must be created before the peer can be deployed. The path can be absolute or relative to <code class="docutils literal notranslate"><span class="pre">FABRIC_CFG_PATH</span></code> (by default, it is <code class="docutils literal notranslate"><span class="pre">/etc/hyperledger/fabric</span></code> in the peer image). Unless an absolute path is specified to a folder named something other than “msp”, the peer defaults to looking for a folder called “msp” at the path (in other words, <code class="docutils literal notranslate"><span class="pre">FABRIC_CFG_PATH/msp</span></code>) and when using the peer image: <code class="docutils literal notranslate"><span class="pre">/etc/hyperledger/fabric/msp</span></code>. If you are using the recommended folder structure described in the <a class="reference external" href="https://hyperledger-fabric-ca.readthedocs.io/en/release-1.4/deployguide/use_CA.html">Registering and enrolling identities with a CA</a> topic, it would be relative to the FABRIC_CFG_PATH as follows:
+<code class="docutils literal notranslate"><span class="pre">config/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp</span></code>. <strong>The best practice is to store this data in persistent storage</strong>. This prevents the MSP from being lost if your peer containers are destroyed for some reason.</li>
+</ul>
+</div>
+<div class="section" id="peer-localmspid">
+<span id="peer-localmspid"></span><h2>peer.localMspId<a class="headerlink" href="#peer-localmspid" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Identifier of the local MSP</span>
+<span class="c1"># ----!!!!IMPORTANT!!!-!!!IMPORTANT!!!-!!!IMPORTANT!!!!----</span>
+<span class="c1"># Deployers need to change the value of the localMspId string.</span>
+<span class="c1"># In particular, the name of the local MSP ID of a peer needs</span>
+<span class="c1"># to match the name of one of the MSPs in each of the channel</span>
+<span class="c1"># that this peer is a member of. Otherwise this peer&#39;s messages</span>
+<span class="c1"># will not be identified as valid by other nodes.</span>
+<span class="n">localMspId</span><span class="p">:</span> <span class="n">SampleOrg</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">localMspId</span></code></strong>: (Default value should be overridden.) This is the value of the MSP ID of the organization the peer belongs to. Because peers can only be joined to a channel if the organization the peer belongs to is a channel member, this MSP ID must match the name of at least one of the MSPs in each of the channels that this peer is a member of.</li>
+</ul>
+</div>
+<div class="section" id="peer-filesystempath">
+<span id="peer-filesystempath"></span><h2>peer.fileSystemPath<a class="headerlink" href="#peer-filesystempath" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Path on the file system where peer will store data (eg ledger). This</span>
+<span class="c1"># location must be access control protected to prevent unintended</span>
+<span class="c1"># modification that might corrupt the peer operations.</span>
+<span class="n">fileSystemPath</span><span class="p">:</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">hyperledger</span><span class="o">/</span><span class="n">production</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">fileSystemPath</span></code></strong>: (Default value should be overridden.) This is the path to the ledger and installed chaincodes on the local filesystem of the peer. It can be an absolute path or relative to <code class="docutils literal notranslate"><span class="pre">FABRIC_CFG_PATH</span></code>. It defaults to <code class="docutils literal notranslate"><span class="pre">/var/hyperledger/production</span></code>. The user running the peer needs to own and have write access to this directory. <strong>The best practice is to store this data in persistent storage</strong>. This prevents the ledger and any installed chaincodes from being lost if your peer containers are destroyed for some reason.</li>
+</ul>
+</div>
+<div class="section" id="peer-gossip">
+<span id="peer-gossip"></span><h2>peer.gossip.*<a class="headerlink" href="#peer-gossip" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gossip</span><span class="p">:</span>
+    <span class="c1"># Bootstrap set to initialize gossip with.</span>
+    <span class="c1"># This is a list of other peers that this peer reaches out to at startup.</span>
+    <span class="c1"># Important: The endpoints here have to be endpoints of peers in the same</span>
+    <span class="c1"># organization, because the peer would refuse connecting to these endpoints</span>
+    <span class="c1"># unless they are in the same organization as the peer.</span>
+    <span class="n">bootstrap</span><span class="p">:</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">7051</span>
+
+    <span class="c1"># Overrides the endpoint that the peer publishes to peers</span>
+    <span class="c1"># in its organization. For peers in foreign organizations</span>
+    <span class="c1"># see &#39;externalEndpoint&#39;</span>
+    <span class="n">endpoint</span><span class="p">:</span>
+
+    <span class="c1"># This is an endpoint that is published to peers outside of the organization.</span>
+    <span class="c1"># If this isn&#39;t set, the peer will not be known to other organizations.</span>
+    <span class="n">externalEndpoint</span><span class="p">:</span>
+
+    <span class="c1"># NOTE: orgLeader and useLeaderElection parameters are mutual exclusive.</span>
+    <span class="c1"># Setting both to true would result in the termination of the peer</span>
+    <span class="c1"># since this is undefined state. If the peers are configured with</span>
+    <span class="c1"># useLeaderElection=false, make sure there is at least 1 peer in the</span>
+    <span class="c1"># organization that its orgLeader is set to true.</span>
+
+    <span class="c1"># Defines whenever peer will initialize dynamic algorithm for</span>
+    <span class="c1"># &quot;leader&quot; selection, where leader is the peer to establish</span>
+    <span class="c1"># connection with ordering service and use delivery protocol</span>
+    <span class="c1"># to pull ledger blocks from ordering service.</span>
+    <span class="n">useLeaderElection</span><span class="p">:</span> <span class="n">false</span>
+
+    <span class="c1"># Statically defines peer to be an organization &quot;leader&quot;,</span>
+    <span class="c1"># where this means that current peer will maintain connection</span>
+    <span class="c1"># with ordering service and disseminate block across peers in</span>
+    <span class="c1"># its own organization. Multiple peers or all peers in an organization</span>
+    <span class="c1"># may be configured as org leaders, so that they all pull</span>
+    <span class="c1"># blocks directly from ordering service.</span>
+    <span class="n">orgLeader</span><span class="p">:</span> <span class="n">true</span>
+
+    <span class="c1"># Gossip state transfer related configuration</span>
+    <span class="n">state</span><span class="p">:</span>
+        <span class="c1"># indicates whenever state transfer is enabled or not</span>
+        <span class="c1"># default value is true, i.e. state transfer is active</span>
+        <span class="c1"># and takes care to sync up missing blocks allowing</span>
+        <span class="c1"># lagging peer to catch up to speed with rest network</span>
+        <span class="n">enabled</span><span class="p">:</span> <span class="n">false</span>
+
+    <span class="n">pvtData</span><span class="p">:</span>
+      <span class="n">implicitCollectionDisseminationPolicy</span><span class="p">:</span>
+          <span class="c1"># requiredPeerCount defines the minimum number of eligible peers to which the peer must successfully</span>
+          <span class="c1"># disseminate private data for its own implicit collection during endorsement. Default value is 0.</span>
+          <span class="n">requiredPeerCount</span><span class="p">:</span> <span class="mi">0</span>
+
+          <span class="c1"># maxPeerCount defines the maximum number of eligible peers to which the peer will attempt to</span>
+          <span class="c1"># disseminate private data for its own implicit collection during endorsement. Default value is 1.</span>
+          <span class="n">maxPeerCount</span><span class="p">:</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>Peers leverage the Gossip data dissemination protocol to broadcast ledger and channel data in a scalable fashion. Gossip messaging is continuous, and each peer on a channel is constantly receiving current and consistent ledger data from multiple peers. While there are many Gossip parameters that can be customized, there are three groups of settings you need to pay attention to at a minimum:</p>
+<ul class="simple">
+<li><strong>Endpoints</strong> Gossip is required for service discovery and private data dissemination. To use these features, you must configure the gossip <code class="docutils literal notranslate"><span class="pre">bootstrap</span></code>, <code class="docutils literal notranslate"><span class="pre">endpoint</span></code>, and <code class="docutils literal notranslate"><span class="pre">externalEndpoint</span></code> parameters in addition to <strong>setting at least one anchor peer</strong> in the peer’s channel configuration.<ul>
+<li><strong><code class="docutils literal notranslate"><span class="pre">bootstrap</span></code></strong>: (Default value should be overridden.) Provide the list of other peer <a class="reference external" href="#address">addresses</a> in this organization to discover.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">endpoint</span></code></strong>: (Default value should be overridden.) Specify the address that other peers <em>in this organization</em> should use to connect to this peer. For example, <code class="docutils literal notranslate"><span class="pre">peer0.org1.example.com:7051</span></code>.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">externalEndpoint:</span></code></strong> (Default value should be overridden.) Specify the address that peers in <em>other organizations</em> should use to connect to this peer, for example, <code class="docutils literal notranslate"><span class="pre">peer0.org1.example.com:7051</span></code>.</li>
+</ul>
+</li>
+<li><strong>Block dissemination</strong> In order to reduce network traffic, it is recommended that peers get their blocks from the ordering service instead of from other peers in their organization (the default configuration starting in Fabric v2.2). The combination of the <code class="docutils literal notranslate"><span class="pre">useLeaderElection:</span></code>, <code class="docutils literal notranslate"><span class="pre">orgLeader:</span></code>, and <code class="docutils literal notranslate"><span class="pre">state.enabled</span></code> parameters in this section ensures that peers will pull blocks from the ordering service.<ul>
+<li><strong><code class="docutils literal notranslate"><span class="pre">useLeaderElection:</span></code></strong> (Defaults to <code class="docutils literal notranslate"><span class="pre">false</span></code> as of v2.2, which is recommended so that peers get blocks from ordering service.) When <code class="docutils literal notranslate"><span class="pre">useLeaderElection</span></code> is set to false, you must configure at least one peer to be the org leader by setting <code class="docutils literal notranslate"><span class="pre">peer.gossip.orgLeader</span></code> to true. Set <code class="docutils literal notranslate"><span class="pre">useLeaderElection</span></code> to true if you prefer that peers use Gossip for block dissemination among peers in the organization.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">orgLeader:</span></code></strong> (Defaults to <code class="docutils literal notranslate"><span class="pre">true</span></code> as of v2.2, which is recommended so that peers get blocks from ordering service.) Set this value to <code class="docutils literal notranslate"><span class="pre">false</span></code> if you want to use Gossip for block dissemination among peers in the organization.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">state.enabled:</span></code></strong> (Defaults to <code class="docutils literal notranslate"><span class="pre">false</span></code> as of v2.2 which is recommended so that peers get blocks from ordering service.) Set this value to <code class="docutils literal notranslate"><span class="pre">true</span></code> when you want to use Gossip to sync up missing blocks, which allows a lagging peer to catch up with other peers on the network.</li>
+</ul>
+</li>
+<li><strong>Implicit data</strong> Fabric v2.0 introduced the concept of private data implicit collections on a peer. If you’d like to utilize per-organization private data patterns, you don’t need to define any collections when deploying chaincode in Fabric v2.*. Implicit organization-specific collections can be used without any upfront definition. When you plan to take advantage of this new feature, you need to configure the values of the <code class="docutils literal notranslate"><span class="pre">pvtData.implicitCollectionDisseminationPolicy.requiredPeerCount</span></code> and <code class="docutils literal notranslate"><span class="pre">pvtData.implicitCollectionDisseminationPolicy.maxPeerCount</span></code>. For more details, review the <a class="reference external" href="../private_data_tutorial.html">Private data tutorial</a>.<ul>
+<li><strong><code class="docutils literal notranslate"><span class="pre">pvtData.implicitCollectionDisseminationPolicy.requiredPeerCount</span></code>:</strong> (Recommended that you override this value when using private data implicit collections.) <strong>New in Fabric 2.0.</strong> It defaults to 0, but you will need to increase it based on the number of peers belonging to your organization. The value represents the required number of peers within your own organization that the data must be disseminated to, to ensure data redundancy in case a peer goes down after it endorses a transaction.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">pvtData.implicitCollectionDisseminationPolicy.maxPeerCount</span></code>:</strong> (Recommended that you override this value when using private data implicit collections.) <strong>New in Fabric 2.0.</strong> This is an organization-specific collection setting that is used to ensure the private data is disseminated elsewhere in case this peer endorses a request and then goes down for some reason. While the <code class="docutils literal notranslate"><span class="pre">requiredPeerCount</span></code> specifies the number of peers that must get the data, the <code class="docutils literal notranslate"><span class="pre">maxPeerCount</span></code> is the number of attempted peer disseminations. The default is set to <code class="docutils literal notranslate"><span class="pre">1</span></code> but in a production environment with <code class="docutils literal notranslate"><span class="pre">n</span></code> peers in an organization, the recommended setting is <code class="docutils literal notranslate"><span class="pre">n-1</span></code>.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="peer-tls">
+<span id="peer-tls"></span><h2>peer.tls.*<a class="headerlink" href="#peer-tls" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tls</span><span class="p">:</span>
+    <span class="c1"># Require server-side TLS</span>
+    <span class="n">enabled</span><span class="p">:</span>  <span class="n">false</span>
+    <span class="c1"># Require client certificates / mutual TLS for inbound connections.</span>
+    <span class="c1"># Note that clients that are not configured to use a certificate will</span>
+    <span class="c1"># fail to connect to the peer.</span>
+    <span class="n">clientAuthRequired</span><span class="p">:</span> <span class="n">false</span>
+    <span class="c1"># X.509 certificate used for TLS server</span>
+    <span class="n">cert</span><span class="p">:</span>
+        <span class="n">file</span><span class="p">:</span> <span class="n">tls</span><span class="o">/</span><span class="n">server</span><span class="o">.</span><span class="n">crt</span>
+    <span class="c1"># Private key used for TLS server</span>
+    <span class="n">key</span><span class="p">:</span>
+        <span class="n">file</span><span class="p">:</span> <span class="n">tls</span><span class="o">/</span><span class="n">server</span><span class="o">.</span><span class="n">key</span>
+    <span class="c1"># rootcert.file represents the trusted root certificate chain used for verifying certificates</span>
+    <span class="c1"># of other nodes during outbound connections.</span>
+    <span class="c1"># It is not required to be set, but can be used to augment the set of TLS CA certificates</span>
+    <span class="c1"># available from the MSPs of each channel’s configuration.</span>
+    <span class="n">rootcert</span><span class="p">:</span>
+        <span class="n">file</span><span class="p">:</span> <span class="n">tls</span><span class="o">/</span><span class="n">ca</span><span class="o">.</span><span class="n">crt</span>
+    <span class="c1"># If mutual TLS is enabled, clientRootCAs.files contains a list of additional root certificates</span>
+    <span class="c1"># used for verifying certificates of client connections.</span>
+    <span class="c1"># It augments the set of TLS CA certificates available from the MSPs of each channel’s configuration.</span>
+    <span class="c1"># Minimally, set your organization&#39;s TLS CA root certificate so that the peer can receive join channel requests.</span>
+    <span class="n">clientRootCAs</span><span class="p">:</span>
+        <span class="n">files</span><span class="p">:</span>
+          <span class="o">-</span> <span class="n">tls</span><span class="o">/</span><span class="n">ca</span><span class="o">.</span><span class="n">crt</span>
+</pre></div>
+</div>
+<p>Configure this section to enable TLS communications for the peer. After TLS is enabled, all nodes that transact with the peer will also need to enable TLS. Review the topic on <a class="reference external" href="https://hyperledger-fabric-ca.readthedocs.io/en/release-1.4/deployguide/use_CA.html">Registering and enrolling identities with a CA</a> for instructions on how to generate the peer TLS certificates.</p>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">enabled</span></code>:</strong> (Default value should be overridden.) To ensure your production environment is secure, TLS should be enabled for all communications between nodes by setting <code class="docutils literal notranslate"><span class="pre">enabled:</span> <span class="pre">true</span></code> in the <code class="docutils literal notranslate"><span class="pre">tls</span></code> section of the config file. While this field is disabled by default, which may be acceptable for a test network, it should to be enabled when in production. This setting will configure <strong>server-side TLS</strong>, meaning that TLS will guarantee the identity of the <em>server</em> to the client and provides a two-way encrypted channel between them.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">cert.file</span></code>:</strong> (Default value should be overridden.) Every peer needs to register and enroll with its TLS CA before it can transact securely with other nodes in the organization. Therefore, before you can deploy a peer, you must first register a user for the peer and enroll the peer identity with the TLS CA to generate the peer’s TLS signed certificate. If you are using the recommended folder structure from the <a class="reference external" href="https://hyperledger-fabric-ca.readthedocs.io/en/release-1.4/deployguide/use_CA.html">Registering and enrolling identities with a CA</a> topic, this file needs to be copied into <code class="docutils literal notranslate"><span class="pre">config/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls</span></code></li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">key.file</span></code>:</strong> (Default value should be overridden.) Similar to the <code class="docutils literal notranslate"><span class="pre">cert.file</span></code>, provide the name and location of the generated TLS private key for this peer, for example, <code class="docutils literal notranslate"><span class="pre">/msp/keystore/87bf5eff47d33b13d7aee81032b0e8e1e0ffc7a6571400493a7c_sk</span></code>. If you are using the recommended folder structure from the <a class="reference external" href="https://hyperledger-fabric-ca.readthedocs.io/en/release-1.4/deployguide/use_CA.html">Registering and enrolling identities with a CA</a> topic, this file needs to be copied into <code class="docutils literal notranslate"><span class="pre">config/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls</span></code>.  If you are using an <a class="reference external" href="#bccsp">HSM</a> to store the private key for the peer, this field will be blank.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">rootcert.file</span></code>:</strong>  (Default value can be unset.) This value contains the name and location of the root certificate chain used for verifying certificates of other nodes during outbound connections. It is not required to be set, but can be used to augment the set of TLS CA certificates available from the MSPs of each channel’s configuration. If you are using the recommended folder structure from the <a class="reference external" href="https://hyperledger-fabric-ca.readthedocs.io/en/release-1.4/deployguide/use_CA.html">Registering and enrolling identities with a CA</a> topic, this file can be copied into <code class="docutils literal notranslate"><span class="pre">config/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls</span></code>.</li>
+</ul>
+<p>The next two parameters only need to be provided when mutual TLS is required:</p>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">clientAuthRequired</span></code>:</strong> Defaults to <code class="docutils literal notranslate"><span class="pre">false</span></code>. Set to <code class="docutils literal notranslate"><span class="pre">true</span></code> for a higher level of security by using <strong>mutual TLS</strong>, which can be configured as an extra verification step of the client-side TLS certificate. Where server-side TLS is considered the minimally necessary level of security, mutual TLS is an additional and optional level of security.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">clientRootCAs.files</span></code>:</strong> Contains a list of additional root certificates used for verifying certificates of client connections. It augments the set of TLS CA certificates available from the MSPs of each channel’s configuration. Minimally, set your organization’s TLS CA root certificate so that the peer can receive join channel requests.</li>
+</ul>
+</div>
+<div class="section" id="peer-bccsp">
+<span id="peer-bccsp"></span><h2>peer.bccsp.*<a class="headerlink" href="#peer-bccsp" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BCCSP</span><span class="p">:</span>
+        <span class="n">Default</span><span class="p">:</span> <span class="n">SW</span>
+        <span class="c1"># Settings for the SW crypto provider (i.e. when DEFAULT: SW)</span>
+        <span class="n">SW</span><span class="p">:</span>
+            <span class="c1"># TODO: The default Hash and Security level needs refactoring to be</span>
+            <span class="c1"># fully configurable. Changing these defaults requires coordination</span>
+            <span class="c1"># SHA2 is hardcoded in several places, not only BCCSP</span>
+            <span class="n">Hash</span><span class="p">:</span> <span class="n">SHA2</span>
+            <span class="n">Security</span><span class="p">:</span> <span class="mi">256</span>
+            <span class="c1"># Location of Key Store</span>
+            <span class="n">FileKeyStore</span><span class="p">:</span>
+                <span class="c1"># If &quot;&quot;, defaults to &#39;mspConfigPath&#39;/keystore</span>
+                <span class="n">KeyStore</span><span class="p">:</span>
+        <span class="c1"># Settings for the PKCS#11 crypto provider (i.e. when DEFAULT: PKCS11)</span>
+        <span class="n">PKCS11</span><span class="p">:</span>
+            <span class="c1"># Location of the PKCS11 module library</span>
+            <span class="n">Library</span><span class="p">:</span>
+            <span class="c1"># Token Label</span>
+            <span class="n">Label</span><span class="p">:</span>
+            <span class="c1"># User PIN</span>
+            <span class="n">Pin</span><span class="p">:</span>
+            <span class="n">Hash</span><span class="p">:</span>
+            <span class="n">Security</span><span class="p">:</span>
+</pre></div>
+</div>
+<p>(Optional) This section is used to configure the Blockchain crypto provider.</p>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">BCCSP.Default:</span></code></strong> If you plan to use a Hardware Security Module (HSM), then this must be set to <code class="docutils literal notranslate"><span class="pre">PKCS11</span></code>.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">BCCSP.PKCS11.*:</span></code></strong> Provide this set of parameters according to your HSM configuration. Refer to this [example]((../hsm.html) of an HSM configuration for more information.</li>
+</ul>
+</div>
+<div class="section" id="chaincode-externalbuilders">
+<span id="chaincode-externalbuilders"></span><h2>chaincode.externalBuilders.*<a class="headerlink" href="#chaincode-externalbuilders" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># List of directories to treat as external builders and launchers for</span>
+    <span class="c1"># chaincode. The external builder detection processing will iterate over the</span>
+    <span class="c1"># builders in the order specified below.</span>
+    <span class="n">externalBuilders</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="c1"># - path: /path/to/directory</span>
+        <span class="c1">#   name: descriptive-builder-name</span>
+        <span class="c1">#   propagateEnvironment:</span>
+        <span class="c1">#      - ENVVAR_NAME_TO_PROPAGATE_FROM_PEER</span>
+        <span class="c1">#      - GOPROXY</span>
+</pre></div>
+</div>
+<p>(Optional) <strong>New in Fabric 2.0.</strong> This section is used to configure a set of paths where your chaincode builders reside. Each external builder definition must include a name (used for logging) and the path to parent of the <code class="docutils literal notranslate"><span class="pre">bin</span></code> directory containing the builder scripts. Also, you can optionally specify a list of environment variable names to propagate from the peer when it invokes the external builder scripts. For details see <a class="reference external" href="../cc_launcher.html">Configuring external builders and launchers</a>.</p>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">externalBuilders.path:</span></code></strong> Specify the path to the builder.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">externalBuilders.name:</span></code></strong> Give this builder a name.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">externalBuilders.propagateEnvironment:</span></code></strong> Specify the list of environment variables that you want to propagate to your peer.</li>
+</ul>
+</div>
+<div class="section" id="ledger">
+<span id="ledger"></span><h2>ledger.*<a class="headerlink" href="#ledger" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ledger</span><span class="p">:</span>
+
+  <span class="n">state</span><span class="p">:</span>
+    <span class="c1"># stateDatabase - options are &quot;goleveldb&quot;, &quot;CouchDB&quot;</span>
+    <span class="c1"># goleveldb - default state database stored in goleveldb.</span>
+    <span class="c1"># CouchDB - store state database in CouchDB</span>
+    <span class="n">stateDatabase</span><span class="p">:</span> <span class="n">goleveldb</span>
+
+    <span class="n">couchDBConfig</span><span class="p">:</span>
+       <span class="c1"># It is recommended to run CouchDB on the same server as the peer, and</span>
+       <span class="c1"># not map the CouchDB container port to a server port in docker-compose.</span>
+       <span class="c1"># Otherwise proper security must be provided on the connection between</span>
+       <span class="c1"># CouchDB client (on the peer) and server.</span>
+       <span class="n">couchDBAddress</span><span class="p">:</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5984</span>
+
+       <span class="c1"># This username must have read and write authority on CouchDB</span>
+       <span class="n">username</span><span class="p">:</span>
+
+       <span class="c1"># The password is recommended to pass as an environment variable</span>
+       <span class="c1"># during start up (eg CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD).</span>
+       <span class="c1"># If it is stored here, the file must be access control protected</span>
+       <span class="c1"># to prevent unintended users from discovering the password.</span>
+       <span class="n">password</span><span class="p">:</span>
+</pre></div>
+</div>
+<p>This section is used to select your ledger database type, either <code class="docutils literal notranslate"><span class="pre">goleveldb</span></code> <code class="docutils literal notranslate"><span class="pre">CouchDB</span></code>. To avoid errors all peers should use the same database <strong>type</strong>.  CouchDB is an appropriate choice when JSON queries are required. While CouchDB runs in a separate operating system process, there is still a 1:1 relation between a peer node and a CouchDB instance, meaning that each peer will have a single database and that database will only be associated with that peer. Besides the additional JSON query capability of CouchDB, the choice of the database is invisible to a smart contract.</p>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">ledger.state.stateDatabase:</span></code></strong> (Override this value when you plan to use CouchDB.) Defaults to goleveldb which is appropriate when ledger states are simple key-value pairs. A LevelDB database is embedded in the peer node process.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">ledger.state.couchDBConfig.couchDBAddress:</span></code></strong> (Required when using CouchDB.) Specify the address and port where CouchDB is running.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">ledger.state.couchDBConfig.username:</span></code></strong> (Required when using CouchDB.) Specify the CouchDB user with read and write authority to the database.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">ledger.state.couchDBConfig.password:</span></code></strong> (Required when using CouchDB.) Specify the password for the CouchDB user with read and write authority to the database.</li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">ledger</span></code> section also contains your default snapshot directory where snapshots are stored. For more information about snapshots, check out <a class="reference external" href="../peer_ledger_snapshot.html">Taking ledger snapshots and using them to join channels</a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">snapshots</span><span class="p">:</span>
+  <span class="c1"># Path on the file system where peer will store ledger snapshots</span>
+  <span class="n">rootDir</span><span class="p">:</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">hyperledger</span><span class="o">/</span><span class="n">production</span><span class="o">/</span><span class="n">snapshots</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">ledger.snapshots.rootDir:</span></code></strong> (Default value should be overridden.) This is the path to where snapshots are stored on the local filesystem of the peer. It can be an absolute path or relative to <code class="docutils literal notranslate"><span class="pre">FABRIC_CFG_PATH</span></code> and defaults to <code class="docutils literal notranslate"><span class="pre">/var/hyperledger/production/snapshots</span></code>. When the snapshot is taken, it is automatically organized by the status, channel name, and block number of the snapshot. For more information, check out <a class="reference external" href="../peer_ledger_snapshot.html#taking-a-snapshot">Taking a snapshot</a>. The user running the peer needs to own and have write access to this directory.</li>
+</ul>
+</div>
+<div class="section" id="operations">
+<span id="operations"></span><h2>operations.*<a class="headerlink" href="#operations" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">operations</span><span class="p">:</span>
+    <span class="c1"># host and port for the operations server</span>
+    <span class="n">listenAddress</span><span class="p">:</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">9443</span>
+
+    <span class="c1"># TLS configuration for the operations endpoint</span>
+    <span class="n">tls</span><span class="p">:</span>
+        <span class="c1"># TLS enabled</span>
+        <span class="n">enabled</span><span class="p">:</span> <span class="n">false</span>
+
+        <span class="c1"># path to PEM encoded server certificate for the operations server</span>
+        <span class="n">cert</span><span class="p">:</span>
+            <span class="n">file</span><span class="p">:</span>
+
+        <span class="c1"># path to PEM encoded server key for the operations server</span>
+        <span class="n">key</span><span class="p">:</span>
+            <span class="n">file</span><span class="p">:</span>
+
+        <span class="c1"># most operations service endpoints require client authentication when TLS</span>
+        <span class="c1"># is enabled. clientAuthRequired requires client certificate authentication</span>
+        <span class="c1"># at the TLS layer to access all resources.</span>
+        <span class="n">clientAuthRequired</span><span class="p">:</span> <span class="n">false</span>
+
+        <span class="c1"># paths to PEM encoded ca certificates to trust for client authentication</span>
+        <span class="n">clientRootCAs</span><span class="p">:</span>
+            <span class="n">files</span><span class="p">:</span> <span class="p">[]</span>
+</pre></div>
+</div>
+<p>The operations service is used for monitoring the health of the peer and relies on mutual TLS to secure its communication. Therefore, you need to set <code class="docutils literal notranslate"><span class="pre">operations.tls.clientAuthRequired</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code>. When this parameter is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, clients attempting to ascertain the health of the node are required to provide a valid certificate for authentication. If the client does not provide a certificate or the service cannot verify the client’s certificate, the request is rejected. This means that the clients will need to register with the peer’s TLS CA and provide their TLS signing certificate on the requests. See <a class="reference external" href="../operations_service.html">The Operations Service</a> to learn more.</p>
+<p>If you plan to use Prometheus <a class="reference external" href="#metrics">metrics</a> to monitor your peer, you must configure the operations service here.</p>
+<p>In the unlikely case where two peers are running on the same node, you need to modify the addresses for the second peer to use a different port. Otherwise, when you start the second peer, it will fail to start, reporting that the addresses are already in use.</p>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">operations.listenAddress:</span></code></strong> (Required when using the operations service.) Specify the address and port of the operations server.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">operations.tls.cert.file*:</span></code></strong> (Required when using the operations service). Can be the same file as the <code class="docutils literal notranslate"><span class="pre">peer.tls.cert.file</span></code>.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">operations.tls.key.file*:</span></code></strong> (Required when using the operations service). Can be the same file as the <code class="docutils literal notranslate"><span class="pre">peer.tls.key.file</span></code>.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">operations.tls.clientAuthRequired*:</span></code></strong> (Required when using the operations service). Must be set tp <code class="docutils literal notranslate"><span class="pre">true</span></code> to enable mutual TLS between the client and the server.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">operations.tls.clientRootCAs.files*:</span></code></strong> (Required when using the operations service). Similar to the <a class="reference external" href="#tls">peer.tls.clientRootCAs.files</a>, it contains a list of client root CA certificates that can be used to verify client certificates. If the client enrolled with the peer organization CA, then this value is the peer organization root CA cert.</li>
+</ul>
+</div>
+<div class="section" id="metrics">
+<span id="metrics"></span><h2>metrics.*<a class="headerlink" href="#metrics" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">metrics</span><span class="p">:</span>
+    <span class="c1"># metrics provider is one of statsd, prometheus, or disabled</span>
+    <span class="n">provider</span><span class="p">:</span> <span class="n">disabled</span>
+    <span class="c1"># statsd configuration</span>
+    <span class="n">statsd</span><span class="p">:</span>
+        <span class="c1"># network type: tcp or udp</span>
+        <span class="n">network</span><span class="p">:</span> <span class="n">udp</span>
+
+        <span class="c1"># statsd server address</span>
+        <span class="n">address</span><span class="p">:</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">8125</span>
+</pre></div>
+</div>
+<p>By default this is disabled, but if you want to monitor the metrics for the peer, you need to choose either <code class="docutils literal notranslate"><span class="pre">statsd</span></code> or <code class="docutils literal notranslate"><span class="pre">Prometheus</span></code> as your metric provider. <code class="docutils literal notranslate"><span class="pre">Statsd</span></code> uses a “push” model, pushing metrics from the peer to a <code class="docutils literal notranslate"><span class="pre">statsd</span></code> endpoint. Because of this, it does not require configuration of the operations service itself. See the list of <a class="reference external" href="../metrics_reference.html#peer-metrics">Available metrics for the peer</a>.</p>
+<ul class="simple">
+<li><strong><code class="docutils literal notranslate"><span class="pre">provider</span></code>:</strong> (Required to use <code class="docutils literal notranslate"><span class="pre">statsd</span></code> or <code class="docutils literal notranslate"><span class="pre">Prometheus</span></code> metrics for the peer.) Because Prometheus utilizes a “pull” model there is not any configuration required, beyond making the operations service available. Rather, Prometheus will send requests to the operations URL to poll for available metrics.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">address:</span></code></strong> (Required when using <code class="docutils literal notranslate"><span class="pre">statsd</span></code>.) When <code class="docutils literal notranslate"><span class="pre">statsd</span></code> is enabled, you will need to configure the hostname and port of the statsd server so that the peer can push metric updates.</li>
+</ul>
+</div>
+<div class="section" id="next-steps">
+<span id="next-steps"></span><h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
+<p>After deciding on your peer configuration, you are ready to deploy your peers. Follow instructions in the <a class="reference external" href="./peerdeploy.html">Deploy the peer</a> topic for instructions on how to deploy your peer.</p>
+<!--- Licensed under Creative Commons Attribution 4.0 International License
+https://creativecommons.org/licenses/by/4.0/ --></div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="peerdeploy.html" class="btn btn-neutral float-right" title="Deploy the peer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="peerplan.html" class="btn btn-neutral" title="Planning for a production peer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright Hyperledger 2020.
+    <br>
+      <br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>
+      <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+        <img alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'master',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
